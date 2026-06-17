@@ -1,16 +1,34 @@
 import { Link, useParams } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import '../Overview.css'
 
 /* ── Project data ── */
-const PROJECT_IMG_HR = 'https://www.figma.com/api/mcp/asset/6abb6d3e-7f61-4993-8d04-2e1db999a022'
+import hrBanner from '../assets/project-banner.png'
+const PROJECT_IMG_HR = hrBanner
 const PROJECT_IMG_STUDENT = 'https://www.figma.com/api/mcp/asset/65a2dbd5-468c-47d7-adbb-f29ec4a25365'
-const PROJECT_IMG_HIRE_HUB = 'https://www.figma.com/api/mcp/asset/01438b39-ebfd-44a7-be74-237685dec4ba'
+import bannerImpact from '../assets/banner-impact.png'
+import overviewImpact from '../assets/overview-impact.png'
+import problemImpact from '../assets/problem-impact.png'
+import solutionImpact from '../assets/solution-impact.png'
+import feature01 from '../assets/feature-01.png'
+import jobSearch02 from '../assets/job-search-02.png'
+import uploadResume from '../assets/upload-resume.png'
+import npsFeedback from '../assets/NPS-feedback.png'
+import appStepTracker from '../assets/Application Step Tracker.png'
+import historyTracker from '../assets/history tracker.png'
+const PROJECT_IMG_HIRE_HUB = bannerImpact
 const PROJECT_IMG_FLEXIBLE = 'https://www.figma.com/api/mcp/asset/3b68e995-e98b-41b9-93c2-0b3bf0fea731'
 const PROJECT_IMG_WEDDING = 'https://www.figma.com/api/mcp/asset/c8ea807e-f0b2-461a-949e-acd4062451b3'
 const PROJECT_IMG_CLEAN = 'https://www.figma.com/api/mcp/asset/ab52fbd4-a2f7-44f0-aa74-953f2b938ca7'
 
 interface Project {
+  overviewImage?: string
+  problemImage?: string
+  solution?: string[]
+  solutionImage?: string
+  features?: { title: string; desc: string; image?: string }[]
+  result?: string
+  learnings?: string[]
   id: string
   title: string
   subtitle: string
@@ -25,52 +43,54 @@ interface Project {
   process: { phase: string; title: string; desc: string }[]
   outcomes: { metric: string; label: string }[]
   nextId: string
+  storybookUrl?: string
 }
 
 const projects: Record<string, Project> = {
   'hr-system': {
     id: 'hr-system',
-    title: 'HR System',
-    subtitle: 'Redesigning enterprise tools for better employee lifecycle management',
-    tags: ['Design System', 'UX/UI', 'Angular'],
+    title: 'HR System Redesign — Phase 2',
+    subtitle: 'Took over and led UX/UI design for Phase 2, designing 9 core modules covering the full employee lifecycle',
+    tags: ['Enterprise UX', 'Design System', 'Phase 2'],
     role: 'Junior UX/UI Designer',
     timeline: '2025 – Present',
-    tools: ['Figma', 'Angular', 'Storybook', 'Design Tokens'],
+    tools: ['Figma', 'Design System', 'Prototyping'],
     platform: 'Desktop Web',
     image: PROJECT_IMG_HR,
     overview:
-      'A comprehensive Design System built from the ground up for an HR internal platform — spanning design tokens in Figma all the way to production-ready Angular components. The goal was to create a single source of truth that both designers and developers could trust.',
+      'Inherited and led UX/UI design for Phase 2 of an enterprise HR System at ARSoft, designing 9 core modules end-to-end — expanding the system beyond Phase 1 with a focus on the full employee lifecycle from recruitment to career growth. Each module was designed to align with the existing Design System while introducing consistent patterns for complex workflows.',
     problem:
-      'The HR platform had grown organically over years, resulting in inconsistent UI patterns, duplicated components, and a slow development cycle. Every new feature required rebuilding from scratch with no shared language between design and engineering.',
+      'Phase 1 had established the foundation, but the system needed to scale across the full HR lifecycle — from hiring to offboarding and long-term talent development. The challenge was to design 9 interconnected modules that felt cohesive, reduced user friction, and could be handed off efficiently to developers.',
     process: [
       {
         phase: '01',
-        title: 'Audit & Discovery',
-        desc: 'Conducted a full UI audit across 40+ screens. Catalogued every unique color, spacing value, and component variant. Interviewed 6 developers and 3 product managers to identify the biggest pain points.',
+        title: 'Handover & Discovery',
+        desc: 'Reviewed Phase 1 deliverables, existing components, and design tokens. Mapped out the 9 modules — Recruit, PMS, Training, Employee, Offboarding, Disciplinary Management, Competency Management, IDP, Talent Management, and Career Development — to understand scope and dependencies.',
       },
       {
         phase: '02',
-        title: 'Token Architecture',
-        desc: 'Designed a 3-tier token system: Primitive → Semantic → Component. Mapped all values to Figma Variables and CSS custom properties so that a single source of truth drives both design and code.',
+        title: 'User Flow & Information Architecture',
+        desc: 'Defined user flows for each module based on HR workflows and stakeholder requirements. Structured the information architecture to ensure logical navigation across interconnected modules covering the full employee lifecycle.',
       },
       {
         phase: '03',
-        title: 'Component Library',
-        desc: 'Built 60+ components in Figma with full variant coverage, interactive states, and accessibility annotations. Each component maps 1:1 to an Angular counterpart published in Storybook.',
+        title: 'UI Design & Design System Alignment',
+        desc: 'Designed all 9 modules in Figma, extending the Design System with new components and patterns where needed. Maintained consistency across modules through shared tokens, reusable components, and documented interaction states.',
       },
       {
         phase: '04',
-        title: 'Handoff & Documentation',
-        desc: 'Created developer-facing documentation for every component — usage guidelines, do/don\'t examples, and prop tables. Reduced design-to-dev handoff time from 2 weeks to 3 days.',
+        title: 'Prototype & Handoff',
+        desc: 'Built interactive prototypes for key user journeys across each module. Prepared developer-ready handoff documentation including component specs, spacing guidelines, and annotated flows to streamline the development process.',
       },
     ],
     outcomes: [
-      { metric: '60+', label: 'Components shipped' },
-      { metric: '3×', label: 'Faster handoff' },
-      { metric: '40%', label: 'Less design debt' },
-      { metric: '100%', label: 'Token coverage' },
+      { metric: '9', label: 'Modules designed' },
+      { metric: '22+', label: 'Components + Full Design Tokens' },
+      { metric: 'Storybook', label: 'Component documentation' },
+      { metric: '✦', label: 'Icons & assets library organized' },
     ],
     nextId: 'student-activity',
+    storybookUrl: 'https://hr-design-system.vercel.app/',
   },
   'student-activity': {
     id: 'student-activity',
@@ -122,41 +142,63 @@ const projects: Record<string, Project> = {
     subtitle: 'Optimizing recruitment lifecycle with an intuitive internal hiring dashboard',
     tags: ['UX/UI Design', 'Dashboard', 'Intern Project'],
     role: 'UX/UI Design Intern',
-    timeline: 'May 2024 – Aug 2024',
-    tools: ['Figma', 'FigJam', 'Maze'],
-    platform: 'Desktop Web',
+    timeline: 'May 2024 – Feb 2025',
+    tools: ['Figma'],
+    platform: 'Desktop · Mobile · Tablet',
     image: PROJECT_IMG_HIRE_HUB,
     overview:
-      'An internal recruitment dashboard for IMPACT Exhibition Management, enabling HR to post jobs, track applicants, schedule interviews, and generate hiring reports — all in one place.',
+      'A recruitment landing page designed for IMPACT Exhibition Management, aimed at improving the application experience and creating a centralized platform for external job seekers.',
+    overviewImage: overviewImpact,
     problem:
-      'The HR team was managing recruitment across 4 separate tools (email, spreadsheets, LINE chat, and a legacy ATS). Applicant statuses were frequently lost, and time-to-hire was 40% above industry benchmark.',
+      'Previously, there was no dedicated channel for external candidates to apply for jobs at IMPACT. Available openings weren\'t clearly listed, and applicants had to fill out a lengthy 22-page Google Form. This has led to confusion, inefficiency.',
+    problemImage: problemImpact,
+    solution: [
+      'Created a clean and accessible landing page that clearly displays open job positions and application instructions.',
+      'Replaced a 22-page Google Form with a multi-step application process, making it less overwhelming for users.',
+      'Designed a progressive form that collects essential information upfront, then requests additional documents only from qualified applicants.',
+      'Ensured the design is responsive across all major devices, improving accessibility and usability.',
+    ],
+    solutionImage: solutionImpact,
+    learnings: [
+      'This was my first real-world UX/UI project, and it gave me valuable experience working as part of a team. I learned how to structure user flows, design responsive layouts, and think critically about improving long and complex processes.',
+      'Since this was a live internship project, some parts of the data were not fully complete, and we didn\'t conduct usability testing at the time. However, it helped me realize how important user feedback is, and I plan to keep improving based on what I\'ve learned.',
+    ],
+    result: 'This staged approach helped simplify a previously overwhelming 22-page Google Form. By collecting data progressively and only prompting document uploads from qualified applicants, the experience became more efficient and user-friendly — especially on mobile devices.',
+    features: [
+      { title: 'Job Recommendation System', desc: 'Suggests relevant job openings based on the candidate\'s selected field of interest during registration.', image: feature01 },
+      { title: 'Job Search', desc: 'Allows users to search for jobs using filters such as location, department, and job type.', image: jobSearch02 },
+      { title: 'Resume Upload', desc: 'Applicants can upload their own resumes directly through the system for faster processing.', image: uploadResume },
+      { title: 'NPS Feedback Feature', desc: 'Allows applicants to rate their application experience using a Net Promoter Score (NPS), helping the company collect valuable feedback for future improvements.', image: npsFeedback },
+      { title: 'Application Step Tracker', desc: 'Collects user information step by step to reduce friction and minimize overwhelm throughout the application process.', image: appStepTracker },
+      { title: 'Application Status Tracking', desc: 'Let candidates track the real-time status of their application after submission, such as "Under Review," "Interview Scheduled," or "Accepted."', image: historyTracker },
+    ],
     process: [
       {
         phase: '01',
-        title: 'Stakeholder Mapping',
-        desc: 'Ran a collaborative workshop with HR, hiring managers, and IT. Defined success metrics and mapped the as-is recruitment journey across all touchpoints.',
+        title: 'Landing Page Design',
+        desc: 'Created a clean and accessible landing page that clearly displays open job positions and application instructions.',
       },
       {
         phase: '02',
-        title: 'Dashboard Architecture',
-        desc: 'Designed the information hierarchy for the dashboard: pipeline overview → candidate detail → interview scheduling → offer management. Prioritized density vs. clarity tradeoffs.',
+        title: 'Multi-Step Application',
+        desc: 'Replaced a 22-page Google Form with a multi-step application process, making it less overwhelming for users.',
       },
       {
         phase: '03',
-        title: 'Interaction Design',
-        desc: 'Created high-fidelity prototypes for the 5 most-used workflows. Focused on reducing click depth — the most common HR task (updating candidate status) went from 6 clicks to 2.',
+        title: 'Progressive Form',
+        desc: 'Designed a progressive form that collects essential information upfront, then requests additional documents only from qualified applicants.',
       },
       {
         phase: '04',
-        title: 'Validation',
-        desc: 'Tested with 5 HR staff using Maze. Achieved 92% task completion rate on core flows. Iterated on the filter system which was the main point of confusion.',
+        title: 'Responsive Design',
+        desc: 'Ensured the design is responsive across all major devices, improving accessibility and usability.',
       },
     ],
     outcomes: [
-      { metric: '92%', label: 'Task completion' },
-      { metric: '6→2', label: 'Clicks to update status' },
-      { metric: '4→1', label: 'Tools consolidated' },
-      { metric: '5', label: 'HR staff tested' },
+      { metric: '22-page', label: 'Google Form Replaced' },
+      { metric: '6', label: 'Features Designed' },
+      { metric: '3', label: 'Platforms Supported' },
+      { metric: 'Progressive', label: 'Data Collection Applied' },
     ],
     nextId: 'flexible-benefits',
   },
@@ -323,6 +365,7 @@ export default function Overview() {
   const { projectId } = useParams<{ projectId: string }>()
   const project = projects[projectId ?? ''] ?? projects['hr-system']
   const nextProject = projects[project.nextId]
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null)
 
   useEffect(() => { window.scrollTo(0, 0) }, [projectId])
 
@@ -407,6 +450,13 @@ export default function Overview() {
             </FadeUp>
             <FadeUp delay={0.1} className="ov-col-right">
               <p className="ov-body-large">{project.overview}</p>
+              {project.overviewImage && (
+                <img
+                  src={project.overviewImage}
+                  alt="Project overview"
+                  className="ov-overview-img"
+                />
+              )}
             </FadeUp>
           </div>
 
@@ -422,6 +472,13 @@ export default function Overview() {
                 <div className="ov-problem-quote">"</div>
                 <p className="ov-body-large">{project.problem}</p>
               </div>
+              {project.problemImage && (
+                <img
+                  src={project.problemImage}
+                  alt="Problem illustration"
+                  className="ov-overview-img"
+                />
+              )}
             </FadeUp>
           </div>
         </div>
@@ -431,8 +488,8 @@ export default function Overview() {
       <section className="ov-process-section">
         <div className="ov-container">
           <FadeUp>
-            <p className="label-tag" style={{ color: '#FFDF9A' }}>MY PROCESS</p>
-            <h2 className="ov-section-heading" style={{ color: '#FAF9F4' }}>How I approached it</h2>
+            <p className="label-tag" style={{ color: '#FFDF9A' }}>{project.solution ? 'SOLUTION' : 'MY PROCESS'}</p>
+            <h2 className="ov-section-heading" style={{ color: '#FAF9F4' }}>{project.solution ? 'How We Solved It' : 'How I approached it'}</h2>
           </FadeUp>
           <div className="ov-process-grid">
             {project.process.map((step, i) => (
@@ -445,6 +502,75 @@ export default function Overview() {
           </div>
         </div>
       </section>
+
+      {/* ── KEY FEATURES ── */}
+      {project.features && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">KEY FEATURES</p>
+              <h2 className="ov-section-heading">Key Features I Designed</h2>
+            </FadeUp>
+            <div className="ov-features-grid">
+              {project.features.map((f, i) => (
+                <FadeUp key={f.title} delay={i * 0.06} className="ov-feature-card">
+                  <span className="ov-feature-num">0{i + 1}</span>
+                  <h3 className="ov-feature-title">{f.title}</h3>
+                  <p className="ov-feature-desc">{f.desc}</p>
+                  {f.image && (
+                    <button className="ov-feature-btn" onClick={() => setLightboxImg(f.image!)}>
+                      View Design
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </button>
+                  )}
+                </FadeUp>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── LEARNINGS ── */}
+      {project.learnings && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <div className="ov-two-col">
+              <FadeUp className="ov-col-left">
+                <p className="label-tag">REFLECTION</p>
+                <h2 className="ov-section-heading">Learnings</h2>
+              </FadeUp>
+              <FadeUp delay={0.1} className="ov-col-right">
+                <div className="ov-learnings-wrap">
+                  {project.learnings.map((l, i) => (
+                    <p key={i} className="ov-body-large">{l}</p>
+                  ))}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── RESULT ── */}
+      {project.result && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <div className="ov-two-col">
+              <FadeUp className="ov-col-left">
+                <p className="label-tag">RESULT</p>
+                <h2 className="ov-section-heading">The Outcome</h2>
+              </FadeUp>
+              <FadeUp delay={0.1} className="ov-col-right">
+                <div className="ov-result-card">
+                  <p className="ov-body-large">{project.result}</p>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── OUTCOMES ── */}
       <section className="ov-section">
@@ -465,6 +591,41 @@ export default function Overview() {
           </FadeUp>
         </div>
       </section>
+
+      {/* ── STORYBOOK LINK ── */}
+      {project.storybookUrl && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <div className="ov-storybook-card">
+                <div className="ov-storybook-left">
+                  <p className="label-tag">DESIGN SYSTEM</p>
+                  <h2 className="ov-section-heading" style={{ marginBottom: 8 }}>Explore the Component Library</h2>
+                  <p className="ov-body-large" style={{ marginBottom: 24 }}>
+                    Browse all 22+ components, design tokens, icons, and assets — documented and interactive on Storybook.
+                  </p>
+                  <a href={project.storybookUrl} target="_blank" rel="noopener noreferrer" className="ov-storybook-btn">
+                    View Storybook
+                    <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+                      <path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
+                <div className="ov-storybook-badge">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="12" fill="#FF4785"/>
+                    <path d="M27.5 8.5H13C11.067 8.5 9.5 10.067 9.5 12V28C9.5 29.933 11.067 31.5 13 31.5H27C28.933 31.5 30.5 29.933 30.5 28V12.5L27.5 8.5Z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
+                    <path d="M27.5 8.5V12.5H30.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M15 18.5H25M15 22.5H22" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                  <span className="ov-storybook-label">Storybook</span>
+                  <span className="ov-storybook-url">hr-design-system.vercel.app</span>
+                </div>
+              </div>
+            </FadeUp>
+          </div>
+        </section>
+      )}
 
       {/* ── NEXT PROJECT ── */}
       {nextProject && (
@@ -550,6 +711,22 @@ export default function Overview() {
           </div>
         </div>
       </footer>
+      {/* ── LIGHTBOX ── */}
+      {lightboxImg && (
+        <div className="ov-lightbox" onClick={() => setLightboxImg(null)}>
+          <button className="ov-lightbox-close" aria-label="Close">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M2 2L18 18M18 2L2 18" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+          <img
+            src={lightboxImg}
+            alt="Feature design"
+            className="ov-lightbox-img"
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   )
 }
