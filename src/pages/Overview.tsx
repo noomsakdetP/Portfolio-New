@@ -17,7 +17,44 @@ import npsFeedback from '../assets/NPS-feedback.png'
 import appStepTracker from '../assets/Application Step Tracker.png'
 import historyTracker from '../assets/history tracker.png'
 const PROJECT_IMG_HIRE_HUB = bannerImpact
-const PROJECT_IMG_FLEXIBLE = 'https://www.figma.com/api/mcp/asset/3b68e995-e98b-41b9-93c2-0b3bf0fea731'
+import flexibleBenefit from '../assets/flexible-benefit.png'
+import weddingBanner from '../assets/12.png'
+import typographyImg from '../assets/Typography.png'
+import wireframeWedding1 from '../assets/wireframe-wedding1.webp'
+import wireframeWedding2 from '../assets/wireframe-wedding2.webp'
+import wireframeWedding3 from '../assets/wireframe-wedding3.webp'
+import uiWedding1 from '../assets/UI-wedding1.webp'
+import uiWedding2 from '../assets/UI-wedding2.webp'
+import uiWedding3 from '../assets/UI-wedding3.webp'
+import uiWedding4 from '../assets/UI-wedding4.webp'
+import uiWedding5 from '../assets/UI-wedding5.webp'
+import uiWedding6 from '../assets/UI-wedding6.webp'
+import uiWedding7 from '../assets/UI-wedding7.webp'
+import rewardImg from '../assets/reward.png'
+import bannerCasestudy from '../assets/banner-casestudy.png'
+import workflowImg from '../assets/workflow.png'
+import flowFlexible from '../assets/Flow Flexible.png'
+import genderImg from '../assets/gender.png'
+import generationImg from '../assets/generation.png'
+import top5activityImg from '../assets/top5activity.png'
+import wireframeImg from '../assets/Wireframe.png'
+import avgCompletionTime from '../assets/average Completion time.png'
+import taskSuccessRate from '../assets/task success rate.png'
+import susScore from '../assets/sus score.png'
+import uiDesign1 from '../assets/UI Design1.webp'
+import uiDesign2 from '../assets/UI Design2.webp'
+import uiDesign3 from '../assets/UI Design3.webp'
+import uiDesign4 from '../assets/UI Design4.webp'
+import uiDesign5 from '../assets/UI Design5.webp'
+import uiDesign6 from '../assets/UI Design6.webp'
+import uiDesign7 from '../assets/UI Design7.webp'
+import uiDesign8 from '../assets/UI Design8.webp'
+import uiDesign9 from '../assets/UI Design9.webp'
+import uiDesign10 from '../assets/UI Design10.webp'
+import persona1 from '../assets/Persona 1.png'
+import persona2 from '../assets/Persona 2.png'
+import persona3 from '../assets/Persona 3.png'
+const PROJECT_IMG_FLEXIBLE = flexibleBenefit
 const PROJECT_IMG_WEDDING = 'https://www.figma.com/api/mcp/asset/c8ea807e-f0b2-461a-949e-acd4062451b3'
 const PROJECT_IMG_CLEAN = 'https://www.figma.com/api/mcp/asset/ab52fbd4-a2f7-44f0-aa74-953f2b938ca7'
 
@@ -29,6 +66,20 @@ interface Project {
   features?: { title: string; desc: string; image?: string }[]
   result?: string
   learnings?: string[]
+  goals?: { number: string; desc: string; objective: string }[]
+  uxProcess?: { content: string; bullets: string[]; afterText: string; workflowImg: string; flowImg: string }
+  personas?: { title: string; desc: string; image: string }[]
+  mockupSection?: { content: string; image: string }
+  wireframes?: { intro: string; bullets: string[]; closing: string; images: string[] }
+  uiDesignWedding?: { content: string; slides: string[] }
+  popularVote?: { content: string; image: string }
+  designSystem?: {
+    intro: string
+    subsections: { title: string; content: string; bullets?: string[]; image?: string }[]
+    closing: string
+  }
+  uiDesign?: { paragraphs: string[]; slides: string[] }
+  usabilityTesting?: { content: string; images: { src: string; label: string; desc: string }[] }
   id: string
   title: string
   subtitle: string
@@ -44,6 +95,8 @@ interface Project {
   outcomes: { metric: string; label: string }[]
   nextId: string
   storybookUrl?: string
+  goalText?: string
+  empathize?: { intro: string; bullets: string[]; closing: string }
 }
 
 const projects: Record<string, Project> = {
@@ -204,45 +257,127 @@ const projects: Record<string, Project> = {
   },
   'flexible-benefits': {
     id: 'flexible-benefits',
-    title: 'Flexible Benefits',
-    subtitle: 'Streamlining corporate benefit selection through a user-centered interface',
+    title: 'Flexible Benefits Awareness Design Project',
+    subtitle: 'Enhancing employee understanding of organizational benefits through design',
     tags: ['UX/UI Design', 'Usability Testing', 'Intern Project'],
     role: 'UX/UI Design Intern',
-    timeline: 'Sep 2024 – Feb 2025',
-    tools: ['Figma', 'Maze', 'Google Forms'],
-    platform: 'Desktop & Mobile Web',
+    timeline: 'May 2024 – Feb 2025',
+    tools: ['Figma', 'Google Forms', 'FigJam', 'Power BI'],
+    platform: 'Mobile',
     image: PROJECT_IMG_FLEXIBLE,
     overview:
-      'A self-service benefits enrollment platform allowing IMPACT employees to allocate their annual welfare budget across health, insurance, lifestyle, and retirement options — with real-time budget tracking.',
+      'This project focused on developing a comprehensive solution for increasing awareness of flexible benefits within an organization. As a UX/UI designer, I led the research, ideation, and design phases to create an engaging platform that informs employees about their benefits and how to utilize them effectively.',
     problem:
-      'Employees found the annual benefits enrollment confusing — unclear eligibility rules, no budget visibility, and a paper form process that resulted in 30% error rate requiring manual correction by HR.',
+      'Employees are unaware of how to access or use their benefit options. The previous system lacked flexibility and failed to encourage employee engagement. There was no centralized or clear communication channel for benefit-related information, and no data was available to track usage or user behavior.',
+    solution: [
+      'View and join company activities.',
+      'Collect and track points.',
+      'Redeem benefits that suit their needs.',
+      'View transaction history and activity updates.',
+    ],
     process: [
       {
         phase: '01',
-        title: 'Competitive Analysis',
-        desc: 'Benchmarked 6 HR benefits platforms. Identified that the best performers used a "shopping cart" mental model with a persistent budget meter — reducing cognitive load significantly.',
+        title: 'View & Join Activities',
+        desc: 'Designed a mobile interface that allows employees to browse and join company activities with ease.',
       },
       {
         phase: '02',
-        title: 'UX Architecture',
-        desc: 'Designed the enrollment flow: category browsing → plan selection → budget check → summary → confirm. Added inline eligibility hints to reduce HR support tickets.',
+        title: 'Collect & Track Points',
+        desc: 'Built a points system UI that lets employees collect and track accumulated points from participating in activities.',
       },
       {
         phase: '03',
-        title: 'High-Fidelity Design',
-        desc: 'Built complete desktop and mobile responsive designs. Key interaction: a sticky budget tracker that updates live as users add/remove benefits, inspired by e-commerce cart patterns.',
+        title: 'Redeem Benefits',
+        desc: 'Designed a benefit redemption flow where employees can choose rewards that best suit their personal needs.',
       },
       {
         phase: '04',
-        title: 'Usability Testing',
-        desc: 'Ran moderated tests with 8 employees across departments. Measured enrollment completion time and error rate. The redesign reduced errors from 30% to under 5%.',
+        title: 'History & Updates',
+        desc: 'Created a transaction history and activity update section so employees can monitor their benefit usage over time.',
       },
     ],
     outcomes: [
-      { metric: '30%→5%', label: 'Error rate' },
-      { metric: '8', label: 'Employees tested' },
-      { metric: '2×', label: 'Faster enrollment' },
-      { metric: '100%', label: 'Mobile responsive' },
+      { metric: '94.12%', label: 'Task Success Rate' },
+      { metric: '17', label: 'Participants' },
+      { metric: '69', label: 'SUS Score (Good)' },
+      { metric: '1:38', label: 'Avg. Completion Time' },
+    ],
+    usabilityTesting: {
+      content: 'To validate the effectiveness and user-friendliness of the flexible benefits application, usability testing was conducted with 17 participants. The goal was to observe real user interactions and gather measurable insights before moving forward.',
+      images: [
+        {
+          src: avgCompletionTime,
+          label: 'Average Completion Time',
+          desc: 'The average time it took for participants to complete the task — from opening the prototype to successfully submitting a benefit request — was 1 minute and 38 seconds. This serves as a baseline for future redesigns, helping to measure improvement over time.',
+        },
+        {
+          src: taskSuccessRate,
+          label: 'Task Success Rate',
+          desc: 'Out of 17 participants, 16 completed the task successfully, resulting in a 94.12% success rate. This indicates that the UI was intuitive and guided users effectively through the process.',
+        },
+        {
+          src: susScore,
+          label: 'SUS (System Usability Scale) Score',
+          desc: 'The average SUS score from all participants was 69, which is considered "Good" on the usability scale. While not perfect, this suggests the UI is effective and provides a strong foundation for further enhancement.',
+        },
+      ],
+    },
+    uiDesign: {
+      paragraphs: [
+        'The redesigned UI follows a clean and modern aesthetic in line with the company\'s branding. Key flows such as benefit claiming and onboarding were simplified to enhance clarity and reduce friction.',
+        'A clickable Figma prototype was created to demonstrate how users could browse, select, and submit benefits seamlessly.',
+      ],
+      slides: [uiDesign1, uiDesign2, uiDesign3, uiDesign4, uiDesign5, uiDesign6, uiDesign7, uiDesign8, uiDesign9, uiDesign10],
+    },
+    mockupSection: {
+      content: 'After analyzing the data and defining the user personas, I began the visual design phase by sketching the mobile interface to ensure clarity and accessibility.',
+      image: wireframeImg,
+    },
+    personas: [
+      {
+        title: 'Recent Graduate',
+        desc: 'Early in their career, this group is motivated by opportunities for self-development and career growth. They are tech-savvy, eager to explore new features, and often value benefits related to learning, wellness, and networking.',
+        image: persona1,
+      },
+      {
+        title: 'Mid-Career with Family',
+        desc: 'This group prioritizes work-life balance and benefits that support their family\'s well-being, such as healthcare, flexible hours, and education support. Their decision-making is practical, and they tend to favor features that save time.',
+        image: persona2,
+      },
+      {
+        title: 'Near Retirement',
+        desc: 'Experienced employees approaching retirement often value security, medical coverage, and clarity in processes. They may not adapt to new technology as quickly, so accessibility and simplicity in UI design are crucial.',
+        image: persona3,
+      },
+    ],
+    uxProcess: {
+      content: 'Next, I created user personas based on assumed employee demographics. I analyzed internal organizational data by:',
+      bullets: [
+        'Separating by gender',
+        'Segmenting by generation (e.g. Gen Z, Millennials, Gen X)',
+        'Reviewing the top 5 most-participated activities from the previous year',
+      ],
+      afterText: 'After identifying patterns and preferences, I mapped out a user workflow for the future system and created an Information Architecture Flow to structure the application\'s core features and navigation logic.',
+      workflowImg: workflowImg,
+      flowImg: flowFlexible,
+    },
+    goals: [
+      {
+        number: 'GOAL 1',
+        desc: 'Measure the average time users take to complete essential tasks during usability testing.',
+        objective: 'Use the time data as a baseline for future redesigns and performance comparison, ensuring continuous improvement in usability.',
+      },
+      {
+        number: 'GOAL 2',
+        desc: 'Measure the percentage of users who can complete tasks without assistance.',
+        objective: 'Achieve at least a 80% success rate across test participants.',
+      },
+      {
+        number: 'GOAL 3',
+        desc: 'Evaluate overall user satisfaction with a standard SUS questionnaire.',
+        objective: 'Score 65 or higher, which indicates "Good Usability".',
+      },
     ],
     nextId: 'impact-wedding',
   },
@@ -255,38 +390,84 @@ const projects: Record<string, Project> = {
     timeline: 'May 2024 – Jul 2024',
     tools: ['Figma', 'FigJam'],
     platform: 'Desktop Web',
-    image: PROJECT_IMG_WEDDING,
+    image: weddingBanner,
     overview:
-      'An event management platform for IMPACT Arena\'s wedding & banquet division — enabling event coordinators to manage bookings, seating arrangements, vendor coordination, and guest communications.',
+      'This project was a freelance opportunity focused on improving the customer experience in selecting wedding decoration items. It was designed for a wedding organizer team that wanted to enhance how clients interact with and communicate their preferences.',
     problem:
-      'Coordinators managed multiple simultaneous events using printouts and WhatsApp groups. Last-minute changes were error-prone, and there was no unified view of event status across the team.',
+      'Customers often struggled to remember or communicate the specific items they had selected to different departments (e.g., florist, lighting team, stage setup). There was no clear system to review or share their chosen decorations after the initial selection.',
+    solution: [
+      'Browse & select wedding items',
+      'View a shareable summary page',
+    ],
     process: [
       {
         phase: '01',
-        title: 'Domain Research',
-        desc: 'Shadowed 2 event coordinators across a full event day. Mapped their toolset (6 different apps) and identified the highest-friction moments: seating changes and vendor confirmations.',
+        title: 'Browse & Select Items',
+        desc: 'Designed a web-based interface that allowed clients to browse and select wedding items such as flowers, stages, props, and lighting with ease.',
       },
       {
         phase: '02',
-        title: 'Core Workflow Design',
-        desc: 'Focused on the 3 most critical workflows: event timeline view, guest list management, and vendor checklist. Used progressive disclosure to keep the interface approachable.',
+        title: 'Summary Page',
+        desc: 'After making selections, clients can view a summary page that lists all their chosen items, making it easy to review everything in one place.',
       },
       {
         phase: '03',
-        title: 'Visual Design',
-        desc: 'Designed a calm, professional aesthetic fitting the wedding industry. Soft neutrals with gold accents. Prioritized spatial clarity for coordinators working under pressure.',
-      },
-      {
-        phase: '04',
-        title: 'Prototype Review',
-        desc: 'Presented interactive Figma prototype to 3 senior coordinators. Collected structured feedback and refined the event status indicators and notification system.',
+        title: 'Save & Share',
+        desc: 'The summary could be saved or shared with relevant departments, making the planning process smoother and reducing miscommunication between teams.',
       },
     ],
+    popularVote: {
+      content: 'The project received a Popular Vote award from R2i (Routine to Innovation) competition, reflecting its user-friendly concept and visual appeal. With further development, it has the potential to be used as a real internal tool to help streamline the wedding planning process for clients and staff.',
+      image: rewardImg,
+    },
+    uiDesignWedding: {
+      content: 'The interface was designed with a romantic, soft tone to match the wedding theme. Using the Sukhumvit font and carefully selected color palettes, the layout ensures clarity, elegance, and a seamless experience for users selecting wedding packages.',
+      slides: [uiWedding1, uiWedding2, uiWedding3, uiWedding4, uiWedding5, uiWedding6, uiWedding7],
+    },
+    wireframes: {
+      intro: 'Before jumping into the visual design, I created low-fidelity wireframes to define the layout, content structure, and user flow of the wedding platform. The wireframes were essential for:',
+      bullets: [
+        'Mapping the user journey from the landing page to the final document generation',
+        'Main page',
+        'Package selection',
+        'Wedding design customization',
+        'Design detail preview',
+        'Summary of selected items',
+        'Final PDF report',
+      ],
+      closing: 'The goal was to ensure usability and logical flow before investing time in high-fidelity mockups. Each screen was structured with clarity and simplicity in mind, allowing stakeholders to review and provide feedback quickly during the early development stages.',
+      images: [wireframeWedding1, wireframeWedding2, wireframeWedding3],
+    },
+    designSystem: {
+      intro: 'The visual identity of this wedding platform follows a soft, elegant aesthetic that aligns with the romantic tone of wedding planning.',
+      subsections: [
+        {
+          title: 'Typography',
+          content: 'The Sukhumvit font was chosen for its modern, clean appearance and excellent legibility in both large headers and smaller interface text. We used a structured type scale for clarity and hierarchy:',
+          bullets: [
+            'H1–H5 for prominent headings, ranging from 60px to 28px',
+            'S1 & B1 for body content and UI labels',
+            'Regular and bold styles were applied to balance readability and visual emphasis',
+          ],
+          image: typographyImg,
+        },
+        {
+          title: 'Color & Material Design',
+          content: 'The color system follows Material Design principles, ensuring consistent application of tones for accessibility and UI feedback.',
+          bullets: [
+            'Primary colors: Soft pastels in pink, peach, and burgundy for emotional warmth',
+            'Secondary & Third colors: Used to differentiate sections and support interaction components',
+            'Gradients and grayscale: Added depth and visual interest across cards, buttons, and backgrounds',
+          ],
+        },
+      ],
+      closing: 'Three distinct color palettes were explored to provide visual flexibility, and a final palette was selected that best represented the client\'s brand and the nature of the event. The result is a cohesive and emotionally engaging UI that elevates the digital wedding planning experience.',
+    },
     outcomes: [
-      { metric: '6→1', label: 'Tools consolidated' },
-      { metric: '3', label: 'Senior coordinators validated' },
-      { metric: '100%', label: 'Mobile-ready' },
-      { metric: '2', label: 'Core flows redesigned' },
+      { metric: '🏆', label: 'Popular Vote · R2i Competition' },
+      { metric: '7', label: 'UI Screens Designed' },
+      { metric: '6', label: 'Key User Flows' },
+      { metric: '3', label: 'Color Palettes Explored' },
     ],
     nextId: 'clean-near-u',
   },
@@ -299,31 +480,47 @@ const projects: Record<string, Project> = {
     timeline: '2024',
     tools: ['Figma', 'Principle', 'User Testing'],
     platform: 'iOS & Android',
-    image: PROJECT_IMG_CLEAN,
+    image: bannerCasestudy,
     overview:
-      'A on-demand laundry pickup & delivery app connecting users with nearby laundry shops. Designed to make scheduling, tracking, and payment frictionless for urban users.',
-    problem:
-      'Existing laundry apps in Thailand had outdated UI, confusing pricing structures, and no real-time order tracking — leading to high drop-off rates and reliance on phone calls to check order status.',
+      '"Clean near U" is a food ordering application designed during a UX certification course, focusing on creating a smooth, user-centered experience to promote healthy eating and build customer loyalty. The goal was to make it easier for users to discover, customize, and order clean food from nearby restaurants.',
+    empathize: {
+      intro: 'Through desk research, I explored users\' behaviors and challenges in maintaining a healthy lifestyle. Key insights include:',
+      bullets: [
+        'A desire to improve eating habits',
+        'Interest in health metrics like TDEE, BMR, and BMI',
+        'Limited time for regular exercise',
+        'Inconsistent hydration and sleep patterns',
+        'Busy daily routines make healthy food choices difficult',
+      ],
+      closing: 'These findings shaped the foundation for designing a user-centered food ordering experience.',
+    },
+    goalText: 'Allowing groups who want to lose weight or be healthy to choose a variety of foods that are close at hand and clean.',
+    problem: '',
     process: [
       {
         phase: '01',
-        title: 'User Interviews',
-        desc: 'Interviewed 10 urban users aged 22–35. Key insight: users don\'t mind paying premium for reliability and predictability — they just want to know exactly when their clothes are coming back.',
+        title: 'Empathize',
+        desc: 'Researched the needs and behaviors of health-conscious users to understand what motivates them to eat clean and what barriers they face when searching for healthy food options nearby.',
       },
       {
         phase: '02',
-        title: 'Mobile-First Design',
-        desc: 'Designed for iOS & Android simultaneously. Followed platform conventions (bottom tab nav, native inputs, system fonts as fallback). Built a simple 3-step order flow: schedule → confirm → track.',
+        title: 'Define',
+        desc: 'Synthesized research findings to clearly define the core problem: users lack a convenient, trustworthy way to find and order clean food near them that fits their dietary goals.',
       },
       {
         phase: '03',
-        title: 'Visual System',
-        desc: 'Fresh, clean visual identity: white surfaces, soft teal accent, rounded cards. Iconography focused on clarity — every icon passed a 5-second comprehension test with new users.',
+        title: 'Ideate',
+        desc: 'Brainstormed solutions focused on food discovery, customization, and loyalty — ultimately focusing on a simple browsing experience with filters for healthy categories and nearby restaurants.',
       },
       {
         phase: '04',
-        title: 'Prototype Testing',
-        desc: 'Tested the high-fi prototype with 6 users. Measured time-to-complete the order flow (target: under 90 seconds). Achieved 78 seconds median. Iterated on the address selection screen.',
+        title: 'Prototype',
+        desc: 'Built interactive wireframes and high-fidelity screens in Figma, covering key flows: onboarding, food discovery, customization, ordering, and loyalty rewards.',
+      },
+      {
+        phase: '05',
+        title: 'Test',
+        desc: 'Conducted usability testing with target users to validate the design decisions, gather feedback, and iterate on the interface to ensure a smooth and intuitive experience.',
       },
     ],
     outcomes: [
@@ -366,6 +563,10 @@ export default function Overview() {
   const project = projects[projectId ?? ''] ?? projects['hr-system']
   const nextProject = projects[project.nextId]
   const [lightboxImg, setLightboxImg] = useState<string | null>(null)
+  const [personaSlide, setPersonaSlide] = useState(0)
+  const [uiSlide, setUiSlide] = useState(0)
+  const [wfSlide, setWfSlide] = useState(0)
+  const [uiWeddingSlide, setUiWeddingSlide] = useState(0)
 
   useEffect(() => { window.scrollTo(0, 0) }, [projectId])
 
@@ -460,17 +661,18 @@ export default function Overview() {
             </FadeUp>
           </div>
 
+          {(project.problem || project.goalText) && <>
           <div className="ov-divider" />
 
           <div className="ov-two-col">
             <FadeUp className="ov-col-left">
-              <p className="label-tag">CHALLENGE</p>
-              <h2 className="ov-section-heading">The Problem</h2>
+              <p className="label-tag">{project.goalText ? 'GOAL' : 'CHALLENGE'}</p>
+              <h2 className="ov-section-heading">{project.goalText ? 'Our Goal' : 'The Problem'}</h2>
             </FadeUp>
             <FadeUp delay={0.1} className="ov-col-right">
               <div className="ov-problem-card">
                 <div className="ov-problem-quote">"</div>
-                <p className="ov-body-large">{project.problem}</p>
+                <p className="ov-body-large">{project.goalText ?? project.problem}</p>
               </div>
               {project.problemImage && (
                 <img
@@ -481,8 +683,34 @@ export default function Overview() {
               )}
             </FadeUp>
           </div>
+          </>}
         </div>
       </section>
+
+      {/* ── GOALS ── */}
+      {project.goals && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">GOALS</p>
+              <h2 className="ov-section-heading">Goals</h2>
+              <p className="ov-body-large" style={{ marginTop: 12 }}>To validate the usability and effectiveness of the design using key UX metrics.</p>
+            </FadeUp>
+            <div className="ov-goals-grid">
+              {project.goals.map((g, i) => (
+                <FadeUp key={g.number} delay={i * 0.08} className="ov-goal-card">
+                  <span className="ov-goal-num">{g.number}</span>
+                  <p className="ov-goal-desc">{g.desc}</p>
+                  <div className="ov-goal-objective">
+                    <span className="ov-goal-obj-label">Objective</span>
+                    <p className="ov-goal-obj-text">{g.objective}</p>
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── PROCESS ── */}
       <section className="ov-process-section">
@@ -502,6 +730,27 @@ export default function Overview() {
           </div>
         </div>
       </section>
+
+      {/* ── EMPATHIZE ── */}
+      {project.empathize && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <div className="ov-two-col">
+              <FadeUp className="ov-col-left">
+                <p className="label-tag">STEP 01</p>
+                <h2 className="ov-section-heading">Empathize</h2>
+              </FadeUp>
+              <FadeUp delay={0.1} className="ov-col-right">
+                <p className="ov-body-large">{project.empathize.intro}</p>
+                <ul className="ov-ux-bullets" style={{ marginTop: 16 }}>
+                  {project.empathize.bullets.map((b, i) => <li key={i}>{b}</li>)}
+                </ul>
+                <p className="ov-body-large" style={{ marginTop: 24 }}>{project.empathize.closing}</p>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── KEY FEATURES ── */}
       {project.features && (
@@ -568,6 +817,368 @@ export default function Overview() {
                 </div>
               </FadeUp>
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── UX PROCESS ── */}
+      {project.uxProcess && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <div className="ov-two-col">
+              <FadeUp className="ov-col-left">
+                <p className="label-tag">STEP 01</p>
+                <h2 className="ov-section-heading">UX Process</h2>
+              </FadeUp>
+              <FadeUp delay={0.1} className="ov-col-right">
+                <p className="ov-body-large">{project.uxProcess.content}</p>
+                <ul className="ov-ux-bullets">
+                  {project.uxProcess.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+<p className="ov-body-large" style={{ marginTop: 24 }}>{project.uxProcess.afterText}</p>
+              </FadeUp>
+            </div>
+            <FadeUp delay={0.15} className="ov-ux-images">
+              <img src={project.uxProcess.workflowImg} alt="User Workflow" className="ov-ux-img" onClick={() => setLightboxImg(project.uxProcess!.workflowImg)} />
+              <img src={project.uxProcess.flowImg} alt="Information Architecture Flow" className="ov-ux-img" onClick={() => setLightboxImg(project.uxProcess!.flowImg)} />
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── PERSONAS ── */}
+      {project.personas && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">PERSONAS</p>
+              <h2 className="ov-section-heading">Personas</h2>
+              <p className="ov-body-large" style={{ marginTop: 12, maxWidth: 720 }}>
+                To ensure the application met the needs of different employee segments, I developed three distinct user personas based on varying life stages and priorities:
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.1} className="ov-persona-wrap">
+              {/* Slide image */}
+              <div className="ov-persona-slide">
+                <img
+                  src={project.personas[personaSlide].image}
+                  alt={project.personas[personaSlide].title}
+                  className="ov-persona-img"
+                  onClick={() => setLightboxImg(project.personas![personaSlide].image)}
+                />
+                {/* Prev / Next */}
+                <button
+                  className="ov-persona-arrow ov-persona-arrow--prev"
+                  onClick={() => setPersonaSlide(i => (i - 1 + project.personas!.length) % project.personas!.length)}
+                  aria-label="Previous persona"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+                <button
+                  className="ov-persona-arrow ov-persona-arrow--next"
+                  onClick={() => setPersonaSlide(i => (i + 1) % project.personas!.length)}
+                  aria-label="Next persona"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+                {/* Dots */}
+                <div className="ov-persona-dots">
+                  {project.personas.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`ov-persona-dot${i === personaSlide ? ' active' : ''}`}
+                      onClick={() => setPersonaSlide(i)}
+                      aria-label={`Persona ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Text */}
+              <div className="ov-persona-info">
+                <span className="ov-persona-num">0{personaSlide + 1}</span>
+                <h3 className="ov-persona-title">{project.personas[personaSlide].title}</h3>
+                <p className="ov-body-large">{project.personas[personaSlide].desc}</p>
+              </div>
+            </FadeUp>
+
+            <FadeUp delay={0.15}>
+              <p className="ov-body-large" style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+                By designing for these three personas, I ensured the system would accommodate users with different motivations, digital habits, and benefit expectations.
+              </p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── MOCKUP & WIREFRAME ── */}
+      {project.mockupSection && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 02</p>
+              <h2 className="ov-section-heading">Mockup &amp; Wireframe</h2>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.mockupSection.content}</p>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <img
+                src={project.mockupSection.image}
+                alt="Wireframe"
+                className="ov-full-img"
+                onClick={() => setLightboxImg(project.mockupSection!.image)}
+              />
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── UI DESIGN & PROTOTYPE ── */}
+      {project.uiDesign && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 03</p>
+              <h2 className="ov-section-heading">UI Design &amp; Prototype</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 16, maxWidth: 720 }}>
+                {project.uiDesign.paragraphs.map((p, i) => (
+                  <p key={i} className="ov-body-large">{p}</p>
+                ))}
+              </div>
+            </FadeUp>
+
+            {project.uiDesign.slides && (
+              <FadeUp delay={0.1} className="ov-ui-slider">
+                {/* Main image */}
+                <div className="ov-ui-slide-main">
+                  <img
+                    src={project.uiDesign.slides[uiSlide]}
+                    alt={`UI Design ${uiSlide + 1}`}
+                    className="ov-ui-slide-img"
+                    onClick={() => setLightboxImg(project.uiDesign!.slides[uiSlide])}
+                  />
+                  <button
+                    className="ov-persona-arrow ov-persona-arrow--prev"
+                    onClick={() => setUiSlide(i => (i - 1 + project.uiDesign!.slides.length) % project.uiDesign!.slides.length)}
+                    aria-label="Previous"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </button>
+                  <button
+                    className="ov-persona-arrow ov-persona-arrow--next"
+                    onClick={() => setUiSlide(i => (i + 1) % project.uiDesign!.slides.length)}
+                    aria-label="Next"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </button>
+                  <div className="ov-ui-slide-counter">{uiSlide + 1} / {project.uiDesign.slides.length}</div>
+                </div>
+
+                {/* Thumbnail strip */}
+                <div className="ov-ui-thumbs">
+                  {project.uiDesign.slides.map((src, i) => (
+                    <button
+                      key={i}
+                      className={`ov-ui-thumb${i === uiSlide ? ' active' : ''}`}
+                      onClick={() => setUiSlide(i)}
+                    >
+                      <img src={src} alt={`UI ${i + 1}`} />
+                    </button>
+                  ))}
+                </div>
+              </FadeUp>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* ── USABILITY TESTING ── */}
+      {project.usabilityTesting && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 04</p>
+              <h2 className="ov-section-heading">Usability Testing</h2>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.usabilityTesting.content}</p>
+            </FadeUp>
+            <div className="ov-ut-grid">
+              {project.usabilityTesting.images.map((img, i) => (
+                <FadeUp key={img.label} delay={i * 0.08} className="ov-ut-card">
+                  <img src={img.src} alt={img.label} className="ov-ut-img" onClick={() => setLightboxImg(img.src)} />
+                  <span className="ov-ut-label">{img.label}</span>
+                  <p className="ov-ut-desc">{img.desc}</p>
+                </FadeUp>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── DESIGN SYSTEM ── */}
+      {project.designSystem && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">DESIGN SYSTEM</p>
+              <h2 className="ov-section-heading">Design System</h2>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.designSystem.intro}</p>
+            </FadeUp>
+            <div className="ov-ds-grid">
+              {project.designSystem.subsections.map((sub, i) => (
+                <FadeUp key={sub.title} delay={i * 0.08} className="ov-ds-card">
+                  <h3 className="ov-ds-title">{sub.title}</h3>
+                  <p className="ov-ds-content">{sub.content}</p>
+                  {sub.bullets && (
+                    <ul className="ov-ds-bullets">
+                      {sub.bullets.map((b, j) => <li key={j}>{b}</li>)}
+                    </ul>
+                  )}
+                </FadeUp>
+              ))}
+            </div>
+            {project.designSystem.subsections.some(s => s.image) && (
+              <FadeUp delay={0.1}>
+                {project.designSystem.subsections.filter(s => s.image).map(s => (
+                  <img
+                    key={s.title}
+                    src={s.image}
+                    alt={s.title}
+                    className="ov-full-img"
+                    onClick={() => setLightboxImg(s.image!)}
+                  />
+                ))}
+              </FadeUp>
+            )}
+            <FadeUp delay={0.15}>
+              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+                {project.designSystem.closing}
+              </p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── WIREFRAMES ── */}
+      {project.wireframes && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <div className="ov-two-col">
+              <FadeUp className="ov-col-left">
+                <p className="label-tag">WIREFRAMES</p>
+                <h2 className="ov-section-heading">Wireframes</h2>
+              </FadeUp>
+              <FadeUp delay={0.1} className="ov-col-right">
+                <p className="ov-body-large">{project.wireframes.intro}</p>
+                <ul className="ov-ux-bullets" style={{ marginTop: 16 }}>
+                  {project.wireframes.bullets.map((b, i) => <li key={i}>{b}</li>)}
+                </ul>
+                <p className="ov-body-large" style={{ marginTop: 24 }}>{project.wireframes.closing}</p>
+              </FadeUp>
+            </div>
+            <FadeUp delay={0.1} className="ov-ui-slider">
+              <div className="ov-ui-slide-main">
+                <img
+                  src={project.wireframes.images[wfSlide]}
+                  alt={`Wireframe ${wfSlide + 1}`}
+                  className="ov-ui-slide-img"
+                  onClick={() => setLightboxImg(project.wireframes!.images[wfSlide])}
+                />
+                <button
+                  className="ov-persona-arrow ov-persona-arrow--prev"
+                  onClick={() => setWfSlide(i => (i - 1 + project.wireframes!.images.length) % project.wireframes!.images.length)}
+                  aria-label="Previous"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+                <button
+                  className="ov-persona-arrow ov-persona-arrow--next"
+                  onClick={() => setWfSlide(i => (i + 1) % project.wireframes!.images.length)}
+                  aria-label="Next"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+                <div className="ov-ui-slide-counter">{wfSlide + 1} / {project.wireframes.images.length}</div>
+              </div>
+              <div className="ov-ui-thumbs">
+                {project.wireframes.images.map((src, i) => (
+                  <button key={i} className={`ov-ui-thumb${i === wfSlide ? ' active' : ''}`} onClick={() => setWfSlide(i)}>
+                    <img src={src} alt={`Wireframe ${i + 1}`} />
+                  </button>
+                ))}
+              </div>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── UI DESIGN WEDDING ── */}
+      {project.uiDesignWedding && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">UI DESIGN</p>
+              <h2 className="ov-section-heading">UI Design</h2>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.uiDesignWedding.content}</p>
+            </FadeUp>
+            <FadeUp delay={0.1} className="ov-ui-slider">
+              <div className="ov-ui-slide-main">
+                <img
+                  src={project.uiDesignWedding.slides[uiWeddingSlide]}
+                  alt={`UI Design ${uiWeddingSlide + 1}`}
+                  className="ov-ui-slide-img"
+                  onClick={() => setLightboxImg(project.uiDesignWedding!.slides[uiWeddingSlide])}
+                />
+                <button
+                  className="ov-persona-arrow ov-persona-arrow--prev"
+                  onClick={() => setUiWeddingSlide(i => (i - 1 + project.uiDesignWedding!.slides.length) % project.uiDesignWedding!.slides.length)}
+                  aria-label="Previous"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+                <button
+                  className="ov-persona-arrow ov-persona-arrow--next"
+                  onClick={() => setUiWeddingSlide(i => (i + 1) % project.uiDesignWedding!.slides.length)}
+                  aria-label="Next"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+                <div className="ov-ui-slide-counter">{uiWeddingSlide + 1} / {project.uiDesignWedding.slides.length}</div>
+              </div>
+              <div className="ov-ui-thumbs">
+                {project.uiDesignWedding.slides.map((src, i) => (
+                  <button key={i} className={`ov-ui-thumb${i === uiWeddingSlide ? ' active' : ''}`} onClick={() => setUiWeddingSlide(i)}>
+                    <img src={src} alt={`UI ${i + 1}`} />
+                  </button>
+                ))}
+              </div>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── POPULAR VOTE ── */}
+      {project.popularVote && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <div className="ov-two-col">
+              <FadeUp className="ov-col-left">
+                <p className="label-tag">AWARD</p>
+                <h2 className="ov-section-heading">Popular Vote</h2>
+              </FadeUp>
+              <FadeUp delay={0.1} className="ov-col-right">
+                <p className="ov-body-large">{project.popularVote.content}</p>
+              </FadeUp>
+            </div>
+            <FadeUp delay={0.15}>
+              <img
+                src={project.popularVote.image}
+                alt="Popular Vote Award"
+                className="ov-full-img"
+                onClick={() => setLightboxImg(project.popularVote!.image)}
+              />
+            </FadeUp>
           </div>
         </section>
       )}

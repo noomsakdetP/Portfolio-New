@@ -35,8 +35,8 @@ const projects = [
     id: 'flexible-benefits',
     image: IMG_FLEXIBLE_BENEFITS,
     roles: ['UX/UI Design Intern', 'Usability Testing'],
-    title: 'Flexible Benefits Design Project & Usability Testing',
-    desc: 'Streamlining corporate benefit selection through a user-centered interface, reducing cognitive load for thousands of employees.',
+    title: 'Flexible Benefits Awareness Design Project',
+    desc: 'Enhancing employee understanding of organizational benefits through design.',
   },
   {
     id: 'impact-wedding',
