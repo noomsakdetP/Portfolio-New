@@ -5,7 +5,7 @@ import '../Overview.css'
 /* ── Project data ── */
 import hrBanner from '../assets/project-banner.png'
 const PROJECT_IMG_HR = hrBanner
-const PROJECT_IMG_STUDENT = 'https://www.figma.com/api/mcp/asset/65a2dbd5-468c-47d7-adbb-f29ec4a25365'
+const PROJECT_IMG_STUDENT = ''
 import bannerImpact from '../assets/banner-impact.png'
 import overviewImpact from '../assets/overview-impact.png'
 import problemImpact from '../assets/problem-impact.png'
@@ -54,9 +54,31 @@ import uiDesign10 from '../assets/UI Design10.webp'
 import persona1 from '../assets/Persona 1.png'
 import persona2 from '../assets/Persona 2.png'
 import persona3 from '../assets/Persona 3.png'
+import defineImg from '../assets/Define.png'
+import howImg from '../assets/how.png'
+import ideate1Img from '../assets/ideate_1.png'
+import impactEffortImg from '../assets/Impact-Effort.png'
+import flowCleanImg from '../assets/Flow.png'
+import iaFlowImg from '../assets/IA Flow.png'
+import test05Img from '../assets/test05.png'
+import certificateImg from '../assets/Certificate_page-0001.jpg'
+import mockupCleanImg from '../assets/Mockup.png'
+import cleanWf1 from '../assets/Clean 1.png'
+import cleanWf2 from '../assets/Clean 2.png'
+import cleanWf3 from '../assets/Clean 3.png'
+import cleanWf4 from '../assets/Clean 4.png'
+import cleanWf5 from '../assets/Clean 5.png'
+import cleanWf6 from '../assets/Clean 6.png'
+import cleanWf7 from '../assets/Clean 7.png'
+import cleanUi3 from '../assets/Clean UI 3.png'
+import cleanUi4 from '../assets/Clean UI 4.png'
+import cleanUi5 from '../assets/Clean UI 5.png'
+import cleanUi6 from '../assets/Clean UI 6.png'
+import cleanUi7 from '../assets/Clean UI 7.png'
+
+const CLEAN_WF_SLIDES = [cleanWf1, cleanWf2, cleanWf3, cleanWf4, cleanWf5, cleanWf6, cleanWf7]
+const CLEAN_UI_SLIDES = [cleanUi3, cleanUi4, cleanUi5, cleanUi6, cleanUi7]
 const PROJECT_IMG_FLEXIBLE = flexibleBenefit
-const PROJECT_IMG_WEDDING = 'https://www.figma.com/api/mcp/asset/c8ea807e-f0b2-461a-949e-acd4062451b3'
-const PROJECT_IMG_CLEAN = 'https://www.figma.com/api/mcp/asset/ab52fbd4-a2f7-44f0-aa74-953f2b938ca7'
 
 interface Project {
   overviewImage?: string
@@ -97,6 +119,27 @@ interface Project {
   storybookUrl?: string
   goalText?: string
   empathize?: { intro: string; bullets: string[]; closing: string }
+  defineSection?: {
+    intro: string
+    persona: { name: string; age: string; role: string; desc: string }
+    painPoints: string[]
+    userGoals: string[]
+    closing: string
+  }
+  hmw?: {
+    intro: string
+    goals: string[]
+    challenges: string[]
+    questions: string[]
+    closing: string
+  }
+  ideate?: {
+    intro: string
+    matrix: { label: string; tag: string; items: string[] }[]
+    closing: string
+  }
+  prototype?: { content: string }
+  testSection?: { content: string; bullets: string[]; closing: string }
 }
 
 const projects: Record<string, Project> = {
@@ -477,9 +520,9 @@ const projects: Record<string, Project> = {
     subtitle: 'A modern laundry service app focusing on convenience and cleanliness',
     tags: ['Mobile UX', 'Service Design', 'App'],
     role: 'UX/UI Designer',
-    timeline: '2024',
-    tools: ['Figma', 'Principle', 'User Testing'],
-    platform: 'iOS & Android',
+    timeline: '2025',
+    tools: ['Figma', 'Figjam', 'Mock up'],
+    platform: 'Mobile',
     image: bannerCasestudy,
     overview:
       '"Clean near U" is a food ordering application designed during a UX certification course, focusing on creating a smooth, user-centered experience to promote healthy eating and build customer loyalty. The goal was to make it easier for users to discover, customize, and order clean food from nearby restaurants.',
@@ -493,6 +536,95 @@ const projects: Record<string, Project> = {
         'Busy daily routines make healthy food choices difficult',
       ],
       closing: 'These findings shaped the foundation for designing a user-centered food ordering experience.',
+    },
+    defineSection: {
+      intro: 'Based on the empathy stage, we created a user persona to define the key problems and goals.',
+      persona: {
+        name: 'Jane',
+        age: '30 years old',
+        role: 'Marketing Specialist',
+        desc: 'Health-conscious but has a busy lifestyle. She often skips meals, relies on delivery apps, and struggles to stay consistent with diet or fitness plans.',
+      },
+      painPoints: [
+        'No time to cook or eat healthy meals',
+        'Busy work life, no time for exercise',
+        'Lack of energy and motivation due to repeated failure with past health programs',
+        "Doesn't know which plan or food choices fit her lifestyle",
+      ],
+      userGoals: [
+        'Lose 5–10 kg in 3–6 months',
+        'Improving health in a sustainable way',
+        'Build healthy habits with clear guidance',
+      ],
+      closing: 'By clearly defining these user needs and challenges, we can ensure the solution design stays focused on solving real user problems.',
+    },
+    hmw: {
+      intro: 'Based on the user insights, we identified key goals and challenges, then reframed them into opportunity-based questions to guide ideation.',
+      goals: [
+        'Lose 5–10 kg within 3–6 months',
+        'Improve overall health and energy',
+      ],
+      challenges: [
+        'No time to cook',
+        'Lack of motivation after repeated failure',
+        'Unclear on what healthy meals to choose',
+      ],
+      questions: [
+        'How might we make healthy food more convenient and accessible for busy people?',
+        'How might we make staying healthy feel fun and less forced?',
+        'How might we encourage people who have failed before to try again with confidence?',
+      ],
+      closing: 'These questions led us to brainstorm features that balance convenience, motivation, and education — forming the foundation for our app concept.',
+    },
+    ideate: {
+      intro: 'After defining key user needs and framing "How Might We" questions, we translated those insights into potential features. To prioritize, we used the Impact–Effort Matrix:',
+      matrix: [
+        {
+          label: 'High Impact / Low Effort',
+          tag: 'Quick Wins',
+          items: [
+            'Progress tracker (e.g., steps, water intake, calories)',
+            'Personalized meal suggestions',
+            'Health tips and quick nutrition advice',
+          ],
+        },
+        {
+          label: 'High Impact / High Effort',
+          tag: 'Big Bets',
+          items: [
+            'Dynamic meal plans based on lifestyle and body goals',
+            'Full meal delivery integration with partner restaurants',
+            'Motivation engine using gamification or community',
+          ],
+        },
+        {
+          label: 'Low Impact / Low Effort',
+          tag: 'Optional',
+          items: [
+            'Minor aesthetic features or micro interactions',
+          ],
+        },
+        {
+          label: 'Low Impact / High Effort',
+          tag: 'Avoid',
+          items: [
+            'Features that add complexity without value',
+          ],
+        },
+      ],
+      closing: 'This method helps us validate ideas iteratively, keeping only the features that align with user goals and product vision — and removing or improving the ones that don\'t work.',
+    },
+    prototype: {
+      content: 'We used the Impact-Effort Matrix to categorize features of the food ordering app, making it easier to develop the Information Architecture (IA) flow.',
+    },
+    testSection: {
+      content: 'At the very end of our user testing session, these final trigger questions are crucial for gathering additional, in-depth feedback from users. This is our last opportunity to:',
+      bullets: [
+        'Uncover overlooked pain points or suggestions.',
+        'Confirm overall user understanding and satisfaction.',
+        'Identify potential new features or improvements.',
+      ],
+      closing: 'These questions help us gain valuable insights that might not emerge during task completion, guiding our next design iterations.',
     },
     goalText: 'Allowing groups who want to lose weight or be healthy to choose a variety of foods that are close at hand and clean.',
     problem: '',
@@ -524,10 +656,10 @@ const projects: Record<string, Project> = {
       },
     ],
     outcomes: [
-      { metric: '78s', label: 'Median order time' },
-      { metric: '6', label: 'Users tested' },
-      { metric: '3', label: 'Step order flow' },
-      { metric: '5★', label: 'Avg. comprehension score' },
+      { metric: '5', label: 'Design Thinking Steps' },
+      { metric: '7', label: 'Wireframe Screens' },
+      { metric: '5', label: 'UI Screens Designed' },
+      { metric: '3', label: 'HMW Questions' },
     ],
     nextId: 'hr-system',
   },
@@ -567,6 +699,8 @@ export default function Overview() {
   const [uiSlide, setUiSlide] = useState(0)
   const [wfSlide, setWfSlide] = useState(0)
   const [uiWeddingSlide, setUiWeddingSlide] = useState(0)
+  const [cleanWfSlide, setCleanWfSlide] = useState(0)
+  const [cleanUiSlide, setCleanUiSlide] = useState(0)
 
   useEffect(() => { window.scrollTo(0, 0) }, [projectId])
 
@@ -748,6 +882,327 @@ export default function Overview() {
                 <p className="ov-body-large" style={{ marginTop: 24 }}>{project.empathize.closing}</p>
               </FadeUp>
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── DEFINE ── */}
+      {project.defineSection && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 02</p>
+              <h2 className="ov-section-heading">Define</h2>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.defineSection.intro}</p>
+            </FadeUp>
+
+            {/* Persona card */}
+            <FadeUp delay={0.1} className="ov-define-persona">
+              <div className="ov-define-persona-tag">PERSONA</div>
+              <h3 className="ov-define-persona-name">{project.defineSection.persona.name}</h3>
+              <p className="ov-define-persona-meta">{project.defineSection.persona.age} · {project.defineSection.persona.role}</p>
+              <p className="ov-body-large" style={{ marginTop: 12 }}>{project.defineSection.persona.desc}</p>
+            </FadeUp>
+
+            {/* Pain points & Goals */}
+            <div className="ov-define-grid">
+              <FadeUp delay={0.1} className="ov-define-card ov-define-card--pain">
+                <h4 className="ov-define-card-title">
+                  <span className="ov-define-icon">⚠</span> Key Pain Points
+                </h4>
+                <ul className="ov-ux-bullets">
+                  {project.defineSection.painPoints.map((p, i) => <li key={i}>{p}</li>)}
+                </ul>
+              </FadeUp>
+              <FadeUp delay={0.15} className="ov-define-card ov-define-card--goal">
+                <h4 className="ov-define-card-title">
+                  <span className="ov-define-icon">✦</span> User Goals
+                </h4>
+                <ul className="ov-ux-bullets">
+                  {project.defineSection.userGoals.map((g, i) => <li key={i}>{g}</li>)}
+                </ul>
+              </FadeUp>
+            </div>
+
+            <FadeUp delay={0.1}>
+              <img
+                src={defineImg}
+                alt="Define illustration"
+                className="ov-full-img"
+                style={{ width: '100%', borderRadius: 16, marginTop: 40 }}
+                onClick={() => setLightboxImg(defineImg)}
+              />
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+                {project.defineSection.closing}
+              </p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── HOW MIGHT WE ── */}
+      {project.hmw && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 02</p>
+              <h2 className="ov-section-heading">How Might We</h2>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.hmw.intro}</p>
+            </FadeUp>
+
+            <div className="ov-define-grid" style={{ marginTop: 32 }}>
+              <FadeUp delay={0.1} className="ov-define-card ov-define-card--goal">
+                <h4 className="ov-define-card-title">
+                  <span className="ov-define-icon">✦</span> User Goals
+                </h4>
+                <ul className="ov-ux-bullets">
+                  {project.hmw.goals.map((g, i) => <li key={i}>{g}</li>)}
+                </ul>
+              </FadeUp>
+              <FadeUp delay={0.1} className="ov-define-card ov-define-card--pain">
+                <h4 className="ov-define-card-title">
+                  <span className="ov-define-icon">⚠</span> User Challenges
+                </h4>
+                <ul className="ov-ux-bullets">
+                  {project.hmw.challenges.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </FadeUp>
+            </div>
+
+            <FadeUp delay={0.1}>
+              <div className="ov-hmw-questions">
+                {project.hmw.questions.map((q, i) => (
+                  <div key={i} className="ov-hmw-question">
+                    <span className="ov-hmw-num">{String(i + 1).padStart(2, '0')}</span>
+                    <p className="ov-hmw-text">{q}</p>
+                  </div>
+                ))}
+              </div>
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <img
+                src={howImg}
+                alt="How Might We illustration"
+                className="ov-full-img"
+                style={{ width: '100%', maxWidth: 560, borderRadius: 16, marginTop: 40, display: 'block', margin: '40px auto 0' }}
+                onClick={() => setLightboxImg(howImg)}
+              />
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+                {project.hmw.closing}
+              </p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── IDEATE ── */}
+      {project.ideate && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 03</p>
+              <h2 className="ov-section-heading">Ideate</h2>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.ideate.intro}</p>
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <img
+                src={ideate1Img}
+                alt="Ideate illustration"
+                className="ov-full-img"
+                style={{ width: '100%', borderRadius: 16, marginTop: 40 }}
+                onClick={() => setLightboxImg(ideate1Img)}
+              />
+              <p className="ov-body-large" style={{ marginTop: 24, maxWidth: 720 }}>
+                We took the challenges identified during the Define stage and reframed them as "How Might We" questions. From there, we brainstormed features that directly answer each question — then placed them in an Impact–Effort Matrix to prioritize what to build first.
+              </p>
+            </FadeUp>
+
+            <div className="ov-ideate-grid">
+              {project.ideate.matrix.map((cell, i) => (
+                <FadeUp key={i} delay={i * 0.08} className={`ov-ideate-card ov-ideate-card--${i}`}>
+                  <div className="ov-ideate-tag">{cell.tag}</div>
+                  <h4 className="ov-ideate-label">{cell.label}</h4>
+                  <ul className="ov-ux-bullets">
+                    {cell.items.map((item, j) => <li key={j}>{item}</li>)}
+                  </ul>
+                </FadeUp>
+              ))}
+            </div>
+
+            <FadeUp delay={0.1}>
+              <img
+                src={impactEffortImg}
+                alt="Impact-Effort Matrix"
+                className="ov-full-img"
+                style={{ width: '100%', maxWidth: 560, borderRadius: 16, marginTop: 40, display: 'block', margin: '40px auto 0' }}
+                onClick={() => setLightboxImg(impactEffortImg)}
+              />
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+                {project.ideate.closing}
+              </p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── PROTOTYPE ── */}
+      {project.prototype && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <div className="ov-two-col">
+              <FadeUp className="ov-col-left">
+                <p className="label-tag">STEP 04</p>
+                <h2 className="ov-section-heading">Prototype</h2>
+              </FadeUp>
+              <FadeUp delay={0.1} className="ov-col-right">
+                <p className="ov-body-large">{project.prototype.content}</p>
+              </FadeUp>
+            </div>
+            <FadeUp delay={0.1}>
+              <img
+                src={flowCleanImg}
+                alt="IA Flow"
+                className="ov-full-img"
+                style={{ width: '100%', maxWidth: 560, borderRadius: 16, display: 'block', margin: '40px auto 0' }}
+                onClick={() => setLightboxImg(flowCleanImg)}
+              />
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>Information Architecture (IA) Flow</h3>
+              <img
+                src={iaFlowImg}
+                alt="Information Architecture Flow"
+                className="ov-full-img"
+                style={{ width: '100%', borderRadius: 16, marginTop: 24 }}
+                onClick={() => setLightboxImg(iaFlowImg)}
+              />
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>Mock Up</h3>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>
+                Next, we'll proceed with mockup creation, defining the screens based on our IA flow and incorporating features identified through our "How Might We" (HMW).
+              </p>
+              <img
+                src={mockupCleanImg}
+                alt="Mockup"
+                className="ov-full-img"
+                style={{ width: '100%', borderRadius: 16, marginTop: 24 }}
+                onClick={() => setLightboxImg(mockupCleanImg)}
+              />
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>Wireframe</h3>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>
+                For our wireframes, we'll create low-fidelity versions based on the mockups. This approach simplifies the subsequent UI design phase and ensures all previously identified features are incorporated.
+              </p>
+              <div className="ov-ui-slider" style={{ marginTop: 32 }}>
+                <div className="ov-ui-slide-main">
+                  <button className="ov-persona-arrow ov-persona-arrow--prev" onClick={() => setCleanWfSlide(i => (i - 1 + CLEAN_WF_SLIDES.length) % CLEAN_WF_SLIDES.length)}>‹</button>
+                  <img
+                    src={CLEAN_WF_SLIDES[cleanWfSlide]}
+                    alt={`Wireframe ${cleanWfSlide + 1}`}
+                    className="ov-ui-slide-img ov-full-img"
+                    onClick={() => setLightboxImg(CLEAN_WF_SLIDES[cleanWfSlide])}
+                  />
+                  <button className="ov-persona-arrow ov-persona-arrow--next" onClick={() => setCleanWfSlide(i => (i + 1) % CLEAN_WF_SLIDES.length)}>›</button>
+                </div>
+                <p className="ov-ui-slide-counter">{cleanWfSlide + 1} / {CLEAN_WF_SLIDES.length}</p>
+                <div className="ov-ui-thumbs">
+                  {CLEAN_WF_SLIDES.map((src, i) => (
+                    <img key={i} src={src} alt={`thumb ${i + 1}`} className={`ov-ui-thumb ${i === cleanWfSlide ? 'active' : ''}`} onClick={() => setCleanWfSlide(i)} />
+                  ))}
+                </div>
+              </div>
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>UI Design</h3>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>
+                The final and most visually impactful phase is UI Design, where our application truly comes to life. Building on the structural foundation from our wireframes, this stage focuses on crafting a vibrant, engaging, and intuitive user experience.
+              </p>
+              <p className="ov-body-large" style={{ marginTop: 16 }}>We've meticulously designed every visual element:</p>
+              <ul className="ov-ux-bullets" style={{ marginTop: 12 }}>
+                <li><strong>Color and Imagery:</strong> A fresh, appealing color palette, combined with high-quality, enticing food photography, creates an inviting and appetizing atmosphere.</li>
+                <li><strong>Typography and Iconography:</strong> Clear, legible fonts ensure easy readability, while custom icons simplify navigation and actions.</li>
+                <li><strong>Layout and Usability:</strong> A clean, organized layout with ample white space ensures the app is easy to use and visually comfortable. Key information is prominently displayed for quick understanding.</li>
+              </ul>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>
+                Every design choice aims to create a cohesive, branded, and delightful experience, transforming functionality into an aesthetically pleasing and enjoyable journey for the user.
+              </p>
+              <div className="ov-ui-slider" style={{ marginTop: 32 }}>
+                <div className="ov-ui-slide-main">
+                  <button className="ov-persona-arrow ov-persona-arrow--prev" onClick={() => setCleanUiSlide(i => (i - 1 + CLEAN_UI_SLIDES.length) % CLEAN_UI_SLIDES.length)}>‹</button>
+                  <img
+                    src={CLEAN_UI_SLIDES[cleanUiSlide]}
+                    alt={`UI Design ${cleanUiSlide + 1}`}
+                    className="ov-ui-slide-img ov-full-img"
+                    onClick={() => setLightboxImg(CLEAN_UI_SLIDES[cleanUiSlide])}
+                  />
+                  <button className="ov-persona-arrow ov-persona-arrow--next" onClick={() => setCleanUiSlide(i => (i + 1) % CLEAN_UI_SLIDES.length)}>›</button>
+                </div>
+                <p className="ov-ui-slide-counter">{cleanUiSlide + 1} / {CLEAN_UI_SLIDES.length}</p>
+                <div className="ov-ui-thumbs">
+                  {CLEAN_UI_SLIDES.map((src, i) => (
+                    <img key={i} src={src} alt={`thumb ${i + 1}`} className={`ov-ui-thumb ${i === cleanUiSlide ? 'active' : ''}`} onClick={() => setCleanUiSlide(i)} />
+                  ))}
+                </div>
+              </div>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── TEST ── */}
+      {project.testSection && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <div className="ov-two-col">
+              <FadeUp className="ov-col-left">
+                <p className="label-tag">STEP 05</p>
+                <h2 className="ov-section-heading">Test</h2>
+              </FadeUp>
+              <FadeUp delay={0.1} className="ov-col-right">
+                <p className="ov-body-large">{project.testSection.content}</p>
+                <ul className="ov-ux-bullets" style={{ marginTop: 16 }}>
+                  {project.testSection.bullets.map((b, i) => <li key={i}>{b}</li>)}
+                </ul>
+                <p className="ov-body-large" style={{ marginTop: 20 }}>{project.testSection.closing}</p>
+              </FadeUp>
+            </div>
+            <FadeUp delay={0.1}>
+              <img
+                src={test05Img}
+                alt="Test session"
+                className="ov-full-img"
+                style={{ width: '100%', borderRadius: 16, marginTop: 40 }}
+                onClick={() => setLightboxImg(test05Img)}
+              />
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>Certificate</h3>
+              <img
+                src={certificateImg}
+                alt="Certificate"
+                className="ov-full-img"
+                style={{ width: '100%', borderRadius: 16, marginTop: 24 }}
+                onClick={() => setLightboxImg(certificateImg)}
+              />
+            </FadeUp>
           </div>
         </section>
       )}
@@ -1268,10 +1723,9 @@ export default function Overview() {
       <div className="cta-wrapper">
         <FadeUp>
           <div className="cta-box">
-            <h2 className="cta-heading">Let's make something amazing<br />together</h2>
+            <h2 className="cta-heading">Design is how I think.<br />Let's think together.</h2>
             <p className="cta-sub">
-              Have a project in mind? I'm currently accepting new commissions for 2024.
-              Let's build your vision from the ground up.
+              Currently open to new opportunities — whether it's a product, a system, or an experience worth building.
             </p>
             <div className="cta-actions">
               <a href="mailto:sakdidetsuttipol@hotmail.com" className="cta-email">
@@ -1281,14 +1735,9 @@ export default function Overview() {
                 </svg>
               </a>
               <div className="social-links">
-                <a href="#" className="social-link" aria-label="LinkedIn">
+                <a href="http://www.linkedin.com/in/sakdidet-suttipol" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
-                <a href="#" className="social-link" aria-label="Instagram">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
                   </svg>
                 </a>
               </div>
@@ -1309,9 +1758,7 @@ export default function Overview() {
           </div>
           <div className="footer-right">
             <ul className="footer-nav">
-              <li><a href="#">LinkedIn</a></li>
-              <li><a href="#">Instagram</a></li>
-              <li><a href="#">Facebook</a></li>
+              <li><a href="http://www.linkedin.com/in/sakdidet-suttipol" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
             </ul>
             <div className="footer-location">
               <svg width="10" height="13" viewBox="0 0 10 14" fill="none">

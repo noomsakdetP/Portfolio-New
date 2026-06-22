@@ -160,6 +160,9 @@
   max-width: 460px;
   position: relative;
   background: white;
+  transition: transform 0.15s ease-out;
+  cursor: pointer;
+  will-change: transform;
 }
 .hero-photo-card img {
   width: 100%;
