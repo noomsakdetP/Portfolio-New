@@ -73,6 +73,10 @@ export default function App() {
               Design System — from Figma token to production-ready
               components that teams can ship.
             </p>
+            <a href="#" className="cv-badge" style={{ display: 'inline-flex', marginBottom: 16 }}>
+              <span className="cv-dot" />
+              <span className="cv-text">Download My CV</span>
+            </a>
             <a href="mailto:sakdidetsuttipol@hotmail.com" className="hero-email-link">
               sakdidetsuttipol@hotmail.com
               <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
@@ -96,10 +100,6 @@ export default function App() {
                 }}
               >
                 <img src={HERO_IMG} alt="Sakdidet" />
-                <div className="cv-badge">
-                  <span className="cv-dot" />
-                  <span className="cv-text">Download My CV</span>
-                </div>
               </div>
             </div>
           </FadeUp>

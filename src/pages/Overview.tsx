@@ -117,6 +117,17 @@ interface Project {
   outcomes: { metric: string; label: string }[]
   nextId: string
   storybookUrl?: string
+  howWeSolvedIt?: { title: string; problem: string; fix: string }[]
+  requirementsSection?: { title: string; desc: string }
+  designSection?: { title: string; desc: string }
+  developmentSection?: { title: string; desc: string }
+  testingSection?: { title: string; desc: string }
+  deliverySection?: { title: string; desc: string }
+  analyticsSection?: {
+    title: string
+    desc: string
+    issues: { title: string; problem: string; fix: string }[]
+  }
   goalText?: string
   empathize?: { intro: string; bullets: string[]; closing: string }
   defineSection?: {
@@ -191,45 +202,78 @@ const projects: Record<string, Project> = {
   'student-activity': {
     id: 'student-activity',
     title: 'Student Activity System',
-    subtitle: 'A holistic design and development approach for tracking campus life',
-    tags: ['Full-Stack Design', 'UX Research', 'Web App'],
-    role: 'Full-Stack Designer',
-    timeline: '2024',
-    tools: ['Figma', 'React', 'Usability Testing'],
-    platform: 'Desktop & Mobile Web',
+    subtitle: 'A full-stack web application for digitizing student activity tracking at Lampang Technical College',
+    tags: ['Full-Stack', 'Web App', 'UX/UI Design'],
+    role: 'Full-Stack Designer & Developer',
+    timeline: '2026',
+    tools: ['Next.js', 'Supabase', 'PostgreSQL', 'Cursor', 'Claude', 'Google Analytics', 'Hotjar'],
+    platform: 'Web',
     image: PROJECT_IMG_STUDENT,
     overview:
-      'A unified platform for Srinakharinwirot University to track student activity hours, manage club registrations, and surface achievements — replacing a fragmented Excel-based process.',
+      'A full-stack web application designed to digitize student activity tracking for Lampang Technical College — supporting a database of 3,400 students and replacing a manual paper-based system. The system also integrates Google Analytics and Hotjar to monitor real-world usage, track user behavior, and inform future improvements.',
     problem:
-      'Students struggled to track their required activity hours across multiple departments, each running their own spreadsheet. Admins had no visibility into participation trends, and data was often lost at semester end.',
+      'Lampang Technical College\'s student activities department relied on physical notebooks and record books to manually track student participation each academic year — a process that was costly, inefficient, and error-prone.',
+    solution: [
+      'A scalable web-based system that digitally records student activity participation, built to handle 3,400+ student records with role-based access for students and staff.',
+    ],
+    features: [
+      { title: 'Role-based Access', desc: 'Separate login flows and dashboards for students and staff, ensuring the right people see the right information.' },
+      { title: 'Excel Import', desc: 'Upload and migrate student records from legacy spreadsheets directly into the system database.' },
+      { title: '6-Digit Activity Code', desc: 'Staff generate a random 6-digit code per activity. Students enter the code to confirm their participation instantly.' },
+      { title: 'Export Reports', desc: 'Download attendance and participation reports as PDF or Excel for record-keeping and administrative use.' },
+      { title: 'Google Analytics', desc: 'Tracks overall usage metrics — page views, session duration, and user flow — giving a high-level view of how the system is being used across the college.' },
+      { title: 'Hotjar', desc: 'Records heatmaps and session replays to understand exactly where users click, scroll, and drop off — helping identify UX issues and prioritize future improvements.' },
+    ],
     process: [
-      {
-        phase: '01',
-        title: 'User Research',
-        desc: 'Interviewed 12 students and 4 administrative staff. Mapped the existing workflow and identified the top 3 friction points: unclear requirements, no history visibility, and manual verification.',
-      },
-      {
-        phase: '02',
-        title: 'Information Architecture',
-        desc: 'Redesigned the IA from scratch — separating student-facing flows (register, track, view history) from admin flows (approve, report, export). Card-sorted with 8 participants.',
-      },
-      {
-        phase: '03',
-        title: 'Prototype & Test',
-        desc: 'Built mid-fi prototypes in Figma, ran 2 rounds of usability testing with 6 users each. Iterated on the approval flow which had the highest error rate in testing.',
-      },
-      {
-        phase: '04',
-        title: 'Design System Support',
-        desc: 'Created a lightweight component library scoped to the project. Delivered a Figma file with all screens, states, and a developer handoff guide.',
-      },
+      { phase: '01', title: 'Requirements & System Flow', desc: 'Gathered requirements from the college to understand the scope and needed features. Created a high-level system flow diagram to present to the client and align on how the system would work.' },
+      { phase: '02', title: 'Design', desc: 'Skipped Figma due to a 3-week deadline. Used Claude Design to plan layouts and component structure, then applied the Shadcn UI library to save time. Defined the Design System including component tokens in Claude Design before development.' },
+      { phase: '03', title: 'Development', desc: 'Built the full-stack application using Next.js, Supabase, and PostgreSQL — including authentication, real-time data, and Excel import/export. Integrated Google Analytics and Hotjar to track user behavior and identify areas for redesign.' },
+      { phase: '04', title: 'Testing', desc: 'Designed AI-generated test cases covering all system scenarios. Any flow that failed a test case was flagged and fixed before delivery.' },
+      { phase: '05', title: 'Delivery', desc: 'Handed off the completed system to Lampang Technical College for live deployment.' },
+      { phase: '06', title: 'Analytics & Iteration', desc: 'Used GA and Hotjar data post-launch to identify UX issues, measure performance, and prioritize improvements for the next iteration.' },
     ],
     outcomes: [
-      { metric: '12', label: 'User interviews' },
-      { metric: '2×', label: 'Usability rounds' },
-      { metric: '80%', label: 'Task success rate' },
-      { metric: '0', label: 'Lost data incidents' },
+      { metric: '3,400+', label: 'Student records' },
+      { metric: '2', label: 'User roles' },
+      { metric: '6-digit', label: 'Activity code system' },
+      { metric: 'PDF & Excel', label: 'Export formats' },
     ],
+    requirementsSection: {
+      title: 'Requirements & System Flow',
+      desc: 'Gathered requirements from the college to understand the scope and needed features. Created a high-level system flow diagram to present to the client and align on how the system would work.',
+    },
+    designSection: {
+      title: 'Design',
+      desc: 'Skipped Figma due to a 3-week deadline. Used Claude Design to plan layouts and component structure, then applied the Shadcn UI library to save time. Defined the Design System including component tokens in Claude Design before development.',
+    },
+    developmentSection: {
+      title: 'Development',
+      desc: 'Built the full-stack application using Next.js, Supabase, and PostgreSQL — including authentication, real-time data, and Excel import/export. Integrated Google Analytics and Hotjar to track user behavior and identify areas for redesign.',
+    },
+    testingSection: {
+      title: 'Testing',
+      desc: 'Designed AI-generated test cases covering all system scenarios. Any flow that failed a test case was flagged and fixed before delivery.',
+    },
+    deliverySection: {
+      title: 'Delivery',
+      desc: 'Handed off the completed system to Lampang Technical College for live deployment. The application was deployed via Vercel, ensuring fast and reliable hosting with seamless continuous deployment.',
+    },
+    analyticsSection: {
+      title: 'Analytics & Iteration',
+      desc: 'Used GA and Hotjar data post-launch to identify UX issues, measure performance, and prioritize improvements for the next iteration.',
+      issues: [
+        {
+          title: 'Login Drop-off',
+          problem: 'The college required that student accounts be auto-created when importing a student list via Excel — avoiding any manual database setup. Students log in for the first time using their student ID and the default password "1234", then are prompted to set a new password. The original flow logged students out immediately after the password change, forcing them to log in again with the new credentials. This created a high drop-off rate and left many students confused.',
+          fix: 'Redesigned the flow so students remain logged in after changing their password. A popup prompts the change on first login — once confirmed, the session continues seamlessly without requiring a second login.',
+        },
+        {
+          title: 'Web Performance — Logo File Size',
+          problem: 'Hotjar Web Performance analysis revealed that the logo image was several MB in size. This caused slow initial page load times, especially for users on mobile networks with weaker connections.',
+          fix: 'Compressed and optimized the logo asset to reduce file size significantly, improving load speed across all devices and network conditions.',
+        },
+      ],
+    },
     nextId: 'impact-hire-hub',
   },
   'impact-hire-hub': {
@@ -853,15 +897,17 @@ export default function Overview() {
             <p className="label-tag" style={{ color: '#FFDF9A' }}>{project.solution ? 'SOLUTION' : 'MY PROCESS'}</p>
             <h2 className="ov-section-heading" style={{ color: '#FAF9F4' }}>{project.solution ? 'How We Solved It' : 'How I approached it'}</h2>
           </FadeUp>
-          <div className="ov-process-grid">
-            {project.process.map((step, i) => (
-              <FadeUp key={step.phase} delay={i * 0.08} className="ov-process-card">
-                <span className="ov-process-num">{step.phase}</span>
-                <h3 className="ov-process-title">{step.title}</h3>
-                <p className="ov-process-desc">{step.desc}</p>
-              </FadeUp>
-            ))}
-          </div>
+          {!project.requirementsSection && (
+            <div className="ov-process-grid">
+              {project.process.map((step, i) => (
+                <FadeUp key={step.phase} delay={i * 0.08} className="ov-process-card">
+                  <span className="ov-process-num">{step.phase}</span>
+                  <h3 className="ov-process-title">{step.title}</h3>
+                  <p className="ov-process-desc">{step.desc}</p>
+                </FadeUp>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -1203,6 +1249,113 @@ export default function Overview() {
                 onClick={() => setLightboxImg(certificateImg)}
               />
             </FadeUp>
+          </div>
+        </section>
+      )}
+
+
+      {/* ── REQUIREMENTS & SYSTEM FLOW ── */}
+      {project.requirementsSection && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 01</p>
+              <h2 className="ov-section-heading">{project.requirementsSection.title}</h2>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.requirementsSection.desc}</p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── DESIGN SECTION ── */}
+      {project.designSection && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 02</p>
+              <h2 className="ov-section-heading">{project.designSection.title}</h2>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.designSection.desc}</p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── DEVELOPMENT SECTION ── */}
+      {project.developmentSection && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 03</p>
+              <h2 className="ov-section-heading">{project.developmentSection.title}</h2>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.developmentSection.desc}</p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── TESTING SECTION ── */}
+      {project.testingSection && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 04</p>
+              <h2 className="ov-section-heading">{project.testingSection.title}</h2>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.testingSection.desc}</p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── DELIVERY SECTION ── */}
+      {project.deliverySection && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 05</p>
+              <h2 className="ov-section-heading">{project.deliverySection.title}</h2>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.deliverySection.desc}</p>
+            </FadeUp>
+          </div>
+        </section>
+      )}
+
+      {/* ── ANALYTICS SECTION ── */}
+      {project.analyticsSection && (
+        <section className="ov-section">
+          <div className="ov-container">
+            <FadeUp>
+              <p className="label-tag">STEP 06</p>
+              <h2 className="ov-section-heading">{project.analyticsSection.title}</h2>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.analyticsSection.desc}</p>
+            </FadeUp>
+            <div className="ov-solved-grid" style={{ marginTop: 48 }}>
+              {project.analyticsSection.issues.map((item, i) => (
+                <FadeUp key={i} delay={i * 0.1} className="ov-solved-card">
+                  <div className="ov-solved-num">{String(i + 1).padStart(2, '0')}</div>
+                  <h3 className="ov-solved-title">{item.title}</h3>
+                  <div className="ov-solved-block ov-solved-block--problem">
+                    <span className="ov-solved-tag">Problem</span>
+                    <p className="ov-body-large">{item.problem}</p>
+                  </div>
+                  <div className="ov-solved-block ov-solved-block--fix">
+                    <span className="ov-solved-tag">Fix</span>
+                    <p className="ov-body-large">{item.fix}</p>
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
           </div>
         </section>
       )}
