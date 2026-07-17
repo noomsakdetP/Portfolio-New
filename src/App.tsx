@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import './App.css'
 import heroImg from './assets/Rectangle.png'
