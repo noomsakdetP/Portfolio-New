@@ -18,7 +18,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
   background: var(--cream);
   color: var(--dark);
   overflow-x: hidden;

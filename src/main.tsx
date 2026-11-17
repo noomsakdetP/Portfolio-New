@@ -2,12 +2,14 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
+import LangProvider from './i18n/LangProvider.tsx'
 import App from './App.tsx'
 import Detail from './pages/Detail.tsx'
 import Overview from './pages/Overview.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <LangProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
@@ -15,5 +17,6 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/projects/:projectId" element={<Overview />} />
       </Routes>
     </BrowserRouter>
+    </LangProvider>
   </StrictMode>,
 )

@@ -7,7 +7,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 1.2px;
@@ -36,7 +36,7 @@
   margin-bottom: 24px;
 }
 .ov-title {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 72px;
   line-height: 1.1;
@@ -78,7 +78,7 @@
   flex-shrink: 0;
 }
 .ov-meta-label {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 1.4px;
@@ -86,7 +86,7 @@
   text-transform: uppercase;
 }
 .ov-meta-value {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 500;
   font-size: 15px;
   color: var(--dark);
@@ -126,7 +126,7 @@
 .ov-col-left {}
 .ov-col-right {}
 .ov-section-heading {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 48px;
   line-height: 1.1;
@@ -156,7 +156,7 @@
   position: relative;
 }
 .ov-problem-quote {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 80px;
   line-height: 0.6;
   color: var(--yellow);
@@ -188,7 +188,7 @@
 }
 .ov-process-card:hover { background: rgba(255,255,255,0.06); }
 .ov-process-num {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 2px;
@@ -197,7 +197,7 @@
   margin-bottom: 20px;
 }
 .ov-process-title {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 24px;
   color: #FAF9F4;
@@ -235,7 +235,7 @@
   transform: translateY(-4px);
 }
 .ov-outcome-metric {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: clamp(20px, 2.2vw, 40px);
   line-height: 1.1;
@@ -266,7 +266,7 @@
 }
 .ov-next-text { display: flex; flex-direction: column; gap: 16px; }
 .ov-next-title {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 48px;
   line-height: 1.1;
@@ -288,7 +288,7 @@
   padding-bottom: 6px;
   text-decoration: none;
   color: var(--dark);
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 600;
   font-size: 18px;
   transition: gap 0.2s ease;
@@ -328,7 +328,7 @@
   align-items: flex-start;
 }
 .ov-solution-num {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 1.5px;
@@ -353,7 +353,7 @@
   border: 1.5px solid var(--border);
   border-radius: 9999px;
   padding: 8px 18px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.5px;
@@ -448,7 +448,7 @@
   margin-bottom: 16px;
 }
 .ov-define-persona-name {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 28px;
   font-weight: 700;
   color: var(--dark);
@@ -480,7 +480,7 @@
   border: 1.5px solid rgba(255, 223, 154, 0.5);
 }
 .ov-define-card-title {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: var(--dark);
@@ -506,7 +506,7 @@
   background: var(--surface);
 }
 .ov-solved-num {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -514,7 +514,7 @@
   margin-bottom: 12px;
 }
 .ov-solved-title {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: var(--dark);
@@ -538,7 +538,7 @@
 }
 
 .ov-sub-heading {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 22px;
   font-weight: 700;
   color: var(--dark);
@@ -576,7 +576,7 @@
   width: fit-content;
 }
 .ov-ideate-label {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 15px;
   font-weight: 700;
   color: var(--dark);
@@ -603,7 +603,7 @@
   border-color: var(--yellow);
 }
 .ov-hmw-num {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 28px;
   font-weight: 700;
   color: var(--yellow-deep);
@@ -860,7 +860,7 @@
   gap: 12px;
 }
 .ov-persona-num {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -871,7 +871,7 @@
   width: fit-content;
 }
 .ov-persona-title {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: clamp(20px, 2vw, 28px);
   font-weight: 700;
   color: var(--dark);
@@ -912,7 +912,7 @@
   gap: 14px;
 }
 .ov-ds-title {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: var(--dark);
@@ -963,7 +963,7 @@
   padding: 32px 28px;
 }
 .ov-goal-num {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -1029,14 +1029,14 @@
   transform: translateY(-3px);
 }
 .ov-feature-num {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 2px;
   color: var(--yellow-dark);
 }
 .ov-feature-title {
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 18px;
   color: var(--dark);
@@ -1091,7 +1091,7 @@
   gap: 10px;
   background: var(--dark);
   color: var(--cream);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.5px;
@@ -1114,7 +1114,7 @@
   text-align: center;
 }
 .ov-storybook-label {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 16px;
   color: var(--dark);
@@ -1145,4 +1145,161 @@
 @media (max-width: 600px) {
   .ov-outcomes-grid { grid-template-columns: 1fr 1fr; }
   .ov-outcome-metric { font-size: 36px; }
+}
+
+/* ═══ CASE STUDY ENHANCEMENTS (src/components/casestudy/*) ═══ */
+
+/* reading progress (under the fixed navbar) */
+.cs-progress { position: fixed; top: 70px; left: 0; right: 0; height: 3px; z-index: 99; pointer-events: none; }
+.cs-progress-bar { height: 100%; background: var(--yellow); transform-origin: left; transform: scaleX(0); }
+
+/* hero image lands in 3D */
+.cs-hero-tilt {
+  position: relative;
+  perspective: 1400px;
+  --land: 1; --tx: 0; --ty: 0;
+}
+.cs-hero-tilt .ov-hero-img {
+  transform-origin: 50% 100%;
+  transform:
+    rotateX(calc((1 - var(--land)) * 18deg + var(--ty) * -4deg))
+    rotateY(calc(var(--tx) * 5deg))
+    scale(calc(0.92 + var(--land) * 0.08));
+  box-shadow: 0 calc(30px + (1 - var(--land)) * 30px) 60px -24px rgba(27, 28, 25, .35);
+  transition: transform .25s ease-out;
+  will-change: transform;
+}
+.cs-hero-glare {
+  position: absolute; inset: 0;
+  border-radius: 24px;
+  pointer-events: none;
+  background: radial-gradient(circle at calc(50% + var(--tx) * 100%) calc(50% + var(--ty) * 100%), rgba(255,255,255,.18), transparent 55%);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.cs-hero-tilt:hover .cs-hero-glare { opacity: 1; }
+
+/* scroll target offset for the fixed navbar */
+section.ov-section, section.ov-process-section { scroll-margin-top: 64px; }
+
+/* section rail — only where there is room beside the 1120px content */
+.cs-rail {
+  position: fixed;
+  left: 24px; top: 50%;
+  transform: translate(-12px, -50%);
+  z-index: 50;
+  max-height: 70vh;
+  overflow-y: auto;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s, transform .3s;
+  display: none;
+}
+.cs-rail.is-on { opacity: 1; pointer-events: auto; transform: translate(0, -50%); }
+.cs-rail ol { list-style: none; display: flex; flex-direction: column; gap: 2px; border-left: 2px solid var(--border); }
+.cs-rail button {
+  display: flex; align-items: center; gap: 10px;
+  background: none; border: 0; cursor: pointer;
+  padding: 6px 0 6px 0; margin-left: -6px;
+  font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif; font-size: 13px; text-align: left;
+  color: var(--text-muted);
+  transition: color .2s;
+}
+.cs-rail button:hover { color: var(--dark); }
+.cs-rail-dot { width: 10px; height: 10px; flex-shrink: 0; border-radius: 50%; background: var(--cream); border: 2px solid var(--border); transition: background .3s, border-color .3s, transform .3s; }
+.cs-rail li.is-done .cs-rail-dot { background: var(--yellow-dark); border-color: var(--yellow-dark); }
+.cs-rail li.is-active .cs-rail-dot { background: var(--yellow); border-color: var(--yellow-dark); transform: scale(1.3); }
+.cs-rail li.is-active button { color: var(--dark); font-weight: 500; }
+.cs-rail-label { max-width: 150px; line-height: 1.3; }
+
+/* pill + sheet — smaller screens */
+.cs-pill-wrap {
+  position: fixed;
+  left: 50%; bottom: 20px;
+  transform: translate(-50%, 16px);
+  z-index: 60;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s, transform .3s;
+  width: min(92vw, 420px);
+}
+.cs-pill-wrap.is-on { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+.cs-pill {
+  display: flex; align-items: center; gap: 10px;
+  max-width: 100%;
+  background: var(--dark); color: var(--cream);
+  border: 0; border-radius: 9999px;
+  padding: 12px 18px;
+  box-shadow: 0 12px 30px -10px rgba(0,0,0,.4);
+  cursor: pointer;
+  font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif; font-size: 14px;
+}
+.cs-pill-count { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1px; color: var(--yellow); flex-shrink: 0; }
+.cs-pill-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cs-pill-caret { font-size: 10px; opacity: .7; }
+.cs-sheet {
+  list-style: none;
+  width: 100%;
+  max-height: 55vh; overflow-y: auto;
+  background: var(--dark);
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 0 20px 40px -12px rgba(0,0,0,.45);
+}
+.cs-sheet button {
+  display: flex; gap: 12px; width: 100%;
+  background: none; border: 0; border-radius: 12px;
+  padding: 12px 14px;
+  color: rgba(250,249,244,.75);
+  font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif; font-size: 15px; text-align: left;
+  cursor: pointer;
+}
+.cs-sheet button span { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: 12px; color: rgba(250,249,244,.4); padding-top: 2px; }
+.cs-sheet button.is-active { background: rgba(234,179,8,.15); color: var(--cream); }
+.cs-sheet button.is-active span { color: var(--yellow); }
+
+@media (min-width: 1480px) {
+  .cs-rail { display: block; }
+  .cs-pill-wrap { display: none; }
+}
+@media (max-width: 860px) {
+  .cs-progress { top: 62px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-hero-tilt .ov-hero-img, .cs-rail, .cs-pill-wrap, .cs-rail-dot { transition: none; }
+}
+
+/* outcome cards must be allowed to shrink on phones (long metrics like "94.12%" / "3,400+") */
+.ov-outcome-card { min-width: 0; }
+.ov-outcome-metric { display: block; min-width: 0; }
+@media (max-width: 860px) {
+  .ov-goals-grid { grid-template-columns: 1fr; } /* 3 goal cards side-by-side overflowed phones */
+}
+
+/* ═══ RESPONSIVE PASS (phones & tablets) ═══ */
+@media (max-width: 860px) {
+  .ov-section { padding: 56px 0; }
+  .ov-container { padding: 0 24px; }
+  .ov-define-grid, .ov-ideate-grid, .ov-persona-wrap, .ov-ds-grid, .ov-ut-grid, .ov-ux-images { grid-template-columns: 1fr; }
+  .ov-wf-grid { grid-template-columns: repeat(2, 1fr); }
+  .ov-ux-data-imgs { grid-template-columns: repeat(2, 1fr); }
+  .ov-outcome-card { padding: 28px 20px; min-height: 0; }
+}
+@media (max-width: 600px) {
+  .ov-outcome-metric { font-size: clamp(24px, 7vw, 32px); }
+}
+@media (max-width: 480px) {
+  .ov-title { font-size: 36px; }
+  .ov-section-heading { font-size: 30px; }
+  .ov-hero-inner { padding: 0 20px 40px; }
+  .ov-hero-img-wrap { padding: 0 20px; }
+  .ov-hero-img { height: 220px; }
+  .ov-container { padding: 0 20px; }
+  .ov-meta-item { min-width: 0; flex: 1 1 40%; }
+}
+@media (max-width: 400px) {
+  .ov-hero-inner, .ov-hero-img-wrap, .ov-container { padding-left: 16px; padding-right: 16px; }
+  .ov-title { font-size: 30px; }
+  .ov-section-heading { font-size: 26px; }
+  .ov-outcomes-grid { gap: 12px; }
+  .ov-outcome-card { padding: 20px 14px; }
 }

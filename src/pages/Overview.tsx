@@ -1,12 +1,19 @@
 import { Link, useParams } from 'react-router-dom'
+import LangToggle from '../components/LangToggle'
+import { useT, useLang, translateDeep } from '../i18n/lang'
+import NavMenu from '../components/NavMenu'
 import { useEffect, useRef, useState } from 'react'
 import '../Overview.css'
+import ReadingProgress from '../components/casestudy/ReadingProgress'
+import SectionNav from '../components/casestudy/SectionNav'
+import CountUp from '../components/casestudy/CountUp'
+import HeroTilt from '../components/casestudy/HeroTilt'
 
 /* ── Project data ── */
 import hrBanner from '../assets/project-banner.png'
 const PROJECT_IMG_HR = hrBanner
 const PROJECT_IMG_STUDENT = ''
-import bannerImpact from '../assets/banner-impact.png'
+import bannerImpact from '../assets/banner-impact.webp'
 import overviewImpact from '../assets/overview-impact.png'
 import problemImpact from '../assets/problem-impact.png'
 import solutionImpact from '../assets/solution-impact.png'
@@ -17,8 +24,8 @@ import npsFeedback from '../assets/NPS-feedback.png'
 import appStepTracker from '../assets/Application Step Tracker.png'
 import historyTracker from '../assets/history tracker.png'
 const PROJECT_IMG_HIRE_HUB = bannerImpact
-import flexibleBenefit from '../assets/flexible-benefit.png'
-import weddingBanner from '../assets/12.png'
+import flexibleBenefit from '../assets/flexible-benefit.webp'
+import weddingBanner from '../assets/12.webp'
 import typographyImg from '../assets/Typography.png'
 import wireframeWedding1 from '../assets/wireframe-wedding1.webp'
 import wireframeWedding2 from '../assets/wireframe-wedding2.webp'
@@ -31,7 +38,7 @@ import uiWedding5 from '../assets/UI-wedding5.webp'
 import uiWedding6 from '../assets/UI-wedding6.webp'
 import uiWedding7 from '../assets/UI-wedding7.webp'
 import rewardImg from '../assets/reward.png'
-import bannerCasestudy from '../assets/banner-casestudy.png'
+import bannerCasestudy from '../assets/banner-casestudy.webp'
 import workflowImg from '../assets/workflow.png'
 import flowFlexible from '../assets/Flow Flexible.png'
 import wireframeImg from '../assets/Wireframe.png'
@@ -733,8 +740,11 @@ function FadeUp({ children, delay = 0, className = '' }: { children: React.React
 
 export default function Overview() {
   const { projectId } = useParams<{ projectId: string }>()
-  const project = projects[projectId ?? ''] ?? projects['hr-system']
-  const nextProject = projects[project.nextId]
+  const t = useT()
+  const { lang } = useLang()
+  const baseProject = projects[projectId ?? ''] ?? projects['hr-system']
+  const project = translateDeep(lang, baseProject)
+  const nextProject = translateDeep(lang, projects[baseProject.nextId])
   const [lightboxImg, setLightboxImg] = useState<string | null>(null)
   const [personaSlide, setPersonaSlide] = useState(0)
   const [uiSlide, setUiSlide] = useState(0)
@@ -755,14 +765,18 @@ export default function Overview() {
             <span className="nav-logo-text">Sakdidet</span>
           </Link>
           <ul className="nav-links">
-            <li><Link to="/#experience">About Me</Link></li>
-            <li><Link to="/projects">Project</Link></li>
-            <li><Link to="/#skills">Skills</Link></li>
-            <li><Link to="/#experience">Experience</Link></li>
+            <li><Link to="/#experience">{t("About Me")}</Link></li>
+            <li><Link to="/projects">{t("Project")}</Link></li>
+            <li><Link to="/#skills">{t("Skills")}</Link></li>
+            <li><Link to="/#experience">{t("Experience")}</Link></li>
           </ul>
-          <a href="mailto:sakdidetsuttipol@hotmail.com" className="btn-sayhi">Say hi</a>
+          <LangToggle />
+          <a href="mailto:sakdidetsuttipol@hotmail.com" className="btn-sayhi">{t("Say hi")}</a>
+          <NavMenu items={[{ label: 'About Me', to: '/#experience' }, { label: 'Project', to: '/projects' }, { label: 'Skills', to: '/#skills' }, { label: 'Experience', to: '/#experience' }]} />
         </div>
       </nav>
+      <ReadingProgress />
+      <SectionNav pageKey={project.id} />
 
       {/* ── HERO ── */}
       <section className="ov-hero">
@@ -772,7 +786,7 @@ export default function Overview() {
               <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
                 <path d="M15 6H1M1 6L6 1M1 6L6 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              All Projects
+              {t("All Projects")}
             </Link>
           </FadeUp>
 
@@ -788,22 +802,22 @@ export default function Overview() {
           <FadeUp delay={0.1}>
             <div className="ov-meta-row">
               <div className="ov-meta-item">
-                <span className="ov-meta-label">Role</span>
+                <span className="ov-meta-label">{t("Role")}</span>
                 <span className="ov-meta-value">{project.role}</span>
               </div>
               <div className="ov-meta-divider" />
               <div className="ov-meta-item">
-                <span className="ov-meta-label">Timeline</span>
+                <span className="ov-meta-label">{t("Timeline")}</span>
                 <span className="ov-meta-value">{project.timeline}</span>
               </div>
               <div className="ov-meta-divider" />
               <div className="ov-meta-item">
-                <span className="ov-meta-label">Platform</span>
+                <span className="ov-meta-label">{t("Platform")}</span>
                 <span className="ov-meta-value">{project.platform}</span>
               </div>
               <div className="ov-meta-divider" />
               <div className="ov-meta-item">
-                <span className="ov-meta-label">Tools</span>
+                <span className="ov-meta-label">{t("Tools")}</span>
                 <span className="ov-meta-value">{project.tools.join(' · ')}</span>
               </div>
             </div>
@@ -812,7 +826,7 @@ export default function Overview() {
 
         {/* Hero image */}
         <FadeUp delay={0.15} className="ov-hero-img-wrap">
-          <img src={project.image} alt={project.title} className="ov-hero-img" />
+          <HeroTilt src={project.image} alt={project.title} className="ov-hero-img" />
         </FadeUp>
       </section>
 
@@ -821,15 +835,15 @@ export default function Overview() {
         <div className="ov-container">
           <div className="ov-two-col">
             <FadeUp className="ov-col-left">
-              <p className="label-tag">OVERVIEW</p>
-              <h2 className="ov-section-heading">Project Brief</h2>
+              <p className="label-tag">{t("OVERVIEW")}</p>
+              <h2 className="ov-section-heading">{t("Project Brief")}</h2>
             </FadeUp>
             <FadeUp delay={0.1} className="ov-col-right">
               <p className="ov-body-large">{project.overview}</p>
               {project.overviewImage && (
                 <img
                   src={project.overviewImage}
-                  alt="Project overview"
+                  alt={t("Project overview")}
                   className="ov-overview-img"
                 />
               )}
@@ -852,7 +866,7 @@ export default function Overview() {
               {project.problemImage && (
                 <img
                   src={project.problemImage}
-                  alt="Problem illustration"
+                  alt={t("Problem illustration")}
                   className="ov-overview-img"
                 />
               )}
@@ -867,9 +881,9 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">GOALS</p>
-              <h2 className="ov-section-heading">Goals</h2>
-              <p className="ov-body-large" style={{ marginTop: 12 }}>To validate the usability and effectiveness of the design using key UX metrics.</p>
+              <p className="label-tag">{t("GOALS")}</p>
+              <h2 className="ov-section-heading">{t("Goals")}</h2>
+              <p className="ov-body-large" style={{ marginTop: 12 }}>{t("To validate the usability and effectiveness of the design using key UX metrics.")}</p>
             </FadeUp>
             <div className="ov-goals-grid">
               {project.goals.map((g, i) => (
@@ -877,7 +891,7 @@ export default function Overview() {
                   <span className="ov-goal-num">{g.number}</span>
                   <p className="ov-goal-desc">{g.desc}</p>
                   <div className="ov-goal-objective">
-                    <span className="ov-goal-obj-label">Objective</span>
+                    <span className="ov-goal-obj-label">{t("Objective")}</span>
                     <p className="ov-goal-obj-text">{g.objective}</p>
                   </div>
                 </FadeUp>
@@ -914,8 +928,8 @@ export default function Overview() {
           <div className="ov-container">
             <div className="ov-two-col">
               <FadeUp className="ov-col-left">
-                <p className="label-tag">STEP 01</p>
-                <h2 className="ov-section-heading">Empathize</h2>
+                <p className="label-tag">{t("STEP 01")}</p>
+                <h2 className="ov-section-heading">{t("Empathize")}</h2>
               </FadeUp>
               <FadeUp delay={0.1} className="ov-col-right">
                 <p className="ov-body-large">{project.empathize.intro}</p>
@@ -934,14 +948,14 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 02</p>
-              <h2 className="ov-section-heading">Define</h2>
+              <p className="label-tag">{t("STEP 02")}</p>
+              <h2 className="ov-section-heading">{t("Define")}</h2>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.defineSection.intro}</p>
             </FadeUp>
 
             {/* Persona card */}
             <FadeUp delay={0.1} className="ov-define-persona">
-              <div className="ov-define-persona-tag">PERSONA</div>
+              <div className="ov-define-persona-tag">{t("PERSONA")}</div>
               <h3 className="ov-define-persona-name">{project.defineSection.persona.name}</h3>
               <p className="ov-define-persona-meta">{project.defineSection.persona.age} · {project.defineSection.persona.role}</p>
               <p className="ov-body-large" style={{ marginTop: 12 }}>{project.defineSection.persona.desc}</p>
@@ -951,7 +965,7 @@ export default function Overview() {
             <div className="ov-define-grid">
               <FadeUp delay={0.1} className="ov-define-card ov-define-card--pain">
                 <h4 className="ov-define-card-title">
-                  <span className="ov-define-icon">⚠</span> Key Pain Points
+                  <span className="ov-define-icon">⚠</span>{t(" Key Pain Points")}
                 </h4>
                 <ul className="ov-ux-bullets">
                   {project.defineSection.painPoints.map((p, i) => <li key={i}>{p}</li>)}
@@ -959,7 +973,7 @@ export default function Overview() {
               </FadeUp>
               <FadeUp delay={0.15} className="ov-define-card ov-define-card--goal">
                 <h4 className="ov-define-card-title">
-                  <span className="ov-define-icon">✦</span> User Goals
+                  <span className="ov-define-icon">✦</span>{t(" User Goals")}
                 </h4>
                 <ul className="ov-ux-bullets">
                   {project.defineSection.userGoals.map((g, i) => <li key={i}>{g}</li>)}
@@ -970,7 +984,7 @@ export default function Overview() {
             <FadeUp delay={0.1}>
               <img
                 src={defineImg}
-                alt="Define illustration"
+                alt={t("Define illustration")}
                 className="ov-full-img"
                 style={{ width: '100%', borderRadius: 16, marginTop: 40 }}
                 onClick={() => setLightboxImg(defineImg)}
@@ -991,15 +1005,15 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 02</p>
-              <h2 className="ov-section-heading">How Might We</h2>
+              <p className="label-tag">{t("STEP 02")}</p>
+              <h2 className="ov-section-heading">{t("How Might We")}</h2>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.hmw.intro}</p>
             </FadeUp>
 
             <div className="ov-define-grid" style={{ marginTop: 32 }}>
               <FadeUp delay={0.1} className="ov-define-card ov-define-card--goal">
                 <h4 className="ov-define-card-title">
-                  <span className="ov-define-icon">✦</span> User Goals
+                  <span className="ov-define-icon">✦</span>{t(" User Goals")}
                 </h4>
                 <ul className="ov-ux-bullets">
                   {project.hmw.goals.map((g, i) => <li key={i}>{g}</li>)}
@@ -1007,7 +1021,7 @@ export default function Overview() {
               </FadeUp>
               <FadeUp delay={0.1} className="ov-define-card ov-define-card--pain">
                 <h4 className="ov-define-card-title">
-                  <span className="ov-define-icon">⚠</span> User Challenges
+                  <span className="ov-define-icon">⚠</span>{t(" User Challenges")}
                 </h4>
                 <ul className="ov-ux-bullets">
                   {project.hmw.challenges.map((c, i) => <li key={i}>{c}</li>)}
@@ -1029,7 +1043,7 @@ export default function Overview() {
             <FadeUp delay={0.1}>
               <img
                 src={howImg}
-                alt="How Might We illustration"
+                alt={t("How Might We illustration")}
                 className="ov-full-img"
                 style={{ width: '100%', maxWidth: 560, borderRadius: 16, marginTop: 40, display: 'block', margin: '40px auto 0' }}
                 onClick={() => setLightboxImg(howImg)}
@@ -1050,21 +1064,21 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 03</p>
-              <h2 className="ov-section-heading">Ideate</h2>
+              <p className="label-tag">{t("STEP 03")}</p>
+              <h2 className="ov-section-heading">{t("Ideate")}</h2>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.ideate.intro}</p>
             </FadeUp>
 
             <FadeUp delay={0.1}>
               <img
                 src={ideate1Img}
-                alt="Ideate illustration"
+                alt={t("Ideate illustration")}
                 className="ov-full-img"
                 style={{ width: '100%', borderRadius: 16, marginTop: 40 }}
                 onClick={() => setLightboxImg(ideate1Img)}
               />
               <p className="ov-body-large" style={{ marginTop: 24, maxWidth: 720 }}>
-                We took the challenges identified during the Define stage and reframed them as "How Might We" questions. From there, we brainstormed features that directly answer each question — then placed them in an Impact–Effort Matrix to prioritize what to build first.
+                {t("We took the challenges identified during the Define stage and reframed them as \"How Might We\" questions. From there, we brainstormed features that directly answer each question — then placed them in an Impact–Effort Matrix to prioritize what to build first.")}
               </p>
             </FadeUp>
 
@@ -1083,7 +1097,7 @@ export default function Overview() {
             <FadeUp delay={0.1}>
               <img
                 src={impactEffortImg}
-                alt="Impact-Effort Matrix"
+                alt={t("Impact-Effort Matrix")}
                 className="ov-full-img"
                 style={{ width: '100%', maxWidth: 560, borderRadius: 16, marginTop: 40, display: 'block', margin: '40px auto 0' }}
                 onClick={() => setLightboxImg(impactEffortImg)}
@@ -1105,8 +1119,8 @@ export default function Overview() {
           <div className="ov-container">
             <div className="ov-two-col">
               <FadeUp className="ov-col-left">
-                <p className="label-tag">STEP 04</p>
-                <h2 className="ov-section-heading">Prototype</h2>
+                <p className="label-tag">{t("STEP 04")}</p>
+                <h2 className="ov-section-heading">{t("Prototype")}</h2>
               </FadeUp>
               <FadeUp delay={0.1} className="ov-col-right">
                 <p className="ov-body-large">{project.prototype.content}</p>
@@ -1115,7 +1129,7 @@ export default function Overview() {
             <FadeUp delay={0.1}>
               <img
                 src={flowCleanImg}
-                alt="IA Flow"
+                alt={t("IA Flow")}
                 className="ov-full-img"
                 style={{ width: '100%', maxWidth: 560, borderRadius: 16, display: 'block', margin: '40px auto 0' }}
                 onClick={() => setLightboxImg(flowCleanImg)}
@@ -1123,10 +1137,10 @@ export default function Overview() {
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>Information Architecture (IA) Flow</h3>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>{t("Information Architecture (IA) Flow")}</h3>
               <img
                 src={iaFlowImg}
-                alt="Information Architecture Flow"
+                alt={t("Information Architecture Flow")}
                 className="ov-full-img"
                 style={{ width: '100%', borderRadius: 16, marginTop: 24 }}
                 onClick={() => setLightboxImg(iaFlowImg)}
@@ -1134,13 +1148,13 @@ export default function Overview() {
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>Mock Up</h3>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>{t("Mock Up")}</h3>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>
-                Next, we'll proceed with mockup creation, defining the screens based on our IA flow and incorporating features identified through our "How Might We" (HMW).
+                {t("Next, we'll proceed with mockup creation, defining the screens based on our IA flow and incorporating features identified through our \"How Might We\" (HMW).")}
               </p>
               <img
                 src={mockupCleanImg}
-                alt="Mockup"
+                alt={t("Mockup")}
                 className="ov-full-img"
                 style={{ width: '100%', borderRadius: 16, marginTop: 24 }}
                 onClick={() => setLightboxImg(mockupCleanImg)}
@@ -1148,9 +1162,9 @@ export default function Overview() {
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>Wireframe</h3>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>{t("Wireframe")}</h3>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>
-                For our wireframes, we'll create low-fidelity versions based on the mockups. This approach simplifies the subsequent UI design phase and ensures all previously identified features are incorporated.
+                {t("For our wireframes, we'll create low-fidelity versions based on the mockups. This approach simplifies the subsequent UI design phase and ensures all previously identified features are incorporated.")}
               </p>
               <div className="ov-ui-slider" style={{ marginTop: 32 }}>
                 <div className="ov-ui-slide-main">
@@ -1173,18 +1187,18 @@ export default function Overview() {
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>UI Design</h3>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>{t("UI Design")}</h3>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>
-                The final and most visually impactful phase is UI Design, where our application truly comes to life. Building on the structural foundation from our wireframes, this stage focuses on crafting a vibrant, engaging, and intuitive user experience.
+                {t("The final and most visually impactful phase is UI Design, where our application truly comes to life. Building on the structural foundation from our wireframes, this stage focuses on crafting a vibrant, engaging, and intuitive user experience.")}
               </p>
-              <p className="ov-body-large" style={{ marginTop: 16 }}>We've meticulously designed every visual element:</p>
+              <p className="ov-body-large" style={{ marginTop: 16 }}>{t("We've meticulously designed every visual element:")}</p>
               <ul className="ov-ux-bullets" style={{ marginTop: 12 }}>
-                <li><strong>Color and Imagery:</strong> A fresh, appealing color palette, combined with high-quality, enticing food photography, creates an inviting and appetizing atmosphere.</li>
-                <li><strong>Typography and Iconography:</strong> Clear, legible fonts ensure easy readability, while custom icons simplify navigation and actions.</li>
-                <li><strong>Layout and Usability:</strong> A clean, organized layout with ample white space ensures the app is easy to use and visually comfortable. Key information is prominently displayed for quick understanding.</li>
+                <li><strong>{t("Color and Imagery:")}</strong>{t(" A fresh, appealing color palette, combined with high-quality, enticing food photography, creates an inviting and appetizing atmosphere.")}</li>
+                <li><strong>{t("Typography and Iconography:")}</strong>{t(" Clear, legible fonts ensure easy readability, while custom icons simplify navigation and actions.")}</li>
+                <li><strong>{t("Layout and Usability:")}</strong>{t(" A clean, organized layout with ample white space ensures the app is easy to use and visually comfortable. Key information is prominently displayed for quick understanding.")}</li>
               </ul>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>
-                Every design choice aims to create a cohesive, branded, and delightful experience, transforming functionality into an aesthetically pleasing and enjoyable journey for the user.
+                {t("Every design choice aims to create a cohesive, branded, and delightful experience, transforming functionality into an aesthetically pleasing and enjoyable journey for the user.")}
               </p>
               <div className="ov-ui-slider" style={{ marginTop: 32 }}>
                 <div className="ov-ui-slide-main">
@@ -1215,8 +1229,8 @@ export default function Overview() {
           <div className="ov-container">
             <div className="ov-two-col">
               <FadeUp className="ov-col-left">
-                <p className="label-tag">STEP 05</p>
-                <h2 className="ov-section-heading">Test</h2>
+                <p className="label-tag">{t("STEP 05")}</p>
+                <h2 className="ov-section-heading">{t("Test")}</h2>
               </FadeUp>
               <FadeUp delay={0.1} className="ov-col-right">
                 <p className="ov-body-large">{project.testSection.content}</p>
@@ -1229,7 +1243,7 @@ export default function Overview() {
             <FadeUp delay={0.1}>
               <img
                 src={test05Img}
-                alt="Test session"
+                alt={t("Test session")}
                 className="ov-full-img"
                 style={{ width: '100%', borderRadius: 16, marginTop: 40 }}
                 onClick={() => setLightboxImg(test05Img)}
@@ -1237,10 +1251,10 @@ export default function Overview() {
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>Certificate</h3>
+              <h3 className="ov-sub-heading" style={{ marginTop: 56 }}>{t("Certificate")}</h3>
               <img
                 src={certificateImg}
-                alt="Certificate"
+                alt={t("Certificate")}
                 className="ov-full-img"
                 style={{ width: '100%', borderRadius: 16, marginTop: 24 }}
                 onClick={() => setLightboxImg(certificateImg)}
@@ -1256,7 +1270,7 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 01</p>
+              <p className="label-tag">{t("STEP 01")}</p>
               <h2 className="ov-section-heading">{project.requirementsSection.title}</h2>
             </FadeUp>
             <FadeUp delay={0.1}>
@@ -1271,7 +1285,7 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 02</p>
+              <p className="label-tag">{t("STEP 02")}</p>
               <h2 className="ov-section-heading">{project.designSection.title}</h2>
             </FadeUp>
             <FadeUp delay={0.1}>
@@ -1286,7 +1300,7 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 03</p>
+              <p className="label-tag">{t("STEP 03")}</p>
               <h2 className="ov-section-heading">{project.developmentSection.title}</h2>
             </FadeUp>
             <FadeUp delay={0.1}>
@@ -1301,7 +1315,7 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 04</p>
+              <p className="label-tag">{t("STEP 04")}</p>
               <h2 className="ov-section-heading">{project.testingSection.title}</h2>
             </FadeUp>
             <FadeUp delay={0.1}>
@@ -1316,7 +1330,7 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 05</p>
+              <p className="label-tag">{t("STEP 05")}</p>
               <h2 className="ov-section-heading">{project.deliverySection.title}</h2>
             </FadeUp>
             <FadeUp delay={0.1}>
@@ -1331,7 +1345,7 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 06</p>
+              <p className="label-tag">{t("STEP 06")}</p>
               <h2 className="ov-section-heading">{project.analyticsSection.title}</h2>
             </FadeUp>
             <FadeUp delay={0.1}>
@@ -1343,11 +1357,11 @@ export default function Overview() {
                   <div className="ov-solved-num">{String(i + 1).padStart(2, '0')}</div>
                   <h3 className="ov-solved-title">{item.title}</h3>
                   <div className="ov-solved-block ov-solved-block--problem">
-                    <span className="ov-solved-tag">Problem</span>
+                    <span className="ov-solved-tag">{t("Problem")}</span>
                     <p className="ov-body-large">{item.problem}</p>
                   </div>
                   <div className="ov-solved-block ov-solved-block--fix">
-                    <span className="ov-solved-tag">Fix</span>
+                    <span className="ov-solved-tag">{t("Fix")}</span>
                     <p className="ov-body-large">{item.fix}</p>
                   </div>
                 </FadeUp>
@@ -1362,8 +1376,8 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">KEY FEATURES</p>
-              <h2 className="ov-section-heading">Key Features I Designed</h2>
+              <p className="label-tag">{t("KEY FEATURES")}</p>
+              <h2 className="ov-section-heading">{t("Key Features I Designed")}</h2>
             </FadeUp>
             <div className="ov-features-grid">
               {project.features.map((f, i) => (
@@ -1373,7 +1387,7 @@ export default function Overview() {
                   <p className="ov-feature-desc">{f.desc}</p>
                   {f.image && (
                     <button className="ov-feature-btn" onClick={() => setLightboxImg(f.image!)}>
-                      View Design
+                      {t("View Design")}
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
@@ -1392,8 +1406,8 @@ export default function Overview() {
           <div className="ov-container">
             <div className="ov-two-col">
               <FadeUp className="ov-col-left">
-                <p className="label-tag">REFLECTION</p>
-                <h2 className="ov-section-heading">Learnings</h2>
+                <p className="label-tag">{t("REFLECTION")}</p>
+                <h2 className="ov-section-heading">{t("Learnings")}</h2>
               </FadeUp>
               <FadeUp delay={0.1} className="ov-col-right">
                 <div className="ov-learnings-wrap">
@@ -1413,8 +1427,8 @@ export default function Overview() {
           <div className="ov-container">
             <div className="ov-two-col">
               <FadeUp className="ov-col-left">
-                <p className="label-tag">RESULT</p>
-                <h2 className="ov-section-heading">The Outcome</h2>
+                <p className="label-tag">{t("RESULT")}</p>
+                <h2 className="ov-section-heading">{t("The Outcome")}</h2>
               </FadeUp>
               <FadeUp delay={0.1} className="ov-col-right">
                 <div className="ov-result-card">
@@ -1432,8 +1446,8 @@ export default function Overview() {
           <div className="ov-container">
             <div className="ov-two-col">
               <FadeUp className="ov-col-left">
-                <p className="label-tag">STEP 01</p>
-                <h2 className="ov-section-heading">UX Process</h2>
+                <p className="label-tag">{t("STEP 01")}</p>
+                <h2 className="ov-section-heading">{t("UX Process")}</h2>
               </FadeUp>
               <FadeUp delay={0.1} className="ov-col-right">
                 <p className="ov-body-large">{project.uxProcess.content}</p>
@@ -1446,8 +1460,8 @@ export default function Overview() {
               </FadeUp>
             </div>
             <FadeUp delay={0.15} className="ov-ux-images">
-              <img src={project.uxProcess.workflowImg} alt="User Workflow" className="ov-ux-img" onClick={() => setLightboxImg(project.uxProcess!.workflowImg)} />
-              <img src={project.uxProcess.flowImg} alt="Information Architecture Flow" className="ov-ux-img" onClick={() => setLightboxImg(project.uxProcess!.flowImg)} />
+              <img src={project.uxProcess.workflowImg} alt={t("User Workflow")} className="ov-ux-img" onClick={() => setLightboxImg(project.uxProcess!.workflowImg)} />
+              <img src={project.uxProcess.flowImg} alt={t("Information Architecture Flow")} className="ov-ux-img" onClick={() => setLightboxImg(project.uxProcess!.flowImg)} />
             </FadeUp>
           </div>
         </section>
@@ -1458,10 +1472,10 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">PERSONAS</p>
-              <h2 className="ov-section-heading">Personas</h2>
+              <p className="label-tag">{t("PERSONAS")}</p>
+              <h2 className="ov-section-heading">{t("Personas")}</h2>
               <p className="ov-body-large" style={{ marginTop: 12, maxWidth: 720 }}>
-                To ensure the application met the needs of different employee segments, I developed three distinct user personas based on varying life stages and priorities:
+                {t("To ensure the application met the needs of different employee segments, I developed three distinct user personas based on varying life stages and priorities:")}
               </p>
             </FadeUp>
 
@@ -1478,14 +1492,14 @@ export default function Overview() {
                 <button
                   className="ov-persona-arrow ov-persona-arrow--prev"
                   onClick={() => setPersonaSlide(i => (i - 1 + project.personas!.length) % project.personas!.length)}
-                  aria-label="Previous persona"
+                  aria-label={t("Previous persona")}
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
                 <button
                   className="ov-persona-arrow ov-persona-arrow--next"
                   onClick={() => setPersonaSlide(i => (i + 1) % project.personas!.length)}
-                  aria-label="Next persona"
+                  aria-label={t("Next persona")}
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
@@ -1512,7 +1526,7 @@ export default function Overview() {
 
             <FadeUp delay={0.15}>
               <p className="ov-body-large" style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
-                By designing for these three personas, I ensured the system would accommodate users with different motivations, digital habits, and benefit expectations.
+                {t("By designing for these three personas, I ensured the system would accommodate users with different motivations, digital habits, and benefit expectations.")}
               </p>
             </FadeUp>
           </div>
@@ -1524,14 +1538,14 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 02</p>
-              <h2 className="ov-section-heading">Mockup &amp; Wireframe</h2>
+              <p className="label-tag">{t("STEP 02")}</p>
+              <h2 className="ov-section-heading">{t("Mockup & Wireframe")}</h2>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.mockupSection.content}</p>
             </FadeUp>
             <FadeUp delay={0.1}>
               <img
                 src={project.mockupSection.image}
-                alt="Wireframe"
+                alt={t("Wireframe")}
                 className="ov-full-img"
                 onClick={() => setLightboxImg(project.mockupSection!.image)}
               />
@@ -1545,8 +1559,8 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 03</p>
-              <h2 className="ov-section-heading">UI Design &amp; Prototype</h2>
+              <p className="label-tag">{t("STEP 03")}</p>
+              <h2 className="ov-section-heading">{t("UI Design & Prototype")}</h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 16, maxWidth: 720 }}>
                 {project.uiDesign.paragraphs.map((p, i) => (
                   <p key={i} className="ov-body-large">{p}</p>
@@ -1567,14 +1581,14 @@ export default function Overview() {
                   <button
                     className="ov-persona-arrow ov-persona-arrow--prev"
                     onClick={() => setUiSlide(i => (i - 1 + project.uiDesign!.slides.length) % project.uiDesign!.slides.length)}
-                    aria-label="Previous"
+                    aria-label={t("Previous")}
                   >
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </button>
                   <button
                     className="ov-persona-arrow ov-persona-arrow--next"
                     onClick={() => setUiSlide(i => (i + 1) % project.uiDesign!.slides.length)}
-                    aria-label="Next"
+                    aria-label={t("Next")}
                   >
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </button>
@@ -1604,8 +1618,8 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">STEP 04</p>
-              <h2 className="ov-section-heading">Usability Testing</h2>
+              <p className="label-tag">{t("STEP 04")}</p>
+              <h2 className="ov-section-heading">{t("Usability Testing")}</h2>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.usabilityTesting.content}</p>
             </FadeUp>
             <div className="ov-ut-grid">
@@ -1626,8 +1640,8 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">DESIGN SYSTEM</p>
-              <h2 className="ov-section-heading">Design System</h2>
+              <p className="label-tag">{t("DESIGN SYSTEM")}</p>
+              <h2 className="ov-section-heading">{t("Design System")}</h2>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.designSystem.intro}</p>
             </FadeUp>
             <div className="ov-ds-grid">
@@ -1671,8 +1685,8 @@ export default function Overview() {
           <div className="ov-container">
             <div className="ov-two-col">
               <FadeUp className="ov-col-left">
-                <p className="label-tag">WIREFRAMES</p>
-                <h2 className="ov-section-heading">Wireframes</h2>
+                <p className="label-tag">{t("WIREFRAMES")}</p>
+                <h2 className="ov-section-heading">{t("Wireframes")}</h2>
               </FadeUp>
               <FadeUp delay={0.1} className="ov-col-right">
                 <p className="ov-body-large">{project.wireframes.intro}</p>
@@ -1693,14 +1707,14 @@ export default function Overview() {
                 <button
                   className="ov-persona-arrow ov-persona-arrow--prev"
                   onClick={() => setWfSlide(i => (i - 1 + project.wireframes!.images.length) % project.wireframes!.images.length)}
-                  aria-label="Previous"
+                  aria-label={t("Previous")}
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
                 <button
                   className="ov-persona-arrow ov-persona-arrow--next"
                   onClick={() => setWfSlide(i => (i + 1) % project.wireframes!.images.length)}
-                  aria-label="Next"
+                  aria-label={t("Next")}
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
@@ -1723,8 +1737,8 @@ export default function Overview() {
         <section className="ov-section">
           <div className="ov-container">
             <FadeUp>
-              <p className="label-tag">UI DESIGN</p>
-              <h2 className="ov-section-heading">UI Design</h2>
+              <p className="label-tag">{t("UI DESIGN")}</p>
+              <h2 className="ov-section-heading">{t("UI Design")}</h2>
               <p className="ov-body-large" style={{ marginTop: 16, maxWidth: 720 }}>{project.uiDesignWedding.content}</p>
             </FadeUp>
             <FadeUp delay={0.1} className="ov-ui-slider">
@@ -1738,14 +1752,14 @@ export default function Overview() {
                 <button
                   className="ov-persona-arrow ov-persona-arrow--prev"
                   onClick={() => setUiWeddingSlide(i => (i - 1 + project.uiDesignWedding!.slides.length) % project.uiDesignWedding!.slides.length)}
-                  aria-label="Previous"
+                  aria-label={t("Previous")}
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
                 <button
                   className="ov-persona-arrow ov-persona-arrow--next"
                   onClick={() => setUiWeddingSlide(i => (i + 1) % project.uiDesignWedding!.slides.length)}
-                  aria-label="Next"
+                  aria-label={t("Next")}
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
@@ -1769,8 +1783,8 @@ export default function Overview() {
           <div className="ov-container">
             <div className="ov-two-col">
               <FadeUp className="ov-col-left">
-                <p className="label-tag">AWARD</p>
-                <h2 className="ov-section-heading">Popular Vote</h2>
+                <p className="label-tag">{t("AWARD")}</p>
+                <h2 className="ov-section-heading">{t("Popular Vote")}</h2>
               </FadeUp>
               <FadeUp delay={0.1} className="ov-col-right">
                 <p className="ov-body-large">{project.popularVote.content}</p>
@@ -1779,7 +1793,7 @@ export default function Overview() {
             <FadeUp delay={0.15}>
               <img
                 src={project.popularVote.image}
-                alt="Popular Vote Award"
+                alt={t("Popular Vote Award")}
                 className="ov-full-img"
                 onClick={() => setLightboxImg(project.popularVote!.image)}
               />
@@ -1792,14 +1806,14 @@ export default function Overview() {
       <section className="ov-section">
         <div className="ov-container">
           <FadeUp>
-            <p className="label-tag">IMPACT</p>
-            <h2 className="ov-section-heading">Key Outcomes</h2>
+            <p className="label-tag">{t("IMPACT")}</p>
+            <h2 className="ov-section-heading">{t("Key Outcomes")}</h2>
           </FadeUp>
           <FadeUp delay={0.1}>
             <div className="ov-outcomes-grid">
               {project.outcomes.map(o => (
                 <div key={o.label} className="ov-outcome-card">
-                  <span className="ov-outcome-metric">{o.metric}</span>
+                  <CountUp value={o.metric} className="ov-outcome-metric" />
                   <span className="ov-outcome-label">{o.label}</span>
                 </div>
               ))}
@@ -1815,13 +1829,13 @@ export default function Overview() {
             <FadeUp>
               <div className="ov-storybook-card">
                 <div className="ov-storybook-left">
-                  <p className="label-tag">DESIGN SYSTEM</p>
-                  <h2 className="ov-section-heading" style={{ marginBottom: 8 }}>Explore the Component Library</h2>
+                  <p className="label-tag">{t("DESIGN SYSTEM")}</p>
+                  <h2 className="ov-section-heading" style={{ marginBottom: 8 }}>{t("Explore the Component Library")}</h2>
                   <p className="ov-body-large" style={{ marginBottom: 24 }}>
-                    Browse all 22+ components, design tokens, icons, and assets — documented and interactive on Storybook.
+                    {t("Browse all 22+ components, design tokens, icons, and assets — documented and interactive on Storybook.")}
                   </p>
                   <a href={project.storybookUrl} target="_blank" rel="noopener noreferrer" className="ov-storybook-btn">
-                    View Storybook
+                    {t("View Storybook")}
                     <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
                       <path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
@@ -1834,8 +1848,8 @@ export default function Overview() {
                     <path d="M27.5 8.5V12.5H30.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M15 18.5H25M15 22.5H22" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
                   </svg>
-                  <span className="ov-storybook-label">Storybook</span>
-                  <span className="ov-storybook-url">hr-design-system.vercel.app</span>
+                  <span className="ov-storybook-label">{t("Storybook")}</span>
+                  <span className="ov-storybook-url">{t("hr-design-system.vercel.app")}</span>
                 </div>
               </div>
             </FadeUp>
@@ -1850,11 +1864,11 @@ export default function Overview() {
             <FadeUp>
               <div className="ov-next-inner">
                 <div className="ov-next-text">
-                  <p className="label-tag">NEXT PROJECT</p>
+                  <p className="label-tag">{t("NEXT PROJECT")}</p>
                   <h2 className="ov-next-title">{nextProject.title}</h2>
                   <p className="ov-next-sub">{nextProject.subtitle}</p>
                   <Link to={`/projects/${nextProject.id}`} className="ov-next-btn">
-                    View Case Study
+                    {t("View Case Study")}
                     <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
                       <path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
@@ -1873,19 +1887,19 @@ export default function Overview() {
       <div className="cta-wrapper">
         <FadeUp>
           <div className="cta-box">
-            <h2 className="cta-heading">Design is how I think.<br />Let's think together.</h2>
+            <h2 className="cta-heading">{t("Design is how I think.")}<br />{t("Let's think together.")}</h2>
             <p className="cta-sub">
-              Currently open to new opportunities — whether it's a product, a system, or an experience worth building.
+              {t("Currently open to new opportunities — whether it's a product, a system, or an experience worth building.")}
             </p>
             <div className="cta-actions">
               <a href="mailto:sakdidetsuttipol@hotmail.com" className="cta-email">
-                sakdidetsuttipol@hotmail.com
+                sakdidetsuttipol@<wbr />hotmail.com
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
                   <path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="#1B1C19" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </a>
               <div className="social-links">
-                <a href="http://www.linkedin.com/in/sakdidet-suttipol" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">
+                <a href="http://www.linkedin.com/in/sakdidet-suttipol" target="_blank" rel="noopener noreferrer" className="social-link" aria-label={t("LinkedIn")}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
@@ -1904,17 +1918,17 @@ export default function Overview() {
               <span className="nav-logo-icon">S</span>
               <span className="footer-logo-text">Sakdidet</span>
             </Link>
-            <p className="footer-copy">©2026 Sakdidet. All Rights Reserved.</p>
+            <p className="footer-copy">{t("©2026 Sakdidet. All Rights Reserved.")}</p>
           </div>
           <div className="footer-right">
             <ul className="footer-nav">
-              <li><a href="http://www.linkedin.com/in/sakdidet-suttipol" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+              <li><a href="http://www.linkedin.com/in/sakdidet-suttipol" target="_blank" rel="noopener noreferrer">{t("LinkedIn")}</a></li>
             </ul>
             <div className="footer-location">
               <svg width="10" height="13" viewBox="0 0 10 14" fill="none">
                 <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#555F6F"/>
               </svg>
-              Based on Bangkok Thailand
+              {t("Based on Bangkok Thailand")}
             </div>
           </div>
         </div>
@@ -1922,14 +1936,14 @@ export default function Overview() {
       {/* ── LIGHTBOX ── */}
       {lightboxImg && (
         <div className="ov-lightbox" onClick={() => setLightboxImg(null)}>
-          <button className="ov-lightbox-close" aria-label="Close">
+          <button className="ov-lightbox-close" aria-label={t("Close")}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M2 2L18 18M18 2L2 18" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             </svg>
           </button>
           <img
             src={lightboxImg}
-            alt="Feature design"
+            alt={t("Feature design")}
             className="ov-lightbox-img"
             onClick={e => e.stopPropagation()}
           />
