@@ -15,6 +15,7 @@ import HeroFresco from './components/HeroFresco'
 import CurtainLoader from './components/CurtainLoader'
 import WallLabel from './components/home/WallLabel'
 import WhatIDo from './components/home/WhatIDo'
+import Impact from './components/home/Impact'
 import { useCloudRise } from './hooks/useCloudRise'
 
 // 3D scenes are code-split: three.js only downloads after the page renders
@@ -102,6 +103,9 @@ export default function App() {
       {/* What I do: cloud bank + Between design and code (Figma 364:2594) */}
       <WhatIDo />
       </div>
+
+      {/* Impact: What the Design System changed (Figma 364:2618) */}
+      <Impact />
 
       {/* ── PROJECTS ── */}
       <section className="projects-section" id="projects">
