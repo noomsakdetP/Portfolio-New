@@ -117,7 +117,9 @@
   .wall-label {
     flex-direction: column;
     align-items: flex-start;
-    padding: var(--space-32) var(--space-16);
+    /* extra room at the bottom: the cloud bank's tops (and its first bit of rise)
+       cover padding here, not the email link */
+    padding: var(--space-32) var(--space-16) var(--space-64);
     gap: var(--space-24);
   }
   .wall-label-intro { order: 0; font-size: 16px; }

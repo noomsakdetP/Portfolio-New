@@ -75,7 +75,12 @@
 @keyframes hero-dim         { from { opacity: 1; } to { opacity: 0.85; } }
 
 @media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
+  /* ≥768px (full-bleed hero, so the Wall Label enters exactly as scrolling starts):
+     CSS view() timeline. Narrower layouts start with the Wall Label already partly in
+     view, where entry 0% would leave the clouds frozen for the first few hundred pixels
+     (that was the "clouds don't move" bug in narrow desktop windows), so they use the
+     JS path in useCloudRise, which starts at scroll 0. */
+  @supports (animation-timeline: view()) { @media (min-width: 768px) {
     .home-intro { timeline-scope: --cloud-rise; }
     .home-intro .wall-label { view-timeline: --cloud-rise block; }
     .home-intro .cloud-layer--back,
@@ -91,17 +96,10 @@
     .home-intro .cloud-layer--mid   { animation-name: cloud-rise-mid; }
     .home-intro .cloud-layer--front { animation-name: cloud-rise-front; }
     .home-intro .hero-fresco        { animation-name: hero-dim; }
-    /* Phones: the stacked Wall Label is tall, so only rise while it leaves the top of
-       the screen; otherwise the clouds cover its email link while you're reading it. */
-    @media (max-width: 767px) {
-      .home-intro .cloud-layer--back,
-      .home-intro .cloud-layer--mid,
-      .home-intro .cloud-layer--front,
-      .home-intro .hero-fresco { animation-range: exit 0% exit 100%; }
-    }
-  }
+  } }
 
-  /* JS fallback (useCloudRise sets --cloud-p 0 → 1 and .is-cloud-js) */
+  /* JS path: narrow layouts, and browsers without scroll timelines
+     (useCloudRise sets --cloud-p 0 → 1 and .is-cloud-js) */
   .home-intro.is-cloud-js .cloud-layer--back  { transform: translateY(calc(var(--cloud-p) * -40%)); }
   .home-intro.is-cloud-js .cloud-layer--mid   { transform: translateY(calc(var(--cloud-p) * -80%)); }
   .home-intro.is-cloud-js .cloud-layer--front { transform: translateY(calc(var(--cloud-p) * -126.667%)); }
