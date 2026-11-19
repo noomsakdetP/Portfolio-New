@@ -14,6 +14,7 @@ import * as THREE from 'three'
 import { HARD_SKILLS, SOFT_SKILLS, type Skill } from '../data/skills'
 import { roundRect, roundedSlab, slabFront, webglOK } from './three/shapes'
 import { useT } from '../i18n/lang'
+import { MUSEUM } from '../theme/museum'
 
 type Tile = Skill & { kind: 'hard' | 'soft'; n: THREE.Vector3; q: THREE.Quaternion }
 
@@ -21,8 +22,8 @@ const R = 3 // sphere radius (world units)
 const TW = 2.5, TH = 0.72, TD = 0.12 // tile size
 
 const COLORS = {
-  hard: { body: '#EAB308', ink: '#251A00' },
-  soft: { body: '#FFFFFF', ink: '#1B1C19' },
+  hard: { body: MUSEUM.bgAccent, ink: MUSEUM.textOnAccent },
+  soft: { body: MUSEUM.bgCard, ink: MUSEUM.textPrimary },
 }
 
 // per-frame state kept outside React (changes every frame, must not re-render)
@@ -57,7 +58,7 @@ function drawTile(t: Tile, cv: HTMLCanvasElement) {
   x.clip()
   x.fillStyle = c.body
   x.fillRect(0, 0, W, H)
-  if (t.kind === 'soft') { x.strokeStyle = '#D3C5AC'; x.lineWidth = 6; roundRect(x, W, H, H * 0.3); x.stroke() }
+  if (t.kind === 'soft') { x.strokeStyle = MUSEUM.borderDefault; x.lineWidth = 6; roundRect(x, W, H, H * 0.3); x.stroke() }
   let size = 46
   x.font = `700 ${size}px "Hanken Grotesk", "IBM Plex Sans Thai", sans-serif`
   while (x.measureText(t.title).width > W - 60 && size > 20) { size -= 2; x.font = `700 ${size}px "Hanken Grotesk", "IBM Plex Sans Thai", sans-serif` }

@@ -181,13 +181,13 @@ export default function Detail() {
           <div className="cta-box">
             <h2 className="cta-heading">{t("Design is how I think.")}<br />{t("Let's think together.")}</h2>
             <p className="cta-sub">
-              {t("Currently open to new opportunities — whether it's a product, a system, or an experience worth building.")}
+              {t("Currently open to new opportunities, whether it's a product, a system, or an experience worth building.")}
             </p>
             <div className="cta-actions">
               <a href="mailto:sakdidetsuttipol@hotmail.com" className="cta-email">
                 sakdidetsuttipol@<wbr />hotmail.com
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
-                  <path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="#1B1C19" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M1 6H15M15 6L10 1M15 6L10 11" style={{ stroke: 'var(--color-text-primary)' }} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
               <div className="social-links">
@@ -218,7 +218,7 @@ export default function Detail() {
             </ul>
             <div className="footer-location">
               <svg width="10" height="13" viewBox="0 0 10 14" fill="none">
-                <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#555F6F" />
+                <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" style={{ fill: 'var(--color-text-muted)' }} />
               </svg>
               {t("Based on Bangkok Thailand")}
             </div>

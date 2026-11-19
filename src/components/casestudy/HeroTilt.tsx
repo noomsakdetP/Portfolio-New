@@ -1,10 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 
 /**
  * Case-study hero image that "lands" in 3D: it starts tilted back and flattens as you
  * scroll, and leans slightly toward the mouse on desktop. CSS transforms only (no WebGL).
+ * A project without an image yet (src === '') shows `placeholder` instead of an <img>
+ * with an empty src (which React warns about and browsers may refetch the page for).
  */
-export default function HeroTilt({ src, alt, className }: { src: string; alt: string; className?: string }) {
+export default function HeroTilt({ src, alt, className, placeholder }: { src: string; alt: string; className?: string; placeholder?: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export default function HeroTilt({ src, alt, className }: { src: string; alt: st
 
   return (
     <div ref={ref} className="cs-hero-tilt">
-      <img src={src} alt={alt} className={className} />
+      {src ? <img src={src} alt={alt} className={className} /> : placeholder}
       <span className="cs-hero-glare" aria-hidden="true" />
     </div>
   )

@@ -11,7 +11,7 @@
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 1.2px;
-  color: var(--yellow-dark);
+  color: var(--color-text-accent);
   text-decoration: none;
   text-transform: uppercase;
   margin-bottom: 40px;
@@ -41,13 +41,13 @@
   font-size: 72px;
   line-height: 1.1;
   letter-spacing: -1.5px;
-  color: var(--dark);
+  color: var(--color-text-primary);
   margin-bottom: 20px;
 }
 .ov-subtitle {
   font-size: 20px;
   line-height: 1.6;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   max-width: 640px;
   margin-bottom: 56px;
 }
@@ -58,8 +58,8 @@
   align-items: center;
   gap: 0;
   flex-wrap: wrap;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--color-border-default);
+  border-bottom: 1px solid var(--color-border-default);
   padding: 24px 0;
 }
 .ov-meta-item {
@@ -74,7 +74,7 @@
 .ov-meta-divider {
   width: 1px;
   height: 40px;
-  background: var(--border);
+  background: var(--color-border-default);
   flex-shrink: 0;
 }
 .ov-meta-label {
@@ -82,14 +82,14 @@
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 1.4px;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   text-transform: uppercase;
 }
 .ov-meta-value {
   font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 500;
   font-size: 15px;
-  color: var(--dark);
+  color: var(--color-text-primary);
   line-height: 1.3;
 }
 
@@ -131,26 +131,26 @@
   font-size: 48px;
   line-height: 1.1;
   letter-spacing: -1px;
-  color: var(--dark);
+  color: var(--color-text-primary);
   margin-top: 12px;
 }
 .ov-body-large {
   font-size: 18px;
   line-height: 1.75;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   margin-top: 8px;
 }
 .ov-divider {
   height: 1px;
-  background: var(--border);
+  background: var(--color-border-default);
   margin: 80px 0;
 }
 
 /* Problem card */
 .ov-problem-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--yellow);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-left: 4px solid var(--color-bg-accent);
   border-radius: 16px;
   padding: 40px 40px 40px 36px;
   position: relative;
@@ -159,7 +159,7 @@
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 80px;
   line-height: 0.6;
-  color: var(--yellow);
+  color: var(--color-text-highlight);
   margin-bottom: 16px;
   display: block;
   opacity: 0.6;
@@ -167,7 +167,7 @@
 
 /* ── Process section (dark bg) ── */
 .ov-process-section {
-  background: var(--dark);
+  background: var(--color-bg-inverse);
   padding: 120px 0;
 }
 .ov-process-section .ov-container {}
@@ -176,23 +176,23 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 2px;
   margin-top: 64px;
-  border: 1px solid rgba(129,118,96,0.2);
+  border: 1px solid color-mix(in srgb, var(--color-border-strong) 20%, transparent);
   border-radius: 24px;
   overflow: hidden;
 }
 .ov-process-card {
-  background: rgba(255,255,255,0.03);
+  background: color-mix(in srgb, var(--color-overlay-white) 3%, transparent);
   padding: 48px;
-  border: 1px solid rgba(129,118,96,0.15);
+  border: 1px solid color-mix(in srgb, var(--color-border-strong) 15%, transparent);
   transition: background 0.25s;
 }
-.ov-process-card:hover { background: rgba(255,255,255,0.06); }
+.ov-process-card:hover { background: color-mix(in srgb, var(--color-overlay-white) 6%, transparent); }
 .ov-process-num {
   font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 2px;
-  color: var(--yellow);
+  color: var(--color-text-highlight);
   display: block;
   margin-bottom: 20px;
 }
@@ -200,14 +200,14 @@
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 24px;
-  color: #FAF9F4;
+  color: var(--color-bg-page);
   margin-bottom: 16px;
   line-height: 1.2;
 }
 .ov-process-desc {
   font-size: 15px;
   line-height: 1.7;
-  color: rgba(250, 249, 244, 0.6);
+  color: color-mix(in srgb, var(--color-bg-page) 60%, transparent);
 }
 
 /* ── Outcomes ── */
@@ -219,8 +219,8 @@
   align-items: stretch;
 }
 .ov-outcome-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
   border-radius: 20px;
   padding: 40px 32px;
   display: flex;
@@ -231,7 +231,7 @@
   transition: border-color 0.2s, transform 0.2s;
 }
 .ov-outcome-card:hover {
-  border-color: var(--yellow);
+  border-color: var(--color-bg-accent);
   transform: translateY(-4px);
 }
 .ov-outcome-metric {
@@ -240,7 +240,7 @@
   font-size: clamp(20px, 2.2vw, 40px);
   line-height: 1.1;
   letter-spacing: -0.5px;
-  color: var(--yellow-dark);
+  color: var(--color-text-accent);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -248,15 +248,15 @@
 .ov-outcome-label {
   font-size: 15px;
   line-height: 1.4;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   font-weight: 500;
 }
 
 /* ── Next Project ── */
 .ov-next-section {
   padding: 80px 0 120px;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
+  background: var(--color-bg-surface);
+  border-top: 1px solid var(--color-border-default);
 }
 .ov-next-inner {
   display: grid;
@@ -271,12 +271,12 @@
   font-size: 48px;
   line-height: 1.1;
   letter-spacing: -1px;
-  color: var(--dark);
+  color: var(--color-text-primary);
 }
 .ov-next-sub {
   font-size: 16px;
   line-height: 1.6;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   max-width: 400px;
 }
 .ov-next-btn {
@@ -284,10 +284,10 @@
   align-items: center;
   gap: 12px;
   margin-top: 16px;
-  border-bottom: 2px solid var(--yellow);
+  border-bottom: 2px solid var(--color-bg-accent);
   padding-bottom: 6px;
   text-decoration: none;
-  color: var(--dark);
+  color: var(--color-text-primary);
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 600;
   font-size: 18px;
@@ -332,14 +332,14 @@
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 1.5px;
-  color: var(--yellow-dark);
+  color: var(--color-text-accent);
   flex-shrink: 0;
   padding-top: 3px;
 }
 .ov-solution-item p {
   font-size: 17px;
   line-height: 1.65;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   margin: 0;
 }
 
@@ -350,20 +350,20 @@
   gap: 8px;
   margin-top: 12px;
   background: none;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border-default);
   border-radius: 9999px;
   padding: 8px 18px;
   font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.5px;
-  color: var(--dark);
+  color: var(--color-text-primary);
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, gap 0.2s;
 }
 .ov-feature-btn:hover {
-  background: var(--yellow);
-  border-color: var(--yellow);
+  background: var(--color-bg-accent);
+  border-color: var(--color-bg-accent);
   gap: 12px;
 }
 
@@ -371,7 +371,7 @@
 .ov-lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
+  background: color-mix(in srgb, var(--color-overlay-black) 85%, transparent);
   z-index: 1000;
   overflow-y: scroll;
   cursor: pointer;
@@ -382,7 +382,7 @@
   position: fixed;
   top: 24px;
   right: 24px;
-  background: rgba(255,255,255,0.1);
+  background: color-mix(in srgb, var(--color-overlay-white) 10%, transparent);
   border: none;
   border-radius: 50%;
   width: 44px;
@@ -394,7 +394,7 @@
   transition: background 0.2s;
   z-index: 1001;
 }
-.ov-lightbox-close:hover { background: rgba(255,255,255,0.2); }
+.ov-lightbox-close:hover { background: color-mix(in srgb, var(--color-overlay-white) 20%, transparent); }
 .ov-lightbox-img {
   display: block;
   width: 100%;
@@ -403,7 +403,7 @@
   border-radius: 16px;
   object-fit: contain;
   cursor: default;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  box-shadow: 0 24px 80px color-mix(in srgb, var(--color-overlay-black) 50%, transparent);
 }
 
 /* ── Learnings ── */
@@ -414,24 +414,24 @@
 }
 .ov-learnings-wrap .ov-body-large {
   padding-left: 20px;
-  border-left: 2px solid var(--border);
+  border-left: 2px solid var(--color-border-default);
 }
 
 /* ── Result card ── */
 .ov-result-card {
-  background: var(--yellow-light);
-  border-left: 4px solid var(--yellow);
+  background: var(--color-bg-highlight);
+  border-left: 4px solid var(--color-bg-accent);
   border-radius: 0 16px 16px 0;
   padding: 32px 36px;
 }
 .ov-result-card .ov-body-large {
-  color: var(--yellow-deep);
+  color: var(--color-text-on-accent);
 }
 
 /* ── Define Section ── */
 .ov-define-persona {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
+  background: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border-default);
   border-radius: 20px;
   padding: 36px 40px;
   margin-top: 40px;
@@ -440,8 +440,8 @@
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: var(--yellow-deep);
-  background: var(--yellow-light);
+  color: var(--color-text-on-accent);
+  background: var(--color-bg-highlight);
   border-radius: 9999px;
   padding: 4px 14px;
   width: fit-content;
@@ -451,11 +451,11 @@
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 28px;
   font-weight: 700;
-  color: var(--dark);
+  color: var(--color-text-primary);
 }
 .ov-define-persona-meta {
   font-size: 14px;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   margin-top: 4px;
 }
 .ov-define-grid {
@@ -472,18 +472,18 @@
   gap: 16px;
 }
 .ov-define-card--pain {
-  background: #FFF5F5;
-  border: 1.5px solid #FFCDD2;
+  background: var(--color-bg-danger-subtle);
+  border: 1.5px solid var(--color-border-danger-subtle);
 }
 .ov-define-card--goal {
-  background: var(--yellow-light);
-  border: 1.5px solid rgba(255, 223, 154, 0.5);
+  background: var(--color-bg-highlight);
+  border: 1.5px solid color-mix(in srgb, var(--color-bg-highlight) 50%, transparent);
 }
 .ov-define-card-title {
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 16px;
   font-weight: 700;
-  color: var(--dark);
+  color: var(--color-text-primary);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -500,24 +500,24 @@
   margin-top: 48px;
 }
 .ov-solved-card {
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border-default);
   border-radius: 20px;
   padding: 32px;
-  background: var(--surface);
+  background: var(--color-bg-surface);
 }
 .ov-solved-num {
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--yellow-deep);
+  color: var(--color-text-on-accent);
   margin-bottom: 12px;
 }
 .ov-solved-title {
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: var(--dark);
+  color: var(--color-text-primary);
   margin-bottom: 24px;
 }
 .ov-solved-block {
@@ -525,14 +525,14 @@
   padding: 20px 24px;
   margin-top: 16px;
 }
-.ov-solved-block--problem { background: #FFF5F5; border: 1px solid #FFCDD2; }
-.ov-solved-block--fix { background: #F0FDF4; border: 1px solid #86EFAC; }
+.ov-solved-block--problem { background: var(--color-bg-danger-subtle); border: 1px solid var(--color-border-danger-subtle); }
+.ov-solved-block--fix { background: var(--color-bg-success-subtle); border: 1px solid var(--color-border-success-subtle); }
 .ov-solved-tag {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   display: block;
   margin-bottom: 8px;
 }
@@ -541,7 +541,7 @@
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 22px;
   font-weight: 700;
-  color: var(--dark);
+  color: var(--color-text-primary);
 }
 
 /* ── Ideate Matrix ── */
@@ -554,23 +554,23 @@
 .ov-ideate-card {
   border-radius: 20px;
   padding: 28px 24px;
-  border: 1.5px solid var(--border);
-  background: var(--surface);
+  border: 1.5px solid var(--color-border-default);
+  background: var(--color-bg-surface);
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-.ov-ideate-card--0 { background: #F0FDF4; border-color: #86EFAC; }
-.ov-ideate-card--1 { background: var(--yellow-light); border-color: rgba(255,223,154,0.6); }
-.ov-ideate-card--2 { background: var(--surface); border-color: var(--border); }
-.ov-ideate-card--3 { background: #FFF5F5; border-color: #FFCDD2; }
+.ov-ideate-card--0 { background: var(--color-bg-success-subtle); border-color: var(--color-border-success-subtle); }
+.ov-ideate-card--1 { background: var(--color-bg-highlight); border-color: color-mix(in srgb, var(--color-bg-highlight) 60%, transparent); }
+.ov-ideate-card--2 { background: var(--color-bg-surface); border-color: var(--color-border-default); }
+.ov-ideate-card--3 { background: var(--color-bg-danger-subtle); border-color: var(--color-border-danger-subtle); }
 .ov-ideate-tag {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  background: rgba(0,0,0,0.06);
+  color: var(--color-text-muted);
+  background: color-mix(in srgb, var(--color-overlay-black) 6%, transparent);
   border-radius: 9999px;
   padding: 3px 12px;
   width: fit-content;
@@ -579,7 +579,7 @@
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 15px;
   font-weight: 700;
-  color: var(--dark);
+  color: var(--color-text-primary);
 }
 
 /* ── HMW Questions ── */
@@ -593,27 +593,27 @@
   display: flex;
   align-items: flex-start;
   gap: 20px;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
+  background: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border-default);
   border-radius: 16px;
   padding: 24px 28px;
   transition: border-color 0.2s;
 }
 .ov-hmw-question:hover {
-  border-color: var(--yellow);
+  border-color: var(--color-bg-accent);
 }
 .ov-hmw-num {
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 28px;
   font-weight: 700;
-  color: var(--yellow-deep);
+  color: var(--color-text-on-accent);
   min-width: 44px;
   line-height: 1;
 }
 .ov-hmw-text {
   font-size: 16px;
   line-height: 1.7;
-  color: var(--dark);
+  color: var(--color-text-primary);
   margin: 0;
   padding-top: 4px;
 }
@@ -629,7 +629,7 @@
 .ov-ux-bullets li {
   font-size: 15px;
   line-height: 1.6;
-  color: var(--dark);
+  color: var(--color-text-primary);
   list-style: disc;
 }
 .ov-ux-data-imgs {
@@ -647,7 +647,7 @@
 .ov-ux-data-img {
   width: 100%;
   border-radius: 12px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border-default);
   transition: opacity 0.2s;
 }
 .ov-ux-data-item:hover .ov-ux-data-img {
@@ -658,7 +658,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   text-align: center;
 }
 .ov-ux-images {
@@ -670,7 +670,7 @@
 .ov-ux-img {
   width: 100%;
   border-radius: 16px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border-default);
   cursor: zoom-in;
   transition: opacity 0.2s;
 }
@@ -694,7 +694,7 @@
 .ov-ut-img {
   width: 100%;
   border-radius: 16px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border-default);
   transition: opacity 0.2s;
 }
 .ov-ut-card:hover .ov-ut-img { opacity: 0.85; }
@@ -702,12 +702,12 @@
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: var(--dark);
+  color: var(--color-text-primary);
 }
 .ov-ut-desc {
   font-size: 14px;
   line-height: 1.65;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
 }
 
 /* ── UI Design Slider ── */
@@ -721,8 +721,8 @@
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
+  background: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border-default);
 }
 .ov-ui-slide-img {
   width: 100%;
@@ -738,8 +738,8 @@
   bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.55);
-  color: #fff;
+  background: color-mix(in srgb, var(--color-overlay-black) 55%, transparent);
+  color: var(--color-overlay-white);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -756,7 +756,7 @@
 }
 .ov-ui-thumbs::-webkit-scrollbar { height: 4px; }
 .ov-ui-thumbs::-webkit-scrollbar-track { background: transparent; }
-.ov-ui-thumbs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 9999px; }
+.ov-ui-thumbs::-webkit-scrollbar-thumb { background: var(--color-border-default); border-radius: 9999px; }
 .ov-ui-thumb {
   flex-shrink: 0;
   width: 72px;
@@ -778,7 +778,7 @@
 }
 .ov-ui-thumb:hover { opacity: 0.85; }
 .ov-ui-thumb.active {
-  border-color: var(--yellow);
+  border-color: var(--color-bg-accent);
   opacity: 1;
 }
 
@@ -787,7 +787,7 @@
   width: 100%;
   margin-top: 40px;
   border-radius: 20px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border-default);
   cursor: zoom-in;
   transition: opacity 0.2s;
   display: block;
@@ -811,15 +811,15 @@
   width: 100%;
   display: block;
   border-radius: 20px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border-default);
   cursor: zoom-in;
 }
 .ov-persona-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255,255,255,0.9);
-  border: 1.5px solid var(--border);
+  background: color-mix(in srgb, var(--color-overlay-white) 90%, transparent);
+  border: 1.5px solid var(--color-border-default);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -830,7 +830,7 @@
   z-index: 2;
   transition: background 0.2s;
 }
-.ov-persona-arrow:hover { background: var(--yellow); }
+.ov-persona-arrow:hover { background: var(--color-bg-accent); }
 .ov-persona-arrow--prev { left: 12px; }
 .ov-persona-arrow--next { right: 12px; }
 .ov-persona-dots {
@@ -845,13 +845,13 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.5);
+  background: color-mix(in srgb, var(--color-overlay-white) 50%, transparent);
   border: none;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
 .ov-persona-dot.active {
-  background: #fff;
+  background: var(--color-overlay-white);
   transform: scale(1.3);
 }
 .ov-persona-info {
@@ -864,8 +864,8 @@
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: var(--yellow-deep);
-  background: var(--yellow-light);
+  color: var(--color-text-on-accent);
+  background: var(--color-bg-highlight);
   border-radius: 9999px;
   padding: 4px 14px;
   width: fit-content;
@@ -874,7 +874,7 @@
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: clamp(20px, 2vw, 28px);
   font-weight: 700;
-  color: var(--dark);
+  color: var(--color-text-primary);
   line-height: 1.2;
 }
 
@@ -888,7 +888,7 @@
 .ov-wf-img {
   width: 100%;
   border-radius: 16px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border-default);
   cursor: zoom-in;
   transition: opacity 0.2s;
   display: block;
@@ -903,8 +903,8 @@
   margin-top: 48px;
 }
 .ov-ds-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
+  background: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border-default);
   border-radius: 20px;
   padding: 36px 32px;
   display: flex;
@@ -915,12 +915,12 @@
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: var(--dark);
+  color: var(--color-text-primary);
 }
 .ov-ds-content {
   font-size: 15px;
   line-height: 1.65;
-  color: var(--dark);
+  color: var(--color-text-primary);
 }
 .ov-ds-bullets {
   display: flex;
@@ -932,7 +932,7 @@
 .ov-ds-img {
   width: 100%;
   border-radius: 12px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border-default);
   margin-top: 8px;
   cursor: zoom-in;
   transition: opacity 0.2s;
@@ -941,7 +941,7 @@
 .ov-ds-bullets li {
   font-size: 14px;
   line-height: 1.6;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   list-style: disc;
 }
 
@@ -957,8 +957,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
+  background: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border-default);
   border-radius: 20px;
   padding: 32px 28px;
 }
@@ -968,9 +968,9 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--yellow);
-  background: rgba(255, 223, 154, 0.12);
-  border: 1px solid rgba(255, 223, 154, 0.3);
+  color: var(--color-text-highlight);
+  background: color-mix(in srgb, var(--color-bg-highlight) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-bg-highlight) 30%, transparent);
   border-radius: 9999px;
   padding: 4px 14px;
   width: fit-content;
@@ -978,12 +978,12 @@
 .ov-goal-desc {
   font-size: 15px;
   line-height: 1.6;
-  color: var(--dark);
+  color: var(--color-text-primary);
   font-weight: 500;
   flex: 1;
 }
 .ov-goal-objective {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--color-border-default);
   padding-top: 16px;
   display: flex;
   flex-direction: column;
@@ -994,12 +994,12 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
 }
 .ov-goal-obj-text {
   font-size: 13px;
   line-height: 1.6;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
 }
 
 /* ── Key Features grid ── */
@@ -1011,8 +1011,8 @@
   align-items: stretch;
 }
 .ov-feature-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
   border-radius: 16px;
   padding: 32px 28px;
   display: flex;
@@ -1025,7 +1025,7 @@
   align-self: flex-start;
 }
 .ov-feature-card:hover {
-  border-color: var(--yellow);
+  border-color: var(--color-bg-accent);
   transform: translateY(-3px);
 }
 .ov-feature-num {
@@ -1033,19 +1033,19 @@
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 2px;
-  color: var(--yellow-dark);
+  color: var(--color-text-accent);
 }
 .ov-feature-title {
   font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 18px;
-  color: var(--dark);
+  color: var(--color-text-primary);
   line-height: 1.3;
 }
 .ov-feature-desc {
   font-size: 15px;
   line-height: 1.65;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   margin: 0;
 }
 @media (max-width: 860px) {
@@ -1061,7 +1061,7 @@
   border-radius: 16px;
   margin-top: 40px;
   object-fit: cover;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid color-mix(in srgb, var(--color-overlay-white) 10%, transparent);
 }
 
 /* ── Overview image ── */
@@ -1070,7 +1070,7 @@
   border-radius: 16px;
   margin-top: 32px;
   object-fit: cover;
-  border: 1px solid var(--border);
+  border: 1px solid var(--color-border-default);
 }
 
 /* ── Storybook section ── */
@@ -1079,8 +1079,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 48px;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
+  background: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border-default);
   border-radius: 24px;
   padding: 56px 64px;
 }
@@ -1089,8 +1089,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--dark);
-  color: var(--cream);
+  background: var(--color-bg-inverse);
+  color: var(--color-text-on-inverse);
   font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -1100,15 +1100,15 @@
   text-decoration: none;
   transition: background 0.2s, gap 0.2s;
 }
-.ov-storybook-btn:hover { background: #FF4785; gap: 14px; }
+.ov-storybook-btn:hover { background: var(--color-bg-brand-storybook); gap: 14px; }
 .ov-storybook-badge {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  background: var(--cream);
-  border: 1.5px solid var(--border);
+  background: var(--color-bg-page);
+  border: 1.5px solid var(--color-border-default);
   border-radius: 20px;
   padding: 32px 40px;
   text-align: center;
@@ -1117,11 +1117,11 @@
   font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
   font-weight: 700;
   font-size: 16px;
-  color: var(--dark);
+  color: var(--color-text-primary);
 }
 .ov-storybook-url {
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   font-family: monospace;
 }
 
@@ -1151,7 +1151,7 @@
 
 /* reading progress (under the fixed navbar) */
 .cs-progress { position: fixed; top: 70px; left: 0; right: 0; height: 3px; z-index: 99; pointer-events: none; }
-.cs-progress-bar { height: 100%; background: var(--yellow); transform-origin: left; transform: scaleX(0); }
+.cs-progress-bar { height: 100%; background: var(--color-bg-accent); transform-origin: left; transform: scaleX(0); }
 
 /* hero image lands in 3D */
 .cs-hero-tilt {
@@ -1165,7 +1165,7 @@
     rotateX(calc((1 - var(--land)) * 18deg + var(--ty) * -4deg))
     rotateY(calc(var(--tx) * 5deg))
     scale(calc(0.92 + var(--land) * 0.08));
-  box-shadow: 0 calc(30px + (1 - var(--land)) * 30px) 60px -24px rgba(27, 28, 25, .35);
+  box-shadow: 0 calc(30px + (1 - var(--land)) * 30px) 60px -24px color-mix(in srgb, var(--color-bg-inverse) 35%, transparent);
   transition: transform .25s ease-out;
   will-change: transform;
 }
@@ -1173,7 +1173,7 @@
   position: absolute; inset: 0;
   border-radius: 24px;
   pointer-events: none;
-  background: radial-gradient(circle at calc(50% + var(--tx) * 100%) calc(50% + var(--ty) * 100%), rgba(255,255,255,.18), transparent 55%);
+  background: radial-gradient(circle at calc(50% + var(--tx) * 100%) calc(50% + var(--ty) * 100%), color-mix(in srgb, var(--color-overlay-white) 18%, transparent), transparent 55%);
   opacity: 0;
   transition: opacity .3s;
 }
@@ -1195,20 +1195,20 @@ section.ov-section, section.ov-process-section { scroll-margin-top: 64px; }
   display: none;
 }
 .cs-rail.is-on { opacity: 1; pointer-events: auto; transform: translate(0, -50%); }
-.cs-rail ol { list-style: none; display: flex; flex-direction: column; gap: 2px; border-left: 2px solid var(--border); }
+.cs-rail ol { list-style: none; display: flex; flex-direction: column; gap: 2px; border-left: 2px solid var(--color-border-default); }
 .cs-rail button {
   display: flex; align-items: center; gap: 10px;
   background: none; border: 0; cursor: pointer;
   padding: 6px 0 6px 0; margin-left: -6px;
   font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif; font-size: 13px; text-align: left;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   transition: color .2s;
 }
-.cs-rail button:hover { color: var(--dark); }
-.cs-rail-dot { width: 10px; height: 10px; flex-shrink: 0; border-radius: 50%; background: var(--cream); border: 2px solid var(--border); transition: background .3s, border-color .3s, transform .3s; }
-.cs-rail li.is-done .cs-rail-dot { background: var(--yellow-dark); border-color: var(--yellow-dark); }
-.cs-rail li.is-active .cs-rail-dot { background: var(--yellow); border-color: var(--yellow-dark); transform: scale(1.3); }
-.cs-rail li.is-active button { color: var(--dark); font-weight: 500; }
+.cs-rail button:hover { color: var(--color-text-primary); }
+.cs-rail-dot { width: 10px; height: 10px; flex-shrink: 0; border-radius: 50%; background: var(--color-bg-page); border: 2px solid var(--color-border-default); transition: background .3s, border-color .3s, transform .3s; }
+.cs-rail li.is-done .cs-rail-dot { background: var(--color-bg-accent-strong); border-color: var(--color-border-accent); }
+.cs-rail li.is-active .cs-rail-dot { background: var(--color-bg-accent); border-color: var(--color-border-accent); transform: scale(1.3); }
+.cs-rail li.is-active button { color: var(--color-text-primary); font-weight: 500; }
 .cs-rail-label { max-width: 150px; line-height: 1.3; }
 
 /* pill + sheet — smaller screens */
@@ -1226,36 +1226,36 @@ section.ov-section, section.ov-process-section { scroll-margin-top: 64px; }
 .cs-pill {
   display: flex; align-items: center; gap: 10px;
   max-width: 100%;
-  background: var(--dark); color: var(--cream);
+  background: var(--color-bg-inverse); color: var(--color-text-on-inverse);
   border: 0; border-radius: 9999px;
   padding: 12px 18px;
-  box-shadow: 0 12px 30px -10px rgba(0,0,0,.4);
+  box-shadow: 0 12px 30px -10px color-mix(in srgb, var(--color-overlay-black) 40%, transparent);
   cursor: pointer;
   font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif; font-size: 14px;
 }
-.cs-pill-count { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1px; color: var(--yellow); flex-shrink: 0; }
+.cs-pill-count { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1px; color: var(--color-text-highlight); flex-shrink: 0; }
 .cs-pill-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cs-pill-caret { font-size: 10px; opacity: .7; }
 .cs-sheet {
   list-style: none;
   width: 100%;
   max-height: 55vh; overflow-y: auto;
-  background: var(--dark);
+  background: var(--color-bg-inverse);
   border-radius: 20px;
   padding: 8px;
-  box-shadow: 0 20px 40px -12px rgba(0,0,0,.45);
+  box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--color-overlay-black) 45%, transparent);
 }
 .cs-sheet button {
   display: flex; gap: 12px; width: 100%;
   background: none; border: 0; border-radius: 12px;
   padding: 12px 14px;
-  color: rgba(250,249,244,.75);
+  color: color-mix(in srgb, var(--color-bg-page) 75%, transparent);
   font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif; font-size: 15px; text-align: left;
   cursor: pointer;
 }
-.cs-sheet button span { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: 12px; color: rgba(250,249,244,.4); padding-top: 2px; }
-.cs-sheet button.is-active { background: rgba(234,179,8,.15); color: var(--cream); }
-.cs-sheet button.is-active span { color: var(--yellow); }
+.cs-sheet button span { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: 12px; color: color-mix(in srgb, var(--color-bg-page) 40%, transparent); padding-top: 2px; }
+.cs-sheet button.is-active { background: color-mix(in srgb, var(--color-bg-accent) 15%, transparent); color: var(--color-text-on-inverse); }
+.cs-sheet button.is-active span { color: var(--color-text-highlight); }
 
 @media (min-width: 1480px) {
   .cs-rail { display: block; }

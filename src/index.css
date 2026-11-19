@@ -1,26 +1,15 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Design tokens generated from Figma (Portfolio Primitives + Portfolio Tokens, Museum mode).
+   Must stay the first rule in this file. */
+@import './styles/tokens.css';
 
-:root {
-  --cream: #FAF9F4;
-  --dark: #1B1C19;
-  --yellow: #EAB308;
-  --yellow-dark: #785A00;
-  --yellow-deep: #251A00;
-  --yellow-light: #FFDF9A;
-  --yellow-mid: #5A4300;
-  --border: #D3C5AC;
-  --surface: #F5F4EF;
-  --surface-dark: #E9E8E3;
-  --text-muted: #555F6F;
-  --nav-link: #596373;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
-  background: var(--cream);
-  color: var(--dark);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }

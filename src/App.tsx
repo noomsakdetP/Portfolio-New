@@ -79,11 +79,6 @@ export default function App() {
       <section className="hero-section hero--fresco" id="about">
         <div className="hero-art">
           <HeroFresco />
-          <div className="hero-legibility" aria-hidden="true" />
-          <a href="#projects" className="hero-scroll-cue" aria-label={t("Scroll to projects")}>
-            <span className="hero-scroll-label">{t("Scroll")}</span>
-            <span className="hero-scroll-thread" />
-          </a>
         </div>
         <FadeUp className="hero-float">
           <h1 className="hero-float-heading">
@@ -104,7 +99,7 @@ export default function App() {
                 {t("VIEW ALL PROJECTS")}
                 <span className="view-all-icon">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="#FAF9F4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M1 7H13M13 7L8 2M13 7L8 12" style={{ stroke: 'var(--color-text-on-inverse)' }} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
               </Link>
@@ -116,10 +111,10 @@ export default function App() {
               <div className="project-image-col" ref={explodeRef}>
                 <div className="pj-stack">
                   <div className="pj-layer pj-tokens" aria-hidden="true">
-                    <span className="pj-swatch" style={{ background: '#EAB308' }} />
-                    <span className="pj-swatch" style={{ background: '#785A00' }} />
-                    <span className="pj-swatch" style={{ background: '#FAF9F4' }} />
-                    <span className="pj-swatch" style={{ background: '#D3C5AC' }} />
+                    <span className="pj-swatch" style={{ background: 'var(--color-bg-accent)' }} />
+                    <span className="pj-swatch" style={{ background: 'var(--color-text-accent)' }} />
+                    <span className="pj-swatch" style={{ background: 'var(--color-bg-page)' }} />
+                    <span className="pj-swatch" style={{ background: 'var(--color-border-default)' }} />
                     <span className="pj-aa">{t("Aa")}</span>
                     <span className="pj-tag">{t("01 · Tokens")}</span>
                   </div>
@@ -149,13 +144,13 @@ export default function App() {
                 <div className="project-info-block">
                   <h3 className="project-info-title">{t("Strategy")}</h3>
                   <p className="project-info-body">
-                    {t("Building a unified Design System to standardize UI across the HR platform — from design tokens in Figma to production-ready components in Angular.")}
+                    {t("Building a unified Design System to standardize UI across the HR platform, from design tokens in Figma to production-ready components in Angular.")}
                   </p>
                 </div>
                 <div className="project-info-block">
                   <h3 className="project-info-title">{t("Results")}</h3>
                   <p className="project-info-body">
-                    {t("Building a unified Design System to standardize UI across the HR platform — from design tokens in Figma to production-ready components in Angular.")}
+                    {t("Building a unified Design System to standardize UI across the HR platform, from design tokens in Figma to production-ready components in Angular.")}
                   </p>
                 </div>
                 <Link to="/projects" className="btn-view-project">{t("View Project")}</Link>
@@ -181,15 +176,15 @@ export default function App() {
                   <h3 className="timeline-company">{t("Advance Research")}<br />{t("Group (ARSoft)")}</h3>
                   <p className="timeline-role">{t("Junior Ux/UI Designer")}</p>
                   <p className="timeline-desc">
-                    {t("Designing UI/UX and building a Design System for the HR internal platform — from Figma tokens to Angular component library.")}
+                    {t("Designing UI/UX and building a Design System for the HR internal platform, from Figma tokens to Angular component library.")}
                   </p>
                   {/* dashed connector line — visible only on desktop */}
                   <div className="timeline-connector" aria-hidden="true">
                     <svg className="timeline-connector-line" viewBox="0 0 180 2" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                      <line x1="0" y1="1" x2="170" y2="1" stroke="#785A00" strokeWidth="2" strokeDasharray="6 4"/>
+                      <line x1="0" y1="1" x2="170" y2="1" style={{ stroke: 'var(--color-text-accent)' }} strokeWidth="2" strokeDasharray="6 4"/>
                     </svg>
                     <svg className="timeline-connector-arrow" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="#785A00" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M1 6H11M11 6L6 1M11 6L6 11" style={{ stroke: 'var(--color-text-accent)' }} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                 </div>
@@ -295,13 +290,13 @@ export default function App() {
             </Suspense>
             <h2 className="cta-heading">{t("Design is how I think.")}<br />{t("Let's think together.")}</h2>
             <p className="cta-sub">
-              {t("Currently open to new opportunities — whether it's a product, a system, or an experience worth building.")}
+              {t("Currently open to new opportunities, whether it's a product, a system, or an experience worth building.")}
             </p>
             <div className="cta-actions">
               <a ref={emailRef} href="mailto:sakdidetsuttipol@hotmail.com" className="cta-email">
                 sakdidetsuttipol@<wbr />hotmail.com
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
-                  <path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="#1B1C19" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M1 6H15M15 6L10 1M15 6L10 11" style={{ stroke: 'var(--color-text-primary)' }} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
               <div className="social-links">
@@ -332,7 +327,7 @@ export default function App() {
             </ul>
             <div className="footer-location">
               <svg width="10" height="13" viewBox="0 0 10 14" fill="none">
-                <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#555F6F" />
+                <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" style={{ fill: 'var(--color-text-muted)' }} />
               </svg>
               {t("Based on Bangkok Thailand")}
             </div>

@@ -161,7 +161,7 @@ interface Project {
 const projects: Record<string, Project> = {
   'hr-system': {
     id: 'hr-system',
-    title: 'HR System Redesign — Phase 2',
+    title: 'HR System Redesign: Phase 2',
     subtitle: 'Took over and led UX/UI design for Phase 2, designing 9 core modules covering the full employee lifecycle',
     tags: ['Enterprise UX', 'Design System', 'Phase 2'],
     role: 'Junior UX/UI Designer',
@@ -170,14 +170,14 @@ const projects: Record<string, Project> = {
     platform: 'Desktop Web',
     image: PROJECT_IMG_HR,
     overview:
-      'Inherited and led UX/UI design for Phase 2 of an enterprise HR System at ARSoft, designing 9 core modules end-to-end — expanding the system beyond Phase 1 with a focus on the full employee lifecycle from recruitment to career growth. Each module was designed to align with the existing Design System while introducing consistent patterns for complex workflows.',
+      'Inherited and led UX/UI design for Phase 2 of an enterprise HR System at ARSoft, designing 9 core modules end-to-end, expanding the system beyond Phase 1 with a focus on the full employee lifecycle from recruitment to career growth. Each module was designed to align with the existing Design System while introducing consistent patterns for complex workflows.',
     problem:
-      'Phase 1 had established the foundation, but the system needed to scale across the full HR lifecycle — from hiring to offboarding and long-term talent development. The challenge was to design 9 interconnected modules that felt cohesive, reduced user friction, and could be handed off efficiently to developers.',
+      'Phase 1 had established the foundation, but the system needed to scale across the full HR lifecycle, from hiring to offboarding and long-term talent development. The challenge was to design 9 interconnected modules that felt cohesive, reduced user friction, and could be handed off efficiently to developers.',
     process: [
       {
         phase: '01',
         title: 'Handover & Discovery',
-        desc: 'Reviewed Phase 1 deliverables, existing components, and design tokens. Mapped out the 9 modules — Recruit, PMS, Training, Employee, Offboarding, Disciplinary Management, Competency Management, IDP, Talent Management, and Career Development — to understand scope and dependencies.',
+        desc: 'Reviewed Phase 1 deliverables, existing components, and design tokens. Mapped out the 9 modules to understand scope and dependencies: Recruit, PMS, Training, Employee, Offboarding, Disciplinary Management, Competency Management, IDP, Talent Management, and Career Development.',
       },
       {
         phase: '02',
@@ -215,9 +215,9 @@ const projects: Record<string, Project> = {
     platform: 'Web',
     image: PROJECT_IMG_STUDENT,
     overview:
-      'A full-stack web application designed to digitize student activity tracking for Lampang Technical College — supporting a database of 3,400 students and replacing a manual paper-based system. The system also integrates Google Analytics and Hotjar to monitor real-world usage, track user behavior, and inform future improvements.',
+      'A full-stack web application designed to digitize student activity tracking for Lampang Technical College, supporting a database of 3,400 students and replacing a manual paper-based system. The system also integrates Google Analytics and Hotjar to monitor real-world usage, track user behavior, and inform future improvements.',
     problem:
-      'Lampang Technical College\'s student activities department relied on physical notebooks and record books to manually track student participation each academic year — a process that was costly, inefficient, and error-prone.',
+      'Lampang Technical College\'s student activities department relied on physical notebooks and record books to manually track student participation each academic year, a process that was costly, inefficient, and error-prone.',
     solution: [
       'A scalable web-based system that digitally records student activity participation, built to handle 3,400+ student records with role-based access for students and staff.',
     ],
@@ -226,13 +226,13 @@ const projects: Record<string, Project> = {
       { title: 'Excel Import', desc: 'Upload and migrate student records from legacy spreadsheets directly into the system database.' },
       { title: '6-Digit Activity Code', desc: 'Staff generate a random 6-digit code per activity. Students enter the code to confirm their participation instantly.' },
       { title: 'Export Reports', desc: 'Download attendance and participation reports as PDF or Excel for record-keeping and administrative use.' },
-      { title: 'Google Analytics', desc: 'Tracks overall usage metrics — page views, session duration, and user flow — giving a high-level view of how the system is being used across the college.' },
-      { title: 'Hotjar', desc: 'Records heatmaps and session replays to understand exactly where users click, scroll, and drop off — helping identify UX issues and prioritize future improvements.' },
+      { title: 'Google Analytics', desc: 'Tracks overall usage metrics: page views, session duration, and user flow, giving a high-level view of how the system is being used across the college.' },
+      { title: 'Hotjar', desc: 'Records heatmaps and session replays to understand exactly where users click, scroll, and drop off, helping identify UX issues and prioritize future improvements.' },
     ],
     process: [
       { phase: '01', title: 'Requirements & System Flow', desc: 'Gathered requirements from the college to understand the scope and needed features. Created a high-level system flow diagram to present to the client and align on how the system would work.' },
       { phase: '02', title: 'Design', desc: 'Skipped Figma due to a 3-week deadline. Used Claude Design to plan layouts and component structure, then applied the Shadcn UI library to save time. Defined the Design System including component tokens in Claude Design before development.' },
-      { phase: '03', title: 'Development', desc: 'Built the full-stack application using Next.js, Supabase, and PostgreSQL — including authentication, real-time data, and Excel import/export. Integrated Google Analytics and Hotjar to track user behavior and identify areas for redesign.' },
+      { phase: '03', title: 'Development', desc: 'Built the full-stack application using Next.js, Supabase, and PostgreSQL, including authentication, real-time data, and Excel import/export. Integrated Google Analytics and Hotjar to track user behavior and identify areas for redesign.' },
       { phase: '04', title: 'Testing', desc: 'Designed AI-generated test cases covering all system scenarios. Any flow that failed a test case was flagged and fixed before delivery.' },
       { phase: '05', title: 'Delivery', desc: 'Handed off the completed system to Lampang Technical College for live deployment.' },
       { phase: '06', title: 'Analytics & Iteration', desc: 'Used GA and Hotjar data post-launch to identify UX issues, measure performance, and prioritize improvements for the next iteration.' },
@@ -253,7 +253,7 @@ const projects: Record<string, Project> = {
     },
     developmentSection: {
       title: 'Development',
-      desc: 'Built the full-stack application using Next.js, Supabase, and PostgreSQL — including authentication, real-time data, and Excel import/export. Integrated Google Analytics and Hotjar to track user behavior and identify areas for redesign.',
+      desc: 'Built the full-stack application using Next.js, Supabase, and PostgreSQL, including authentication, real-time data, and Excel import/export. Integrated Google Analytics and Hotjar to track user behavior and identify areas for redesign.',
     },
     testingSection: {
       title: 'Testing',
@@ -269,11 +269,11 @@ const projects: Record<string, Project> = {
       issues: [
         {
           title: 'Login Drop-off',
-          problem: 'The college required that student accounts be auto-created when importing a student list via Excel — avoiding any manual database setup. Students log in for the first time using their student ID and the default password "1234", then are prompted to set a new password. The original flow logged students out immediately after the password change, forcing them to log in again with the new credentials. This created a high drop-off rate and left many students confused.',
-          fix: 'Redesigned the flow so students remain logged in after changing their password. A popup prompts the change on first login — once confirmed, the session continues seamlessly without requiring a second login.',
+          problem: 'The college required that student accounts be auto-created when importing a student list via Excel, avoiding any manual database setup. Students log in for the first time using their student ID and the default password "1234", then are prompted to set a new password. The original flow logged students out immediately after the password change, forcing them to log in again with the new credentials. This created a high drop-off rate and left many students confused.',
+          fix: 'Redesigned the flow so students remain logged in after changing their password. A popup prompts the change on first login: once confirmed, the session continues seamlessly without requiring a second login.',
         },
         {
-          title: 'Web Performance — Logo File Size',
+          title: 'Web Performance: Logo File Size',
           problem: 'Hotjar Web Performance analysis revealed that the logo image was several MB in size. This caused slow initial page load times, especially for users on mobile networks with weaker connections.',
           fix: 'Compressed and optimized the logo asset to reduce file size significantly, improving load speed across all devices and network conditions.',
         },
@@ -308,7 +308,7 @@ const projects: Record<string, Project> = {
       'This was my first real-world UX/UI project, and it gave me valuable experience working as part of a team. I learned how to structure user flows, design responsive layouts, and think critically about improving long and complex processes.',
       'Since this was a live internship project, some parts of the data were not fully complete, and we didn\'t conduct usability testing at the time. However, it helped me realize how important user feedback is, and I plan to keep improving based on what I\'ve learned.',
     ],
-    result: 'This staged approach helped simplify a previously overwhelming 22-page Google Form. By collecting data progressively and only prompting document uploads from qualified applicants, the experience became more efficient and user-friendly — especially on mobile devices.',
+    result: 'This staged approach helped simplify a previously overwhelming 22-page Google Form. By collecting data progressively and only prompting document uploads from qualified applicants, the experience became more efficient and user-friendly, especially on mobile devices.',
     features: [
       { title: 'Job Recommendation System', desc: 'Suggests relevant job openings based on the candidate\'s selected field of interest during registration.', image: feature01 },
       { title: 'Job Search', desc: 'Allows users to search for jobs using filters such as location, department, and job type.', image: jobSearch02 },
@@ -401,7 +401,7 @@ const projects: Record<string, Project> = {
         {
           src: avgCompletionTime,
           label: 'Average Completion Time',
-          desc: 'The average time it took for participants to complete the task — from opening the prototype to successfully submitting a benefit request — was 1 minute and 38 seconds. This serves as a baseline for future redesigns, helping to measure improvement over time.',
+          desc: 'The average time it took for participants to complete the task, from opening the prototype to successfully submitting a benefit request, was 1 minute and 38 seconds. This serves as a baseline for future redesigns, helping to measure improvement over time.',
         },
         {
           src: taskSuccessRate,
@@ -623,7 +623,7 @@ const projects: Record<string, Project> = {
         'How might we make staying healthy feel fun and less forced?',
         'How might we encourage people who have failed before to try again with confidence?',
       ],
-      closing: 'These questions led us to brainstorm features that balance convenience, motivation, and education — forming the foundation for our app concept.',
+      closing: 'These questions led us to brainstorm features that balance convenience, motivation, and education, forming the foundation for our app concept.',
     },
     ideate: {
       intro: 'After defining key user needs and framing "How Might We" questions, we translated those insights into potential features. To prioritize, we used the Impact–Effort Matrix:',
@@ -661,7 +661,7 @@ const projects: Record<string, Project> = {
           ],
         },
       ],
-      closing: 'This method helps us validate ideas iteratively, keeping only the features that align with user goals and product vision — and removing or improving the ones that don\'t work.',
+      closing: 'This method helps us validate ideas iteratively, keeping only the features that align with user goals and product vision, and removing or improving the ones that don\'t work.',
     },
     prototype: {
       content: 'We used the Impact-Effort Matrix to categorize features of the food ordering app, making it easier to develop the Information Architecture (IA) flow.',
@@ -691,7 +691,7 @@ const projects: Record<string, Project> = {
       {
         phase: '03',
         title: 'Ideate',
-        desc: 'Brainstormed solutions focused on food discovery, customization, and loyalty — ultimately focusing on a simple browsing experience with filters for healthy categories and nearby restaurants.',
+        desc: 'Brainstormed solutions focused on food discovery, customization, and loyalty, ultimately focusing on a simple browsing experience with filters for healthy categories and nearby restaurants.',
       },
       {
         phase: '04',
@@ -826,7 +826,16 @@ export default function Overview() {
 
         {/* Hero image */}
         <FadeUp delay={0.15} className="ov-hero-img-wrap">
-          <HeroTilt src={project.image} alt={project.title} className="ov-hero-img" />
+          <HeroTilt
+            src={project.image}
+            alt={project.title}
+            className="ov-hero-img"
+            placeholder={
+              <div className="ov-hero-img project-card-placeholder" role="img" aria-label={project.title}>
+                <span>{project.title}</span><small>{t("Case study coming soon")}</small>
+              </div>
+            }
+          />
         </FadeUp>
       </section>
 
@@ -905,8 +914,8 @@ export default function Overview() {
       <section className="ov-process-section">
         <div className="ov-container">
           <FadeUp>
-            <p className="label-tag" style={{ color: '#FFDF9A' }}>{project.solution ? 'SOLUTION' : 'MY PROCESS'}</p>
-            <h2 className="ov-section-heading" style={{ color: '#FAF9F4' }}>{project.solution ? 'How We Solved It' : 'How I approached it'}</h2>
+            <p className="label-tag" style={{ color: 'var(--color-text-highlight)' }}>{project.solution ? 'SOLUTION' : 'MY PROCESS'}</p>
+            <h2 className="ov-section-heading" style={{ color: 'var(--color-text-on-inverse)' }}>{project.solution ? 'How We Solved It' : 'How I approached it'}</h2>
           </FadeUp>
           {!project.requirementsSection && (
             <div className="ov-process-grid">
@@ -992,7 +1001,7 @@ export default function Overview() {
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--color-border-default)' }}>
                 {project.defineSection.closing}
               </p>
             </FadeUp>
@@ -1051,7 +1060,7 @@ export default function Overview() {
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--color-border-default)' }}>
                 {project.hmw.closing}
               </p>
             </FadeUp>
@@ -1078,7 +1087,7 @@ export default function Overview() {
                 onClick={() => setLightboxImg(ideate1Img)}
               />
               <p className="ov-body-large" style={{ marginTop: 24, maxWidth: 720 }}>
-                {t("We took the challenges identified during the Define stage and reframed them as \"How Might We\" questions. From there, we brainstormed features that directly answer each question — then placed them in an Impact–Effort Matrix to prioritize what to build first.")}
+                {t("We took the challenges identified during the Define stage and reframed them as \"How Might We\" questions. From there, we brainstormed features that directly answer each question, then placed them in an Impact–Effort Matrix to prioritize what to build first.")}
               </p>
             </FadeUp>
 
@@ -1105,7 +1114,7 @@ export default function Overview() {
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--color-border-default)' }}>
                 {project.ideate.closing}
               </p>
             </FadeUp>
@@ -1525,7 +1534,7 @@ export default function Overview() {
             </FadeUp>
 
             <FadeUp delay={0.15}>
-              <p className="ov-body-large" style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+              <p className="ov-body-large" style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid var(--color-border-default)' }}>
                 {t("By designing for these three personas, I ensured the system would accommodate users with different motivations, digital habits, and benefit expectations.")}
               </p>
             </FadeUp>
@@ -1671,7 +1680,7 @@ export default function Overview() {
               </FadeUp>
             )}
             <FadeUp delay={0.15}>
-              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--border)' }}>
+              <p className="ov-body-large" style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--color-border-default)' }}>
                 {project.designSystem.closing}
               </p>
             </FadeUp>
@@ -1832,7 +1841,7 @@ export default function Overview() {
                   <p className="label-tag">{t("DESIGN SYSTEM")}</p>
                   <h2 className="ov-section-heading" style={{ marginBottom: 8 }}>{t("Explore the Component Library")}</h2>
                   <p className="ov-body-large" style={{ marginBottom: 24 }}>
-                    {t("Browse all 22+ components, design tokens, icons, and assets — documented and interactive on Storybook.")}
+                    {t("Browse all 22+ components, design tokens, icons, and assets, documented and interactive on Storybook.")}
                   </p>
                   <a href={project.storybookUrl} target="_blank" rel="noopener noreferrer" className="ov-storybook-btn">
                     {t("View Storybook")}
@@ -1843,7 +1852,7 @@ export default function Overview() {
                 </div>
                 <div className="ov-storybook-badge">
                   <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <rect width="40" height="40" rx="12" fill="#FF4785"/>
+                    <rect width="40" height="40" rx="12" style={{ fill: 'var(--color-bg-brand-storybook)' }}/>
                     <path d="M27.5 8.5H13C11.067 8.5 9.5 10.067 9.5 12V28C9.5 29.933 11.067 31.5 13 31.5H27C28.933 31.5 30.5 29.933 30.5 28V12.5L27.5 8.5Z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
                     <path d="M27.5 8.5V12.5H30.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M15 18.5H25M15 22.5H22" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
@@ -1875,7 +1884,9 @@ export default function Overview() {
                   </Link>
                 </div>
                 <div className="ov-next-img-wrap">
-                  <img src={nextProject.image} alt={nextProject.title} />
+                  {nextProject.image
+                    ? <img src={nextProject.image} alt={nextProject.title} />
+                    : <div className="project-card-placeholder" aria-hidden="true"><span>{nextProject.title}</span><small>{t("Case study coming soon")}</small></div>}
                 </div>
               </div>
             </FadeUp>
@@ -1889,13 +1900,13 @@ export default function Overview() {
           <div className="cta-box">
             <h2 className="cta-heading">{t("Design is how I think.")}<br />{t("Let's think together.")}</h2>
             <p className="cta-sub">
-              {t("Currently open to new opportunities — whether it's a product, a system, or an experience worth building.")}
+              {t("Currently open to new opportunities, whether it's a product, a system, or an experience worth building.")}
             </p>
             <div className="cta-actions">
               <a href="mailto:sakdidetsuttipol@hotmail.com" className="cta-email">
                 sakdidetsuttipol@<wbr />hotmail.com
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
-                  <path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="#1B1C19" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M1 6H15M15 6L10 1M15 6L10 11" style={{ stroke: 'var(--color-text-primary)' }} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </a>
               <div className="social-links">
@@ -1926,7 +1937,7 @@ export default function Overview() {
             </ul>
             <div className="footer-location">
               <svg width="10" height="13" viewBox="0 0 10 14" fill="none">
-                <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#555F6F"/>
+                <path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" style={{ fill: 'var(--color-text-muted)' }}/>
               </svg>
               {t("Based on Bangkok Thailand")}
             </div>

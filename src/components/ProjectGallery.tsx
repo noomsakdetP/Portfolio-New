@@ -16,6 +16,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import * as THREE from 'three'
 import { webglOK } from './three/shapes'
 import { translate, useLang, useT, type Lang } from '../i18n/lang'
+import { MUSEUM } from '../theme/museum'
 
 export type GalleryProject = { id: string; title: string; image: string; roles: string[]; desc: string }
 
@@ -45,8 +46,8 @@ function panelGeometry(w: number, h: number, r: number) {
 function placeholderTexture(title: string, comingSoon: string) {
   const c = document.createElement('canvas'); c.width = 1024; c.height = 640
   const x = c.getContext('2d')!
-  x.fillStyle = '#EAB308'; x.fillRect(0, 0, 1024, 640)
-  x.fillStyle = '#251A00'; x.font = '700 76px "Hanken Grotesk", sans-serif'
+  x.fillStyle = MUSEUM.bgAccent; x.fillRect(0, 0, 1024, 640)
+  x.fillStyle = MUSEUM.textOnAccent; x.font = '700 76px "Hanken Grotesk", sans-serif'
   const words = title.split(' '); let line = '', y = 300
   for (const w of words) { const t = line ? line + ' ' + w : w; if (x.measureText(t).width > 860) { x.fillText(line, 80, y); line = w; y += 90 } else line = t }
   x.fillText(line, 80, y)
@@ -111,7 +112,7 @@ function Panel({ p, i, tex, active, mobile, still, onOpen }: {
         onPointerOut={() => { setHover(false); document.body.style.cursor = '' }}
       >
         <mesh geometry={frame} position={[0, 0, -0.02]}>
-          <meshBasicMaterial color={i === active ? '#EAB308' : '#2E2F2A'} toneMapped={false} />
+          <meshBasicMaterial color={i === active ? MUSEUM.bgAccent : MUSEUM.bgInverseRaised} toneMapped={false} />
         </mesh>
         <mesh geometry={geo}>
           <meshBasicMaterial ref={mat} map={tex} transparent opacity={0.45} toneMapped={false} />
@@ -129,7 +130,7 @@ function Scene({ projects, active, mobile, still, onOpen, lang }: {
   const textures = useMemo(() => {
     let n = 0
     return projects.map(p => {
-      return prepare(p.image ? loaded[n++] : placeholderTexture(p.title, translate(lang, 'CASE STUDY — COMING SOON')))
+      return prepare(p.image ? loaded[n++] : placeholderTexture(p.title, translate(lang, 'CASE STUDY: COMING SOON')))
     })
   }, [projects, loaded, lang])
 
@@ -152,12 +153,12 @@ function Scene({ projects, active, mobile, still, onOpen, lang }: {
 
   return (
     <>
-      <fog attach="fog" args={['#1B1C19', 5, 22]} />
+      <fog attach="fog" args={[MUSEUM.bgInverse, 5, 22]} />
       {projects.map((p, i) => (
         <Panel key={p.id} p={p} i={i} tex={textures[i]} active={active} mobile={mobile} still={still} onOpen={onOpen} />
       ))}
       {/* floor line for depth */}
-      <gridHelper args={[60, 60, '#3A3B36', '#2A2B27']} position={[0, -1.6, -D * (projects.length / 2)]} />
+      <gridHelper args={[60, 60, MUSEUM.borderStrong, MUSEUM.bgInverseRaised]} position={[0, -1.6, -D * (projects.length / 2)]} />
     </>
   )
 }
@@ -217,7 +218,7 @@ export default function ProjectGallery({ projects }: { projects: GalleryProject[
             gl={{ antialias: !mobile, alpha: false }}
             camera={{ position: [0, 0, 6], fov: mobile ? 55 : 45 }}
             frameloop={visible ? 'always' : 'never'}
-            onCreated={({ gl }) => gl.setClearColor('#1B1C19')}
+            onCreated={({ gl }) => gl.setClearColor(MUSEUM.bgInverse)}
           >
             <Suspense fallback={null}>
               <Scene projects={projects} active={active} mobile={mobile} still={still} lang={lang} onOpen={id => navigate(`/projects/${id}`)} />

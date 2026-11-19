@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 import { roundRect } from './shapes'
+import { MUSEUM } from '../../theme/museum'
 
 export type Kind = 'color' | 'type' | 'space' | 'radius' | 'button' | 'toggle' | 'input'
 export type Token = {
@@ -17,20 +18,22 @@ export type Token = {
   mobile: boolean // show on mobile?
 }
 
+// Scene palette, from the Museum tokens. Keys are kept from the old palette so the
+// scenes don't need touching: "yellow" is the accent, "dark" the inverse, etc.
 export const C = {
-  yellow: '#EAB308',
-  dark: '#1B1C19',
-  cream: '#FAF9F4',
-  deep: '#251A00',
-  border: '#D3C5AC',
-  muted: '#555F6F',
-  white: '#FFFFFF',
+  yellow: MUSEUM.bgAccent,
+  dark: MUSEUM.bgInverse,
+  cream: MUSEUM.bgPage,
+  deep: MUSEUM.textOnAccent,
+  border: MUSEUM.borderDefault,
+  muted: MUSEUM.textMuted,
+  white: MUSEUM.bgCard,
 }
 
 export const TOKENS: Token[] = [
-  { id: 'yellow', kind: 'color', w: 1.15, h: 1.15, body: C.yellow, label: 'yellow/500', sub: '#EAB308', scatter: [-0.86, 0.58, 0.6], tilt: [0.25, 0.45, -0.18], slot: [0, 0], mobile: true },
-  { id: 'dark', kind: 'color', w: 1.15, h: 1.15, body: C.dark, label: 'dark/900', sub: '#1B1C19', scatter: [0.88, 0.74, 0.2], tilt: [-0.2, -0.5, 0.15], slot: [1, 0], mobile: true },
-  { id: 'cream', kind: 'color', w: 1.15, h: 1.15, body: C.cream, label: 'cream/50', sub: '#FAF9F4', scatter: [0.94, -0.1, 0.9], tilt: [0.1, -0.6, 0.2], slot: [2, 0], mobile: false },
+  { id: 'yellow', kind: 'color', w: 1.15, h: 1.15, body: C.yellow, label: 'ochre', sub: '#D9A066', scatter: [-0.86, 0.58, 0.6], tilt: [0.25, 0.45, -0.18], slot: [0, 0], mobile: true },
+  { id: 'dark', kind: 'color', w: 1.15, h: 1.15, body: C.dark, label: 'deep-umber', sub: '#2E241D', scatter: [0.88, 0.74, 0.2], tilt: [-0.2, -0.5, 0.15], slot: [1, 0], mobile: true },
+  { id: 'cream', kind: 'color', w: 1.15, h: 1.15, body: C.cream, label: 'plaster-ivory', sub: '#F0EAE1', scatter: [0.94, -0.1, 0.9], tilt: [0.1, -0.6, 0.2], slot: [2, 0], mobile: false },
   { id: 'type', kind: 'type', w: 1.15, h: 1.15, body: C.white, label: 'Aa', sub: 'Heading / 64', scatter: [-0.93, -0.08, 1.0], tilt: [-0.15, 0.55, 0.1], slot: [0, 1], mobile: true },
   { id: 'space', kind: 'space', w: 1.15, h: 1.15, body: C.white, label: 'space', sub: '8 · 16 · 24', scatter: [0.8, -0.72, 0.4], tilt: [0.3, -0.35, -0.12], slot: [1, 1], mobile: false },
   { id: 'radius', kind: 'radius', w: 1.15, h: 1.15, body: C.white, label: 'radius', sub: '8px', scatter: [-0.35, 0.92, 0.1], tilt: [0.35, 0.2, 0.2], slot: [2, 1], mobile: false },
@@ -65,7 +68,7 @@ export function drawFace(t: Token, cv: HTMLCanvasElement) {
     }
     case 'type': {
       x.font = `italic 700 ${118 * s}px "Hanken Grotesk", sans-serif`
-      x.fillStyle = '#785A00'
+      x.fillStyle = MUSEUM.textAccent
       x.fillText('Aa', 22 * s, 140 * s)
       x.fillStyle = C.muted
       x.font = `500 ${18 * s}px Inter, sans-serif`
@@ -109,7 +112,7 @@ export function drawFace(t: Token, cv: HTMLCanvasElement) {
       x.strokeStyle = C.border
       x.lineWidth = 6 * s
       x.save(); x.translate(3 * s, 3 * s); roundRect(x, W - 6 * s, H - 6 * s, r - 3 * s); x.stroke(); x.restore()
-      x.fillStyle = '#9AA1AC'
+      x.fillStyle = MUSEUM.textOnInverseMuted
       x.font = `400 ${24 * s}px Inter, sans-serif`
       x.textBaseline = 'middle'
       x.fillText(t.label!, 34 * s, H / 2)

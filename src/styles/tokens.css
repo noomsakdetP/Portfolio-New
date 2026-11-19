@@ -1,0 +1,146 @@
+/* Generated from Figma "playground": collections "Portfolio Primitives" and "Portfolio Tokens".
+   Default theme = Museum. Add data-theme="light" on <html> for the old Light palette.
+   Use semantic tokens (--color-*) in components; primitives (--p-*) only feed them. */
+
+:root {
+  /* Primitives */
+  --p-cream: #FAF9F4;
+  --p-ink: #1B1C19;
+  --p-white: #FFFFFF;
+  --p-yellow-200: #FFDF9A;
+  --p-yellow-500: #EAB308;
+  --p-yellow-700: #785A00;
+  --p-yellow-800: #5A4300;
+  --p-yellow-950: #251A00;
+  --p-sand-300: #D3C5AC;
+  --p-sand-500: #817660;
+  --p-neutral-50: #F5F4EF;
+  --p-neutral-100: #E9E8E3;
+  --p-graphite: #2A2B27;
+  --p-slate-500: #596373;
+  --p-slate-600: #555F6F;
+  --p-green-500: #22C55E;
+  --p-red-50: #FFF5F5;
+  --p-red-200: #FFCDD2;
+  --p-green-50: #F0FDF4;
+  --p-green-300: #86EFAC;
+  --p-pink-500: #FF4785;
+  --p-stone-400: #B9B6AC;
+  --p-museum-plaster-ivory: #F0EAE1;
+  --p-museum-fresco-plaster: #ECE3DA;
+  --p-museum-warm-stone: #D7D2C9;
+  --p-museum-card: #FAF6EF;
+  --p-museum-deep-umber: #2E241D;
+  --p-museum-umber-raised: #3E3128;
+  --p-museum-burnt-umber: #7F5B46;
+  --p-museum-umber-soft: #5A4334;
+  --p-museum-nav: #7A6A5C;
+  --p-museum-madder-red: #A64B3C;
+  --p-museum-madder-deep: #7E3428;
+  --p-museum-ochre: #D9A066;
+  --p-museum-terracotta-light: #EBCFAE;
+  --p-museum-sage: #8FA08A;
+  --p-museum-sky: #A9B9BC;
+  --p-museum-crack: #D7C9B5;
+  --p-museum-crack-dark: #8A7A68;
+  --p-museum-ivory-muted: #BFB3A3;
+  --p-museum-gold: #B8893A;
+
+  /* Spacing (px) */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-120: 120px;
+  --space-128: 128px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-lg-plus: 20px;
+  --radius-xl: 24px;
+  --radius-2xl: 64px;
+  --radius-full: 9999px;
+
+  /* Semantic: Museum (default) */
+  --color-bg-page: var(--p-museum-plaster-ivory);
+  --color-bg-surface: var(--p-museum-fresco-plaster);
+  --color-bg-surface-strong: var(--p-museum-warm-stone);
+  --color-bg-card: var(--p-museum-card);
+  --color-bg-inverse: var(--p-museum-deep-umber);
+  --color-bg-inverse-raised: var(--p-museum-umber-raised);
+  --color-bg-accent: var(--p-museum-ochre);
+  --color-bg-accent-strong: var(--p-museum-madder-red);
+  --color-bg-accent-cool: var(--p-museum-sky);
+  --color-bg-highlight: var(--p-museum-terracotta-light);
+  --color-bg-success: var(--p-museum-sage);
+  --color-bg-success-subtle: var(--p-green-50);
+  --color-bg-danger-subtle: var(--p-red-50);
+  --color-bg-brand-storybook: var(--p-pink-500);
+  --color-text-primary: var(--p-museum-deep-umber);
+  --color-text-muted: var(--p-museum-burnt-umber);
+  --color-text-nav: var(--p-museum-nav);
+  --color-text-on-inverse: var(--p-museum-plaster-ivory);
+  --color-text-on-inverse-muted: var(--p-museum-ivory-muted);
+  --color-text-accent: var(--p-museum-madder-red);
+  --color-text-highlight: var(--p-museum-terracotta-light);
+  --color-text-on-accent: var(--p-museum-deep-umber);
+  --color-text-on-accent-muted: var(--p-museum-umber-soft);
+  --color-border-default: var(--p-museum-crack);
+  --color-border-strong: #8A7A68;
+  --color-border-inverse: var(--p-museum-crack-dark);
+  --color-border-accent: var(--p-museum-madder-red);
+  --color-border-accent-strong: var(--p-museum-madder-deep);
+  --color-border-on-accent: var(--p-museum-umber-soft);
+  --color-border-danger-subtle: var(--p-red-200);
+  --color-border-success-subtle: var(--p-green-300);
+  --color-overlay-white: #FAF6EF;
+  --color-overlay-black: #2E241D;
+  --color-mascot-blush: #F4A9A0;
+  --color-mascot-eye-shine: #FFFFFF;
+  --color-mascot-cat-stripe: #B9763C;
+  --color-mascot-our-cat-fur: #F7EFE3;
+  --color-mascot-our-cat-points: #E9B88A;
+  --color-mascot-our-cat-eye: #9CC3E4;
+  --color-mascot-our-cat-nose: #E58E8C;
+  --color-mascot-our-cat-tongue: #F08A98;
+}
+
+[data-theme="light"] {
+  --color-bg-page: var(--p-cream);
+  --color-bg-surface: var(--p-neutral-50);
+  --color-bg-surface-strong: var(--p-neutral-100);
+  --color-bg-card: var(--p-white);
+  --color-bg-inverse: var(--p-ink);
+  --color-bg-inverse-raised: var(--p-graphite);
+  --color-bg-accent: var(--p-yellow-500);
+  --color-bg-accent-strong: var(--p-yellow-700);
+  --color-bg-accent-cool: var(--p-slate-500);
+  --color-bg-highlight: var(--p-yellow-200);
+  --color-bg-success: var(--p-green-500);
+  --color-text-primary: var(--p-ink);
+  --color-text-muted: var(--p-slate-600);
+  --color-text-nav: var(--p-slate-500);
+  --color-text-on-inverse: var(--p-cream);
+  --color-text-on-inverse-muted: var(--p-stone-400);
+  --color-text-accent: var(--p-yellow-700);
+  --color-text-highlight: var(--p-yellow-200);
+  --color-text-on-accent: var(--p-yellow-950);
+  --color-text-on-accent-muted: var(--p-yellow-800);
+  --color-border-default: var(--p-sand-300);
+  --color-border-strong: #817660;
+  --color-border-inverse: var(--p-sand-500);
+  --color-border-accent: var(--p-yellow-500);
+  --color-border-accent-strong: var(--p-yellow-700);
+  --color-border-on-accent: var(--p-yellow-800);
+  --color-overlay-white: #FFFFFF;
+  --color-overlay-black: #000000;
+}
