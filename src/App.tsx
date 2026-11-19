@@ -4,20 +4,19 @@ import { useT } from './i18n/lang'
 import NavMenu from './components/NavMenu'
 import { Link } from 'react-router-dom'
 import './App.css'
-import heroImg from './assets/Rectangle.png'
 import projectImg from './assets/project-banner.png'
 import { HARD_SKILLS, SOFT_SKILLS } from './data/skills'
 import { useScrollTimeline } from './hooks/useScrollTimeline'
 import { useMagnetic } from './hooks/useMagnetic'
 import { useExplodeOnScroll } from './hooks/useExplodeOnScroll'
 import FooterCube from './components/FooterCube'
+// Light wrapper: static WebP poster first; it lazy-loads the Rive runtime itself.
+import HeroFresco from './components/HeroFresco'
 
-// 3D token scene is code-split: three.js only downloads after the page renders
-const HeroTokens = lazy(() => import('./components/HeroTokens'))
+// 3D scenes are code-split: three.js only downloads after the page renders
 const SkillsOrb = lazy(() => import('./components/SkillsOrb'))
 const CtaTokens = lazy(() => import('./components/CtaTokens'))
 
-const HERO_IMG = heroImg
 const PROJECT_IMG = projectImg
 
 function useFadeUp() {
@@ -74,54 +73,23 @@ export default function App() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="hero-section" id="about">
-        <div className="hero-inner">
-          <FadeUp className="hero-text">
-            <div className="badge">
-              <span className="badge-dot" />
-              {t("UI Designer & Design Technologist")}
-            </div>
-            <h1 className="hero-heading">
-              {t("Hey There,")}<br />
-              {t("I'm ")}<em className="accent">Sakdidet</em>
-            </h1>
-            <p className="hero-sub">
-              {t("Bridging design decisions into real product. Specialized in Design System — from Figma token to production-ready components that teams can ship.")}
-            </p>
-            <a href="#" className="cv-badge" style={{ display: 'inline-flex', marginBottom: 16 }}>
-              <span className="cv-dot" />
-              <span className="cv-text">{t("Download My CV")}</span>
-            </a>
-            <a href="mailto:sakdidetsuttipol@hotmail.com" className="hero-email-link">
-              sakdidetsuttipol@<wbr />hotmail.com
-              <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
-                <path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="#1B1C19" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-          </FadeUp>
-          <FadeUp className="hero-image" delay={0.15}>
-            <div className="hero-photo-wrap">
-              <div
-                className="hero-photo-card"
-                onMouseMove={e => {
-                  const card = e.currentTarget
-                  const rect = card.getBoundingClientRect()
-                  const x = (e.clientX - rect.left) / rect.width - 0.5
-                  const y = (e.clientY - rect.top) / rect.height - 0.5
-                  card.style.transform = `rotate(2deg) perspective(600px) rotateY(${x * 14}deg) rotateX(${-y * 14}deg) scale(1.03)`
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.transform = 'rotate(2deg)'
-                }}
-              >
-                <img src={HERO_IMG} alt="Sakdidet" />
-              </div>
-              <Suspense fallback={null}>
-                <HeroTokens />
-              </Suspense>
-            </div>
-          </FadeUp>
+      {/* Figma: playground › Hero (full-bleed), node 364:2555 */}
+      <section className="hero-section hero--fresco" id="about">
+        <div className="hero-art">
+          <HeroFresco />
+          <div className="hero-legibility" aria-hidden="true" />
+          <a href="#projects" className="hero-scroll-cue" aria-label={t("Scroll to projects")}>
+            <span className="hero-scroll-label">{t("Scroll")}</span>
+            <span className="hero-scroll-thread" />
+          </a>
         </div>
+        <FadeUp className="hero-float">
+          <h1 className="hero-float-heading">
+            {t("Hey There,")}<br />
+            {t("I'm ")}<em className="hero-float-name">Sakdidet</em>
+          </h1>
+          <p className="hero-float-badge">{t("UI Designer & Design Technologist")}</p>
+        </FadeUp>
       </section>
 
       {/* ── PROJECTS ── */}

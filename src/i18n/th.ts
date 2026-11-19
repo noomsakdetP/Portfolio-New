@@ -13,6 +13,8 @@ export const TH: Record<string, string> = {
   "I'm ": "ผม ",
   "Bridging design decisions into real product. Specialized in Design System — from Figma token to production-ready components that teams can ship.": "เปลี่ยนการตัดสินใจด้านดีไซน์ให้กลายเป็นโปรดักต์จริง เชี่ยวชาญด้าน Design System ตั้งแต่ token ใน Figma ไปจนถึง component ที่พร้อมใช้งานจริงและทีมนำไปพัฒนาต่อได้ทันที",
   "Download My CV": "ดาวน์โหลด CV",
+  "Scroll": "เลื่อนลง",
+  "Scroll to projects": "เลื่อนไปที่โปรเจกต์",
   "My Project": "โปรเจกต์ของฉัน",
   "VIEW ALL PROJECTS": "ดูโปรเจกต์ทั้งหมด",
   "Save changes": "บันทึกการเปลี่ยนแปลง",

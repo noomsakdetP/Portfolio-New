@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.0",
+    "@rive-app/react-webgl2": "4.38.1",
+    "@rive-app/webgl2": "2.49.2",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.17.0",

@@ -1,0 +1,63 @@
+{
+  "canvas": {
+    "width": 1672,
+    "height": 941,
+    "note": "All three PNGs are full canvas size. Place each at x=0, y=0 in this order: bg-no-arms, arm-man, arm-cat."
+  },
+  "layers": [
+    "bg-no-arms.png",
+    "arm-man.png",
+    "arm-cat.png"
+  ],
+  "bones": {
+    "man": {
+      "shoulder": [
+        396,
+        446
+      ],
+      "elbow": [
+        500,
+        420
+      ],
+      "wrist": [
+        615,
+        350
+      ],
+      "fingertip": [
+        738,
+        385
+      ],
+      "rest_rotation_range_deg": [
+        -2,
+        3
+      ]
+    },
+    "cat": {
+      "shoulder": [
+        1035,
+        372
+      ],
+      "elbow": [
+        930,
+        362
+      ],
+      "wrist": [
+        842,
+        360
+      ],
+      "paw_tip": [
+        772,
+        378
+      ],
+      "rest_rotation_range_deg": [
+        -10,
+        6
+      ]
+    }
+  },
+  "animation_idea": {
+    "idle": "both arms breathe: man 0 to -1 deg, cat 0 to 1 deg, 3s ease-in-out loop",
+    "swat": "cat winds up -10 deg (0.25s), swats +6 deg (0.12s, overshoot), returns 0 (0.4s); man flinches +3 deg right after the swat hits, returns 0",
+    "trigger": "hover or tap on the cat; play swat once every ~6s while idle on touch devices"
+  }
+}
