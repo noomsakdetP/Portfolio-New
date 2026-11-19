@@ -4,7 +4,6 @@ import { useT } from './i18n/lang'
 import NavMenu from './components/NavMenu'
 import NavLogoMark, { NAV_LOGO_LABEL } from './components/NavLogo'
 import './App.css'
-import { HARD_SKILLS, SOFT_SKILLS } from './data/skills'
 import { useMagnetic } from './hooks/useMagnetic'
 // Light wrapper: static WebP poster first; it lazy-loads the Rive runtime itself.
 import HeroFresco from './components/HeroFresco'
@@ -14,10 +13,10 @@ import WhatIDo from './components/home/WhatIDo'
 import Impact from './components/home/Impact'
 import Experience from './components/home/Experience'
 import MyProject from './components/home/MyProject'
+import Skills from './components/home/Skills'
 import { useCloudRise } from './hooks/useCloudRise'
 
 // 3D scenes are code-split: three.js only downloads after the page renders
-const SkillsOrb = lazy(() => import('./components/SkillsOrb'))
 const CtaTokens = lazy(() => import('./components/CtaTokens'))
 
 
@@ -108,50 +107,8 @@ export default function App() {
       {/* My Project: the featured project (Figma 364:2680) */}
       <MyProject />
 
-      {/* ── SKILLS ── */}
-      <section className="skills-section" id="skills">
-        <div className="skills-inner">
-          <FadeUp>
-            <div className="skills-header">
-              <p className="label-tag">{t("MY EXPERTISE")}</p>
-              <h2 className="section-heading">{t("Skills & Capabilities")}</h2>
-            </div>
-          </FadeUp>
-          <Suspense fallback={null}>
-            <SkillsOrb />
-          </Suspense>
-          <div className="skills-grid">
-            <FadeUp>
-              <div className="skills-col-title">
-                <span className="skills-col-icon">🎨</span>
-                <h3 className="skills-col-heading">{t("Hard Skills")}</h3>
-              </div>
-              <div className="skill-cards">
-                {HARD_SKILLS.map(s => (
-                  <div key={s.title} className="skill-card hard">
-                    <p className="skill-card-title">{t(s.title)}</p>
-                    <p className="skill-card-desc">{t(s.desc)}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeUp>
-            <FadeUp delay={0.15}>
-              <div className="skills-col-title">
-                <span className="skills-col-icon">🧠</span>
-                <h3 className="skills-col-heading">{t("Soft Skills")}</h3>
-              </div>
-              <div className="skill-cards">
-                {SOFT_SKILLS.map(s => (
-                  <div key={s.title} className="skill-card soft">
-                    <p className="skill-card-title">{t(s.title)}</p>
-                    <p className="skill-card-desc">{t(s.desc)}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </section>
+      {/* Skills & Capabilities: card decks (Figma 364:2704) */}
+      <Skills />
 
       {/* ── CTA ── */}
       <div className="cta-wrapper">

@@ -22,7 +22,7 @@ import cloudImg from '../assets/hero/cloud.webp'
  * (rive/hero-fresco: `rive . --publish=local`). While false, only the static WebP shows
  * and the Rive chunk, wasm and .riv are never downloaded.
  */
-export const HERO_ANIMATED = false
+export const HERO_ANIMATED = true
 
 const HeroFrescoRive = lazy(() => import('./HeroFrescoRive'))
 

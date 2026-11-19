@@ -161,88 +161,7 @@
 /* Hide on mobile / when columns stack */
 .project-card-desc { font-size: 15px; line-height: 1.5; color: var(--color-text-muted); }
 
-/* ─── SKILLS SECTION ─── */
-.skills-section { background: var(--color-bg-page); padding: 120px 0; }
-.skills-inner { max-width: 1280px; margin: 0 auto; padding: 0 80px; }
-.skills-header { text-align: center; margin-bottom: 64px; }
-.skills-header .label-tag { display: block; text-align: center; }
-.skills-header .section-heading { margin-bottom: 0; }
-.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-.skills-col-title { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-.skills-col-icon { font-size: 22px; }
-.skills-col-heading {
-  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
-  font-weight: 600;
-  font-size: 32px;
-  color: var(--color-text-primary);
-}
-.skill-cards { display: flex; flex-direction: column; gap: 16px; }
-.skill-card {
-  border: 1px solid var(--color-border-default);
-  border-radius: 16px;
-  padding: 24px 25px;
-}
-.skill-card.hard { background: var(--color-bg-surface); }
-.skill-card.soft { background: var(--color-overlay-white); }
-.skill-card-title {
-  font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  color: var(--color-text-primary);
-  margin-bottom: 4px;
-}
-.skill-card-desc { font-size: 15px; line-height: 1.5; color: var(--color-text-muted); }
-
 /* the hover label now lives on the top layer */
-
-/* ─── SKILLS 3D ORB (src/components/SkillsOrb.tsx) ─── */
-.skills-orb {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  align-items: center;
-  gap: 32px;
-  margin: -24px 0 72px;
-}
-.skills-orb-stage { height: 460px; }
-.skills-orb-caption { max-width: 380px; }
-.skills-orb-kind {
-  display: inline-block;
-  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  border-radius: 9999px;
-  margin-bottom: 16px;
-}
-.skills-orb-kind.hard { background: var(--color-bg-accent); color: var(--color-text-on-accent); }
-.skills-orb-kind.soft { background: var(--color-overlay-white); color: var(--color-text-primary); border: 1px solid var(--color-border-default); }
-.skills-orb-title {
-  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 1.15;
-  color: var(--color-text-primary);
-  margin-bottom: 12px;
-}
-.skills-orb-desc { font-size: 17px; line-height: 1.6; color: var(--color-text-muted); min-height: 3.2em; }
-.skills-orb-hint {
-  margin-top: 24px;
-  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--color-text-nav);
-}
-@media (max-width: 860px) {
-  .skills-orb { grid-template-columns: 1fr; gap: 8px; margin: -32px 0 48px; }
-  .skills-orb-stage { height: 340px; }
-  .skills-orb-caption { max-width: none; text-align: center; }
-  .skills-orb-title { font-size: 26px; }
-  .skills-orb-desc { font-size: 15px; }
-}
 
 /* ─── CTA SECTION ─── */
 .cta-wrapper { padding: 0 80px 120px; }
@@ -356,10 +275,10 @@
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 1100px) {
- .navbar-inner, .skills-inner, .footer-inner, .cta-wrapper { padding-left: 40px; padding-right: 40px; }
+ .navbar-inner, .footer-inner, .cta-wrapper { padding-left: 40px; padding-right: 40px; }
 }
 @media (max-width: 860px) {
- .hero-inner, .skills-grid { grid-template-columns: 1fr; }
+ .hero-inner { grid-template-columns: 1fr; }
   .hero-image { order: -1; }
   .navbar-inner { padding: 16px 24px; }
   .nav-links { display: none; }
@@ -410,10 +329,6 @@
   .hero-section { padding-top: 104px; padding-bottom: 72px; }
   .hero-inner { min-height: 0; gap: 24px; padding: 0 24px; }
 
- .skills-section { padding-top: 80px; padding-bottom: 80px; }
- .skills-inner { padding-left: 24px; padding-right: 24px; gap: 48px; }
-  .skills-header { margin-bottom: 40px; }
-  .skills-col-heading { font-size: 26px; }
 }
 @media (max-width: 560px) {
  .hero-heading, .section-heading { font-size: 36px; letter-spacing: -0.8px; }
@@ -447,7 +362,7 @@
 /* Thai needs more line-height for vowels/tone marks, and no negative tracking */
 :lang(th) .hero-heading, :lang(th) .section-heading,
 :lang(th) .cta-heading, :lang(th) .detail-heading, :lang(th) .ov-title, :lang(th) .ov-section-heading,
-:lang(th) .gallery3d-title, :lang(th) .skills-orb-title,
+:lang(th) .gallery3d-title,
 :lang(th) .ov-next-title, :lang(th) .detail-all-heading {
   line-height: 1.35;
   letter-spacing: 0;
@@ -461,8 +376,7 @@
 
 /* ═══ NARROW-SCREEN SAFETY (≤ 400px, e.g. small phones / split screens) ═══ */
 /* grid/flex children may shrink below their content width (stops long e-mails & canvases widening the page) */
- .hero-inner > *, .skills-grid > *, .skills-orb > * { min-width: 0; }
-.skills-orb-stage { overflow: hidden; }
+ .hero-inner > * { min-width: 0; }
  .cta-email { overflow-wrap: break-word; max-width: 100%; } /* e-mail breaks after "@" (<wbr>) on very small screens */
 .badge { max-width: 100%; }
 
@@ -472,14 +386,13 @@
 
   .lang-toggle span { padding: 5px 7px; }
   .nav-menu-btn { width: 40px; height: 40px; padding: 0 10px; }
- .hero-inner, .skills-inner { padding-left: 16px; padding-right: 16px; }
+ .hero-inner { padding-left: 16px; padding-right: 16px; }
  .hero-heading, .section-heading { font-size: 32px; }
   .badge { font-size: 11px; padding: 6px 12px; }
   .cta-wrapper { padding: 0 16px 64px; }
   .cta-box { padding: 48px 18px; border-radius: 24px; }
   .cta-heading { font-size: 28px; }
   .cta-email { font-size: 14px; }
-  .skills-orb-stage { height: 300px; }
 }
 
 /* ═══ HERO FRESCO — Figma "Hero (full-bleed)" (playground, node 364:2555) ═══
