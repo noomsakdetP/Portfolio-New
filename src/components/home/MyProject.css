@@ -1,0 +1,183 @@
+/* ═══ MY PROJECT (single): Figma 364:2680 (1440 frame: padding 120 160, gap 80,
+   bg/inverse; grid = 731 × 600 image + info, 48px apart). Tapes, note and arrow are
+   anchored to the image so they stay with it when the layout reflows. ═══ */
+.pj {
+  background: var(--color-bg-inverse);
+  padding: clamp(72px, 8.333vw, 120px) clamp(16px, 11.111vw, 160px);
+}
+.pj-inner { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 80px; }
+
+/* header (364:2681) */
+.pj-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.pj-title {
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 4.444vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-on-inverse);
+}
+:lang(th) .pj-title { letter-spacing: 0; line-height: 1.3; }
+.pj-view-all {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700; font-size: 12px; line-height: 1.3; letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-text-on-inverse);
+  text-decoration: none;
+}
+.pj-view-all-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 9999px;
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);      /* arrow: text/primary, as in Figma */
+  transition: transform 0.2s;
+}
+.pa-stroke-current { stroke: currentColor; }
+.pa-stroke-on-inverse { stroke: var(--color-text-on-inverse); }
+.pa-stroke-ochre { stroke: var(--color-bg-accent); }
+.pj-arrow-icon { width: 14px; height: 14px; }
+.pj-view-all:hover .pj-view-all-icon { transform: translateX(3px); }
+
+/* grid (364:2688) */
+.pj-grid { display: grid; grid-template-columns: 731fr 341fr; column-gap: 48px; align-items: stretch; }
+
+.pj-image-wrap { position: relative; min-width: 0; }
+.pj-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 731 / 600;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-bg-inverse-raised);
+  text-decoration: none;
+}
+.pj-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* hover scrim: keeps the cream label readable over light screenshots */
+.pj-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--color-overlay-black) 0%, transparent) 45%,
+    color-mix(in srgb, var(--color-overlay-black) 80%, transparent) 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.pj-image:hover::after,
+.pj-grid:has(.btn-view-project:focus-visible) .pj-image::after { opacity: 1; }
+.pj-hover-label { z-index: 1; }
+.pj-image-slot {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700; font-size: 11px; line-height: 1.3; letter-spacing: 1.2px;
+  text-align: center;
+  color: var(--color-text-nav);
+}
+/* hover label (364:2691, hidden in Figma): tag + title, bottom-left */
+.pj-hover-label {
+  position: absolute;
+  left: 40px;
+  bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.pj-hover-tag {
+  padding: 4px 16px;
+  border-radius: 9999px;
+  background: var(--color-bg-accent-strong);
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700; font-size: 12px; line-height: 1.3; letter-spacing: 1.2px;
+  color: var(--color-text-on-inverse);
+}
+.pj-hover-title {
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 600; font-size: 36px; line-height: 1.1;
+  color: var(--color-text-on-inverse);
+}
+.pj-image:hover .pj-hover-label,
+.pj-grid:has(.btn-view-project:focus-visible) .pj-hover-label { opacity: 1; transform: none; }
+
+/* washi tape (84 × 26, dashed), positioned from the image's corners */
+.pj-tape {
+  position: absolute;
+  z-index: 2;
+  width: 84px;
+  height: 26px;
+  background: var(--color-bg-highlight);
+  border: 1px dashed var(--color-border-default);
+  pointer-events: none;
+}
+.pj-tape--left { left: -25.6px; top: -1.6px; transform: rotate(12deg); }
+.pj-tape--right { right: -21.5px; top: -18.7px; transform: rotate(-9deg); }
+
+/* "my favourite one" + arrow, above the image (Figma: note x 458, y 196; arrow x 360, y 200) */
+.pj-note {
+  position: absolute;
+  z-index: 2;
+  left: 300px;
+  top: -68px;
+  font-family: 'Architects Daughter', 'IBM Plex Sans Thai', cursive;
+  font-size: 26px; line-height: 1.3; letter-spacing: 0.5px;
+  white-space: nowrap;
+  color: var(--color-text-on-inverse);
+  transform: rotate(3deg);
+  pointer-events: none;
+}
+.pj-arrow-favourite {
+  position: absolute;
+  z-index: 2;
+  left: 200px;
+  top: -70px;
+  width: 130px;
+  height: 126px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* info (364:2696) */
+.pj-info { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 48px; min-width: 0; }
+.pj-block {
+  width: 100%;
+  display: flex; flex-direction: column; gap: 16px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--color-border-strong);
+}
+.pj-block-title {
+  position: relative;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 600; font-size: 32px; line-height: 1.2;
+  color: var(--color-text-highlight);
+}
+.pj-underline { position: absolute; left: 0; top: 36px; height: 12px; overflow: visible; }
+.pj-block:first-child .pj-underline { width: 128px; }
+.pj-block:nth-child(2) .pj-underline { width: 111px; }
+.pj-block-body { font-size: 16px; line-height: 1.5; color: var(--color-text-on-inverse); }
+
+/* ── narrower: image on top, text below ── */
+@media (max-width: 1000px) {
+  .pj-grid { grid-template-columns: 1fr; row-gap: 48px; }
+  .pj-info { gap: 40px; }
+}
+@media (max-width: 560px) {
+  .pj-inner { gap: 64px; }
+  .pj-note { left: auto; right: 8px; top: -56px; font-size: 22px; }
+  .pj-arrow-favourite { display: none; }
+  .pj-hover-label { left: 20px; bottom: 24px; }
+  .pj-hover-title { font-size: 24px; }
+  .pj-block-title { font-size: 28px; }
+  .pj-underline { top: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pj-hover-label, .pj-view-all-icon { transition: none; }
+}

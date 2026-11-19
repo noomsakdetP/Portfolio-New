@@ -3,12 +3,9 @@ import LangToggle from './components/LangToggle'
 import { useT } from './i18n/lang'
 import NavMenu from './components/NavMenu'
 import NavLogoMark, { NAV_LOGO_LABEL } from './components/NavLogo'
-import { Link } from 'react-router-dom'
 import './App.css'
-import projectImg from './assets/project-banner.png'
 import { HARD_SKILLS, SOFT_SKILLS } from './data/skills'
 import { useMagnetic } from './hooks/useMagnetic'
-import { useExplodeOnScroll } from './hooks/useExplodeOnScroll'
 // Light wrapper: static WebP poster first; it lazy-loads the Rive runtime itself.
 import HeroFresco from './components/HeroFresco'
 import CurtainLoader from './components/CurtainLoader'
@@ -16,13 +13,13 @@ import WallLabel from './components/home/WallLabel'
 import WhatIDo from './components/home/WhatIDo'
 import Impact from './components/home/Impact'
 import Experience from './components/home/Experience'
+import MyProject from './components/home/MyProject'
 import { useCloudRise } from './hooks/useCloudRise'
 
 // 3D scenes are code-split: three.js only downloads after the page renders
 const SkillsOrb = lazy(() => import('./components/SkillsOrb'))
 const CtaTokens = lazy(() => import('./components/CtaTokens'))
 
-const PROJECT_IMG = projectImg
 
 function useFadeUp() {
   const ref = useRef<HTMLDivElement>(null)
@@ -52,7 +49,6 @@ export default function App() {
   const t = useT()
   const emailRef = useMagnetic<HTMLAnchorElement>(0.3)
   const linkedinRef = useMagnetic<HTMLAnchorElement>(0.45, 60)
-  const explodeRef = useExplodeOnScroll<HTMLDivElement>()
   const introRef = useCloudRise<HTMLDivElement>()
 
   return (
@@ -106,79 +102,11 @@ export default function App() {
       {/* Impact: What the Design System changed (Figma 364:2618) */}
       <Impact />
 
-      {/* ── PROJECTS ── */}
-      <section className="projects-section" id="projects">
-        <div className="projects-inner">
-          <FadeUp>
-            <div className="section-header">
-              <h2 className="section-heading-dark">{t("My Project")}</h2>
-              <Link to="/projects" className="view-all-btn">
-                {t("VIEW ALL PROJECTS")}
-                <span className="view-all-icon">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M1 7H13M13 7L8 2M13 7L8 12" style={{ stroke: 'var(--color-text-on-inverse)' }} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </Link>
-            </div>
-          </FadeUp>
-          <FadeUp delay={0.1}>
-            <div className="project-grid">
-              {/* Exploded view: tokens → UI → grid → components, driven by scroll (useExplodeOnScroll) */}
-              <div className="project-image-col" ref={explodeRef}>
-                <div className="pj-stack">
-                  <div className="pj-layer pj-tokens" aria-hidden="true">
-                    <span className="pj-swatch" style={{ background: 'var(--color-bg-accent)' }} />
-                    <span className="pj-swatch" style={{ background: 'var(--color-text-accent)' }} />
-                    <span className="pj-swatch" style={{ background: 'var(--color-bg-page)' }} />
-                    <span className="pj-swatch" style={{ background: 'var(--color-border-default)' }} />
-                    <span className="pj-aa">{t("Aa")}</span>
-                    <span className="pj-tag">{t("01 · Tokens")}</span>
-                  </div>
-                  <div className="pj-layer pj-screen">
-                    <img src={PROJECT_IMG} alt={t("HR Design System")} />
-                    <div className="project-image-overlay" />
-                  </div>
-                  <div className="pj-layer pj-grid" aria-hidden="true">
-                    <span className="pj-tag">{t("02 · Layout grid")}</span>
-                  </div>
-                  <div className="pj-layer pj-comps" aria-hidden="true">
-                    <span className="pj-chip pj-btn">{t("Save changes")}</span>
-                    <span className="pj-chip pj-input">{t("Search employee…")}</span>
-                    <span className="pj-chip pj-badge">{t("● Active")}</span>
-                    <span className="pj-chip pj-toggle"><i /></span>
-                    <span className="pj-tag">{t("03 · Components")}</span>
-                  </div>
-                  <div className="pj-layer pj-top">
-                    <div className="project-image-label">
-                      <span className="project-tag">{t("FIGMA · ANGULAR")}</span>
-                      <span className="project-name">{t("HR Design System")}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="project-info-col">
-                <div className="project-info-block">
-                  <h3 className="project-info-title">{t("Strategy")}</h3>
-                  <p className="project-info-body">
-                    {t("Building a unified Design System to standardize UI across the HR platform, from design tokens in Figma to production-ready components in Angular.")}
-                  </p>
-                </div>
-                <div className="project-info-block">
-                  <h3 className="project-info-title">{t("Results")}</h3>
-                  <p className="project-info-body">
-                    {t("Building a unified Design System to standardize UI across the HR platform, from design tokens in Figma to production-ready components in Angular.")}
-                  </p>
-                </div>
-                <Link to="/projects" className="btn-view-project">{t("View Project")}</Link>
-              </div>
-            </div>
-          </FadeUp>
-        </div>
-      </section>
-
       {/* Work Experience (Figma 364:2659) */}
       <Experience />
+
+      {/* My Project: the featured project (Figma 364:2680) */}
+      <MyProject />
 
       {/* ── SKILLS ── */}
       <section className="skills-section" id="skills">
