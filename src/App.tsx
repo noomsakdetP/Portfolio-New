@@ -12,6 +12,7 @@ import { useExplodeOnScroll } from './hooks/useExplodeOnScroll'
 import FooterCube from './components/FooterCube'
 // Light wrapper: static WebP poster first; it lazy-loads the Rive runtime itself.
 import HeroFresco from './components/HeroFresco'
+import CurtainLoader from './components/CurtainLoader'
 
 // 3D scenes are code-split: three.js only downloads after the page renders
 const SkillsOrb = lazy(() => import('./components/SkillsOrb'))
@@ -52,6 +53,8 @@ export default function App() {
 
   return (
     <>
+      {/* Curtain over the page while the hero loads (once per full page load) */}
+      <CurtainLoader />
 
       {/* ── NAVBAR ── */}
       <nav className="navbar">

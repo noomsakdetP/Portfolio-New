@@ -15,6 +15,15 @@
 import { lazy, Suspense, useCallback, useEffect, useState, useSyncExternalStore } from 'react'
 import cloudImg from '../assets/hero/cloud.webp'
 
+/**
+ * Master switch for the Rive animation. Off for now: our Rive plan watermarks every
+ * export with a splash screen that covers the hero for several seconds. Flip to `true`
+ * after re-exporting public/hero-fresco.riv from a plan without the watermark
+ * (rive/hero-fresco: `rive . --publish=local`). While false, only the static WebP shows
+ * and the Rive chunk, wasm and .riv are never downloaded.
+ */
+export const HERO_ANIMATED = false
+
 const HeroFrescoRive = lazy(() => import('./HeroFrescoRive'))
 
 const POSTER = `${import.meta.env.BASE_URL}creation-of-sakdidet-final.webp`
@@ -59,7 +68,7 @@ export default function HeroFresco({ className = '' }: { className?: string }) {
   const [riveReady, setRiveReady] = useState(false)
   const onReady = useCallback(() => setRiveReady(true), [])
 
-  const animate = !reduced && !lite && afterLoad
+  const animate = HERO_ANIMATED && !reduced && !lite && afterLoad
 
   return (
     <div className={`hero-fresco ${riveReady && animate ? 'is-live' : ''} ${className}`} role="img" aria-label={LABEL}>
