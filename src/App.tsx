@@ -13,6 +13,7 @@ import { useExplodeOnScroll } from './hooks/useExplodeOnScroll'
 // Light wrapper: static WebP poster first; it lazy-loads the Rive runtime itself.
 import HeroFresco from './components/HeroFresco'
 import CurtainLoader from './components/CurtainLoader'
+import WallLabel from './components/home/WallLabel'
 
 // 3D scenes are code-split: three.js only downloads after the page renders
 const SkillsOrb = lazy(() => import('./components/SkillsOrb'))
@@ -88,6 +89,9 @@ export default function App() {
           <p className="hero-float-badge">{t("UI Designer & Design Technologist")}</p>
         </FadeUp>
       </section>
+
+      {/* Wall Label (Figma 416:3119) */}
+      <WallLabel />
 
       {/* ── PROJECTS ── */}
       <section className="projects-section" id="projects">

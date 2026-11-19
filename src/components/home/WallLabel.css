@@ -1,0 +1,128 @@
+/* ═══ WALL LABEL: Figma 416:3119 ═══
+   1440 frame: 40px × 160px padding, three columns spread with space-between. */
+.wall-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-40);
+  padding: var(--space-40) 160px;
+  background: var(--color-bg-highlight);
+}
+
+/* placard: 3px madder rule on the left, like a museum label */
+.wall-label-placard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 20px;
+  border-left: 3px solid var(--color-border-accent);
+  flex-shrink: 0;
+}
+.wall-label-room {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+}
+.wall-label-title {
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+.wall-label-credit {
+  font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.wall-label-intro {
+  width: 360px;
+  max-width: 100%;
+  font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.wall-label-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/* ── shared: CV Badge (Figma 338:1258) ── */
+.cv-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 22px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.cv-badge:hover { border-color: var(--color-border-strong); }
+
+/* ── shared: Email Link (Figma 338:1254, "On Light"; the CTA uses an on-accent variant) ── */
+.email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--color-border-accent);
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: opacity 0.2s;
+}
+.email-link svg { flex-shrink: 0; transition: transform 0.2s; }
+.email-link:hover svg { transform: translateX(3px); }
+
+.cv-badge:focus-visible, .email-link:focus-visible {
+  outline: 2px solid var(--color-border-accent);
+  outline-offset: 3px;
+}
+
+/* ── responsive ── */
+@media (max-width: 1280px) {
+  .wall-label { padding: var(--space-40) var(--space-80); }
+}
+@media (max-width: 1100px) {
+  /* three columns no longer fit: placard + actions on one row, intro below */
+  .wall-label { flex-wrap: wrap; padding: var(--space-40); row-gap: var(--space-24); }
+  .wall-label-intro { order: 3; width: 100%; max-width: 640px; }
+}
+@media (max-width: 767px) {
+  .wall-label {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-32) var(--space-16);
+    gap: var(--space-24);
+  }
+  .wall-label-intro { order: 0; font-size: 16px; }
+  .email-link { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .email-link svg { transition: none; }
+}
