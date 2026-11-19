@@ -5,11 +5,12 @@
   z-index: 1000; /* above the fixed navbar (100) */
   overflow: hidden;
   pointer-events: auto;
+  container-type: size; /* cqw = curtain width, used to line up the fabric across the seam */
 }
 .curtain:not(.is-loading):not(.is-rope-out) { pointer-events: none; } /* page is usable once it opens */
 .curtain.is-loading, .curtain.is-rope-out { cursor: pointer; } /* click to skip */
 
-/* click / Esc: fade the whole curtain out */
+/* click / Esc with prefers-reduced-motion: fade the whole curtain out */
 .curtain.is-skipping { opacity: 0; transition: opacity 0.25s ease; }
 
 /* ── panels: fabric is the tile, #8E3A2E is the fallback while it loads ── */
@@ -20,13 +21,26 @@
   width: 50.5%; /* slight overlap so no gap shows down the middle */
   background: #8E3A2E url(/curtain-tile.webp) repeat-x;
   background-size: auto 100%;
-  box-shadow: 0 0 24px rgba(20, 6, 4, 0.45);
   transition:
     transform 1.2s cubic-bezier(0.65, 0, 0.35, 1),
-    border-radius 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+    border-radius 1.2s cubic-bezier(0.65, 0, 0.35, 1),
+    box-shadow 0.3s ease;
 }
 .curtain-panel--left  { left: 0;  transform-origin: left center; }
-.curtain-panel--right { right: 0; transform-origin: right center; }
+.curtain-panel--right {
+  right: 0;
+  transform-origin: right center;
+  /* The right panel starts at 49.5% of the curtain width. Shift its tile back by that
+     much so it continues the left panel's pattern: no visible edge down the middle. */
+  background-position: calc(-49.5cqw) 0;
+}
+/* Shadows only once the panels part; while closed, the right panel's shadow would
+   draw a dark line on the left panel where they overlap. */
+.curtain:is(.is-opening, .is-sliding, .is-lifting) .curtain-panel { box-shadow: 0 0 24px rgba(20, 6, 4, 0.45); }
+
+/* skip (click / Esc): the same open, but the gather runs in 0.4s instead of 1.2s */
+.curtain.is-fast.is-opening .curtain-panel { transition-duration: 0.4s, 0.4s, 0.3s; }
+.curtain.is-fast.is-opening .curtain-panel::after { transition-duration: 0.4s; }
 
 /* shading that builds toward each panel's gathered outer edge as it opens */
 .curtain-panel::after {

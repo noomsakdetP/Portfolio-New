@@ -12,7 +12,8 @@
  * 3. Panels slide fully off-screen (translateX ±100%, 0.4 s) while the valance stays;
  *    then the valance lifts out of view (translateY -100%, 0.5 s) and the loader unmounts.
  *
- * Click or Esc skips: the whole curtain fades out in 0.25 s.
+ * Click or Esc (while closed) skips the wait: the same open runs at once, with the
+ * gather sped up to 0.4 s. Under reduced motion, skip fades the curtain out in 0.25 s.
  * prefers-reduced-motion: the rope just jumps to each value (no width transition, no
  * creep) and the curtain fades out instead of opening, sliding and lifting.
  */
@@ -36,7 +37,8 @@ const OPEN_MS = 1200       // panels gather to scaleX(0.14)
 const SLIDE_MS = 400       // gathered panels slide off-screen
 const LIFT_MS = 500        // valance lifts away
 const FADE_OUT_MS = 400    // reduced-motion exit
-const SKIP_MS = 250        // click / Esc
+const SKIP_OPEN_MS = 400   // click / Esc: gather in 0.4 s, then the normal slide + lift
+const SKIP_FADE_MS = 250   // click / Esc under prefers-reduced-motion
 const CREEP_TICK_MS = 250
 const CREEP_SHARE = 0.85   // creep covers at most 85% of the gap to the next step
 const CREEP_TAU_S = 1.5    // creep time constant
@@ -137,15 +139,28 @@ export default function CurtainLoader() {
     }
   }, [show, reduced])
 
-  // Click or Esc: fade the whole curtain out now.
-  const skipped = useRef(false)
+  // Click or Esc while the curtain is still closed: open it now with the normal
+  // animation, gather sped up to 0.4 s (then the usual slide and valance lift).
+  // Reduced motion: fade the whole curtain out instead. Once it's opening, skip is a no-op.
+  const phaseRef = useRef(phase)
+  useEffect(() => { phaseRef.current = phase }, [phase])
+  const [fast, setFast] = useState(false)
   const skip = useCallback(() => {
-    if (skipped.current) return
-    skipped.current = true
+    if (phaseRef.current !== 'loading' && phaseRef.current !== 'rope-out') return
     timers.current.forEach(window.clearTimeout)
-    timers.current = [window.setTimeout(() => setPhase('done'), SKIP_MS)]
-    setPhase('skipping')
-  }, [])
+    timers.current = []
+    const at = (ms: number, p: Phase) => { timers.current.push(window.setTimeout(() => setPhase(p), ms)) }
+    if (reduced) {
+      setPhase('skipping')
+      at(SKIP_FADE_MS, 'done')
+      return
+    }
+    setFast(true)
+    setPhase('opening')
+    at(SKIP_OPEN_MS, 'sliding')
+    at(SKIP_OPEN_MS + SLIDE_MS, 'lifting')
+    at(SKIP_OPEN_MS + SLIDE_MS + LIFT_MS, 'done')
+  }, [reduced])
 
   const active = show && phase !== 'done'
   useEffect(() => {
@@ -167,7 +182,7 @@ export default function CurtainLoader() {
 
   if (!active) return null
 
-  const classes = ['curtain', `is-${phase}`, reduced ? 'is-reduced' : ''].join(' ')
+  const classes = ['curtain', `is-${phase}`, reduced ? 'is-reduced' : '', fast ? 'is-fast' : ''].join(' ')
 
   return (
     <div className={classes} onClick={skip}>
