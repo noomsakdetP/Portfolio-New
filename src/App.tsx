@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import './App.css'
 import projectImg from './assets/project-banner.png'
 import { HARD_SKILLS, SOFT_SKILLS } from './data/skills'
-import { useScrollTimeline } from './hooks/useScrollTimeline'
 import { useMagnetic } from './hooks/useMagnetic'
 import { useExplodeOnScroll } from './hooks/useExplodeOnScroll'
 // Light wrapper: static WebP poster first; it lazy-loads the Rive runtime itself.
@@ -16,6 +15,7 @@ import CurtainLoader from './components/CurtainLoader'
 import WallLabel from './components/home/WallLabel'
 import WhatIDo from './components/home/WhatIDo'
 import Impact from './components/home/Impact'
+import Experience from './components/home/Experience'
 import { useCloudRise } from './hooks/useCloudRise'
 
 // 3D scenes are code-split: three.js only downloads after the page renders
@@ -50,7 +50,6 @@ function FadeUp({ children, delay = 0, className = '' }: { children: React.React
 
 export default function App() {
   const t = useT()
-  const timelineRef = useScrollTimeline<HTMLDivElement>()
   const emailRef = useMagnetic<HTMLAnchorElement>(0.3)
   const linkedinRef = useMagnetic<HTMLAnchorElement>(0.45, 60)
   const explodeRef = useExplodeOnScroll<HTMLDivElement>()
@@ -178,81 +177,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── EXPERIENCE ── */}
-      <section className="experience-section" id="experience">
-        <div className="experience-inner">
-          <FadeUp>
-            <p className="label-tag">{t("MY JOURNEY")}</p>
-            <h2 className="section-heading">{t("Work Experience")}</h2>
-            <div className="timeline" ref={timelineRef}>
-              <span className="timeline-progress" aria-hidden="true" />
-              {/* Experience 1 — current job, has connector arrow */}
-              <div className="timeline-item timeline-item--active">
-                <div className="timeline-dot-wrap"><div className="timeline-dot timeline-dot--active" /></div>
-                <div className="timeline-content-wrap">
-                  <p className="timeline-date">{t("2025 - Present")}</p>
-                  <h3 className="timeline-company">{t("Advance Research")}<br />{t("Group (ARSoft)")}</h3>
-                  <p className="timeline-role">{t("Junior Ux/UI Designer")}</p>
-                  <p className="timeline-desc">
-                    {t("Designing UI/UX and building a Design System for the HR internal platform, from Figma tokens to Angular component library.")}
-                  </p>
-                  {/* dashed connector line — visible only on desktop */}
-                  <div className="timeline-connector" aria-hidden="true">
-                    <svg className="timeline-connector-line" viewBox="0 0 180 2" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                      <line x1="0" y1="1" x2="170" y2="1" style={{ stroke: 'var(--color-text-accent)' }} strokeWidth="2" strokeDasharray="6 4"/>
-                    </svg>
-                    <svg className="timeline-connector-arrow" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 6H11M11 6L6 1M11 6L6 11" style={{ stroke: 'var(--color-text-accent)' }} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div className="timeline-item">
-                <div className="timeline-dot-wrap"><div className="timeline-dot" /></div>
-                <div>
-                  <p className="timeline-date">{t("May 2024 - Feb 2025")}</p>
-                  <h3 className="timeline-company">{t("IMPACT EXHIBITION")}<br />{t("MANAGEMENT CO.,LTD")}</h3>
-                  <p className="timeline-role" style={{ marginTop: 32 }}>{t("Skills gained")}</p>
-                  <p className="timeline-desc">
-                    {t("Delivered 2 projects: IMPACT Hire Hub and Flexible Benefit platform.")}<br />
-                    {t("Design System Beginner · Prototyping")}<br />
-                    {t("Design for 3 Devices (Tablet, Mobile and Desktop)")}<br />
-                    {t("Usability Testing")}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-          <FadeUp delay={0.15}>
-            <div className="projects-card">
-              <h3 className="projects-card-heading">{t("The project I'm responsible for")}</h3>
-              <div className="project-cards-list">
-                <div className="project-card-item">
-                  <div className="project-card-header">
-                    <span className="project-card-icon">🏗️</span>
-                    <h4 className="project-card-title">{t("Design System for HR System and UX/UI Design")}</h4>
-                  </div>
-                  <p className="project-card-desc">{t("Built a full Design System with tokens, components, and Storybook documentation for an HR platform.")}</p>
-                </div>
-                <div className="project-card-item">
-                  <div className="project-card-header">
-                    <span className="project-card-icon">🔬</span>
-                    <h4 className="project-card-title">{t("Support Design in SWU Research & SWU HUB")}</h4>
-                  </div>
-                  <p className="project-card-desc">{t("Built a full Design System with tokens, components, and Storybook documentation for an HR platform.")}</p>
-                </div>
-                <div className="project-card-item">
-                  <div className="project-card-header">
-                    <span className="project-card-icon">🚔</span>
-                    <h4 className="project-card-title">{t("Do project SMART POLICE")}</h4>
-                  </div>
-                  <p className="project-card-desc">{t("Designed wireframes, interactive prototype, and a foundational Design System for a police management platform (Desktop).")}</p>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-        </div>
-      </section>
+      {/* Work Experience (Figma 364:2659) */}
+      <Experience />
 
       {/* ── SKILLS ── */}
       <section className="skills-section" id="skills">
