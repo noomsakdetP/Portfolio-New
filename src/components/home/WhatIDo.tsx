@@ -9,6 +9,8 @@
  */
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { useT } from '../../i18n/lang'
+// Self-hosted handwriting font for the spectrum labels (font-display: swap)
+import '@fontsource/architects-daughter/400.css'
 import CloudBank from './CloudBank'
 import SpectrumArt from './SpectrumArt'
 import './WhatIDo.css'
