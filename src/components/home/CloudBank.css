@@ -1,0 +1,109 @@
+/* ═══ CLOUD BANK: Figma 414:3044 (1440 × 300 frame, 20px above "What I do") ═══
+   Everything is a fraction of the frame, so the bank scales with the page width.
+   Rise amounts are % of the layer height (300): back −40% (−120px at 1440),
+   mid −80% (−240px), front −126.667% (−380px). */
+
+.cloud-bank {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: -20px;                 /* back clouds peek over the bottom of the Wall Label at rest */
+  aspect-ratio: 1440 / 300;
+  pointer-events: none;
+  /* edge clouds hang past both sides (as in Figma): clip sideways so the page never
+     widens on phones, but let the layers rise above the bank */
+  overflow-x: clip;
+  overflow-y: visible;
+}
+.cloud-layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+.cloud-layer--back { opacity: 0.75; }
+.cloud-layer--mid { opacity: 0.92; }
+
+.cloud-bank-cloud {
+  position: absolute;
+  height: auto;
+  aspect-ratio: 900 / 359;   /* cloud.webp */
+  max-width: none;
+  object-fit: cover;
+}
+.cloud-layer--back .cloud-bank-cloud { aspect-ratio: 340 / 136; }
+.cloud-layer--mid .cloud-bank-cloud { aspect-ratio: 470 / 187; }
+.cloud-layer--front .cloud-bank-cloud { aspect-ratio: 640 / 255; }
+.cloud-bank-cloud.is-flipped { transform: scaleX(-1); }
+
+/* solid plaster body under the front clouds; rises with them and covers what's above */
+.cloud-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;                   /* 150 / 300 */
+  height: 233.333%;           /* 700 / 300 */
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--color-bg-page) 0%, transparent) 0%,
+    var(--color-bg-page) 12%,
+    var(--color-bg-page) 100%);
+}
+/* static base fade: melts the bank into the section */
+.cloud-base-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 63.333%;            /* 190 / 300 */
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--color-bg-page) 0%, transparent) 0%,
+    color-mix(in srgb, var(--color-bg-page) 85%, transparent) 55%,
+    var(--color-bg-page) 100%);
+}
+
+/* ── motion ──
+   Timeline: the Wall Label's view() (entry 0% → exit 100%): it starts as the hero
+   begins to scroll out and ends when the Wall Label has left the top of the screen. */
+@property --cloud-p {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@keyframes cloud-rise-back  { from { transform: translateY(0); } to { transform: translateY(-40%); } }
+@keyframes cloud-rise-mid   { from { transform: translateY(0); } to { transform: translateY(-80%); } }
+@keyframes cloud-rise-front { from { transform: translateY(0); } to { transform: translateY(-126.667%); } }
+@keyframes hero-dim         { from { opacity: 1; } to { opacity: 0.85; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .home-intro { timeline-scope: --cloud-rise; }
+    .home-intro .wall-label { view-timeline: --cloud-rise block; }
+    .home-intro .cloud-layer--back,
+    .home-intro .cloud-layer--mid,
+    .home-intro .cloud-layer--front,
+    .home-intro .hero-fresco {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --cloud-rise;
+      animation-range: entry 0% exit 100%;
+    }
+    .home-intro .cloud-layer--back  { animation-name: cloud-rise-back; }
+    .home-intro .cloud-layer--mid   { animation-name: cloud-rise-mid; }
+    .home-intro .cloud-layer--front { animation-name: cloud-rise-front; }
+    .home-intro .hero-fresco        { animation-name: hero-dim; }
+    /* Phones: the stacked Wall Label is tall, so only rise while it leaves the top of
+       the screen; otherwise the clouds cover its email link while you're reading it. */
+    @media (max-width: 767px) {
+      .home-intro .cloud-layer--back,
+      .home-intro .cloud-layer--mid,
+      .home-intro .cloud-layer--front,
+      .home-intro .hero-fresco { animation-range: exit 0% exit 100%; }
+    }
+  }
+
+  /* JS fallback (useCloudRise sets --cloud-p 0 → 1 and .is-cloud-js) */
+  .home-intro.is-cloud-js .cloud-layer--back  { transform: translateY(calc(var(--cloud-p) * -40%)); }
+  .home-intro.is-cloud-js .cloud-layer--mid   { transform: translateY(calc(var(--cloud-p) * -80%)); }
+  .home-intro.is-cloud-js .cloud-layer--front { transform: translateY(calc(var(--cloud-p) * -126.667%)); }
+  .home-intro.is-cloud-js .hero-fresco        { opacity: calc(1 - var(--cloud-p) * 0.15); }
+}

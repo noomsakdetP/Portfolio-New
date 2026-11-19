@@ -14,6 +14,8 @@ import { useExplodeOnScroll } from './hooks/useExplodeOnScroll'
 import HeroFresco from './components/HeroFresco'
 import CurtainLoader from './components/CurtainLoader'
 import WallLabel from './components/home/WallLabel'
+import WhatIDo from './components/home/WhatIDo'
+import { useCloudRise } from './hooks/useCloudRise'
 
 // 3D scenes are code-split: three.js only downloads after the page renders
 const SkillsOrb = lazy(() => import('./components/SkillsOrb'))
@@ -51,6 +53,7 @@ export default function App() {
   const emailRef = useMagnetic<HTMLAnchorElement>(0.3)
   const linkedinRef = useMagnetic<HTMLAnchorElement>(0.45, 60)
   const explodeRef = useExplodeOnScroll<HTMLDivElement>()
+  const introRef = useCloudRise<HTMLDivElement>()
 
   return (
     <>
@@ -76,6 +79,9 @@ export default function App() {
       </nav>
 
       {/* ── HERO ── */}
+      {/* Hero, Wall Label and What I do share the cloud-bank scroll timeline */}
+      <div className="home-intro" ref={introRef}>
+
       {/* Figma: playground › Hero (full-bleed), node 364:2555 */}
       <section className="hero-section hero--fresco" id="about">
         <div className="hero-art">
@@ -92,6 +98,10 @@ export default function App() {
 
       {/* Wall Label (Figma 416:3119) */}
       <WallLabel />
+
+      {/* What I do: cloud bank + Between design and code (Figma 364:2594) */}
+      <WhatIDo />
+      </div>
 
       {/* ── PROJECTS ── */}
       <section className="projects-section" id="projects">

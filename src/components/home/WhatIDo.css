@@ -1,0 +1,127 @@
+/* ═══ WHAT I DO: Figma 364:2594 (1440 frame: padding 280 160 120, gap 56, bg/page) ═══ */
+.what-i-do {
+  position: relative;
+  z-index: 1;                 /* the cloud bank paints over the hero + Wall Label above */
+  background: var(--color-bg-page);
+  padding: max(140px, 19.444vw) clamp(16px, 11.111vw, 160px) clamp(72px, 8.333vw, 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+}
+.what-i-do > :not(.cloud-bank) { position: relative; z-index: 1; width: 100%; max-width: 1120px; }
+
+/* header */
+.what-i-do-header { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+.what-i-do-kicker {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700; font-size: 12px; line-height: 1.3; letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+}
+.what-i-do-title {
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700;
+  font-size: clamp(36px, 4.444vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+:lang(th) .what-i-do-title { letter-spacing: 0; line-height: 1.3; }
+
+/* ── spectrum: 1120 × 360 Figma frame, scaled to the column ── */
+.spectrum-scroll { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.spectrum {
+  --draw: 0;
+  position: relative;
+  min-width: 760px;           /* below this the hand-drawn labels get too small: scroll sideways */
+  aspect-ratio: 1120 / 360;
+  container-type: inline-size;
+}
+.spectrum-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+.sp-stroke-ink { stroke: var(--color-text-primary); }
+.sp-fill-ochre { fill: var(--color-bg-accent); }
+.sp-fill-sky { fill: var(--color-bg-accent-cool); }
+.sp-fill-madder { fill: var(--color-bg-accent-strong); }
+.sp-fill-terracotta { fill: var(--color-bg-highlight); }
+
+.spectrum-line { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--draw)); }
+
+.spectrum-label {
+  position: absolute;
+  white-space: nowrap;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+.spectrum-label--hand, .spectrum-label--pointer {
+  font-family: 'Architects Daughter', 'IBM Plex Sans Thai', cursive;
+  letter-spacing: 0.5px;
+  font-size: 2.1429cqw;       /* 24px at 1120 */
+}
+.spectrum-label--pointer { font-size: 2.5cqw; }   /* 28px at 1120 */
+.spectrum-label--end, .spectrum-label--me {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700;
+  font-size: max(10px, 1.0714cqw);                /* 12px at 1120 */
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.spectrum-label--me { text-transform: none; color: var(--color-text-accent); }
+
+/* stops + me + pointer: hidden until the line is drawn, then pop in left to right */
+.spectrum-stop, .spectrum-label--hand, .spectrum-me, .spectrum-label--me,
+.spectrum-pointer, .spectrum-label--pointer {
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(var(--i, 0) * 110ms);
+}
+.spectrum-stop, .spectrum-me { transform-box: fill-box; transform-origin: center; transform: scale(0.4); }
+.spectrum-label--hand { transform: translateY(6px); }
+.spectrum-me, .spectrum-label--me { --i: 7; }
+.spectrum-pointer, .spectrum-label--pointer { --i: 8; }
+
+.spectrum.is-drawn :is(.spectrum-stop, .spectrum-label--hand, .spectrum-me, .spectrum-label--me,
+  .spectrum-pointer, .spectrum-label--pointer) { opacity: 1; transform: none; }
+
+/* the red "me" dot pulses once, after it has popped in */
+.spectrum-me-dot { transform-box: fill-box; transform-origin: center; }
+.spectrum.is-drawn .spectrum-me-dot { animation: me-pulse 0.9s ease-out 1.1s 1; }
+@keyframes me-pulse {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.35); }
+  70% { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+
+/* ── side cards (364:2608) ── */
+.what-i-do-sides { display: flex; gap: 24px; align-items: stretch; }
+.side-card {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px 28px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg-plus);
+  color: var(--color-text-primary);
+}
+.side-card--me { background: var(--color-bg-highlight); border: 2px solid var(--color-border-accent); }
+.side-card-title {
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700; font-size: 22px; line-height: 1.25;
+}
+.side-card-list { font-size: 15px; line-height: 1.5; padding-left: 22.5px; list-style: disc; }
+.side-card-text { font-size: 16px; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .what-i-do-sides { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spectrum-stop, .spectrum-label--hand, .spectrum-me, .spectrum-label--me,
+  .spectrum-pointer, .spectrum-label--pointer { opacity: 1; transform: none; transition: none; }
+  .spectrum.is-drawn .spectrum-me-dot { animation: none; }
+}
