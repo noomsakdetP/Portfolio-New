@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef } from 'react'
 import LangToggle from './components/LangToggle'
 import { useT } from './i18n/lang'
 import NavMenu from './components/NavMenu'
+import NavLogoMark, { NAV_LOGO_LABEL } from './components/NavLogo'
 import { Link } from 'react-router-dom'
 import './App.css'
 import projectImg from './assets/project-banner.png'
@@ -9,7 +10,6 @@ import { HARD_SKILLS, SOFT_SKILLS } from './data/skills'
 import { useScrollTimeline } from './hooks/useScrollTimeline'
 import { useMagnetic } from './hooks/useMagnetic'
 import { useExplodeOnScroll } from './hooks/useExplodeOnScroll'
-import FooterCube from './components/FooterCube'
 // Light wrapper: static WebP poster first; it lazy-loads the Rive runtime itself.
 import HeroFresco from './components/HeroFresco'
 import CurtainLoader from './components/CurtainLoader'
@@ -59,9 +59,8 @@ export default function App() {
       {/* ── NAVBAR ── */}
       <nav className="navbar">
         <div className="navbar-inner">
-          <a href="#" className="nav-logo">
-            <span className="nav-logo-icon">S</span>
-            <span className="nav-logo-text">Sakdidet</span>
+          <a href="#" className="nav-logo" aria-label={NAV_LOGO_LABEL}>
+            <NavLogoMark />
           </a>
           <ul className="nav-links">
             <li><a href="#experience">{t("About Me")}</a></li>
@@ -321,8 +320,8 @@ export default function App() {
       <footer className="footer">
         <div className="footer-inner">
           <div>
-            <a href="#" className="footer-logo" aria-label={t("Sakdidet — back to top")}>
-              <FooterCube />
+            <a href="#" className="footer-logo" aria-label={t("Sakdidet, back to top")}>
+              <NavLogoMark />
               <span className="footer-logo-text">Sakdidet</span>
             </a>
             <p className="footer-copy">{t("©2026 Sakdidet. All Rights Reserved.")}</p>

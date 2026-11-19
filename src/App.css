@@ -10,7 +10,7 @@
 .navbar-inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 16px 80px;
+  padding: 14px 80px; /* 14 + 44px logo + 14 = the 72px navbar the hero is laid out under */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,25 +20,13 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
-}
-.nav-logo-icon {
-  width: 22px; height: 22px;
-  background: var(--dark);
   border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--cream);
-  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  flex-shrink: 0;
 }
-.nav-logo-text {
-  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
-  font-weight: 700;
-  font-size: 28px;
-  color: var(--dark);
+.nav-logo:focus-visible { outline: 2px solid #A64B3C; outline-offset: 3px; }
+/* navbar mark (src/components/NavLogo.tsx, public/logo-frame.svg): 38×44, ~31×36 on mobile */
+.nav-logo-mark { display: block; width: 38px; height: 44px; flex-shrink: 0; }
+@media (max-width: 860px) {
+  .nav-logo-mark { width: 31px; height: 36px; }
 }
 .nav-links {
   display: flex;
@@ -639,42 +627,8 @@
   .pj-tokens { padding: 20px 20px 56px; gap: 8px; }
 }
 
-/* ─── FOOTER CUBE (src/components/FooterCube.tsx) ─── */
-.footer-cube { width: 36px; height: 36px; perspective: 400px; flex-shrink: 0; }
-.footer-cube-body {
-  --s: 36px;
-  position: relative;
-  display: block;
-  width: var(--s); height: var(--s);
-  transform-style: preserve-3d;
-  transform: rotateX(var(--rx, -18deg)) rotateY(var(--ry, 28deg));
-  transition: transform .5s cubic-bezier(.2,.8,.2,1);
-}
-.fc {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 7px;
-  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  backface-visibility: hidden;
-}
-.fc-front  { background: var(--dark);   color: var(--cream);       transform: translateZ(calc(var(--s) / 2)); }
-.fc-back   { background: var(--yellow); color: var(--yellow-deep); transform: rotateY(180deg) translateZ(calc(var(--s) / 2)); }
-.fc-right  { background: var(--yellow); color: var(--yellow-deep); transform: rotateY(90deg) translateZ(calc(var(--s) / 2)); }
-.fc-left   { background: #2A2B27;                                  transform: rotateY(-90deg) translateZ(calc(var(--s) / 2)); }
-.fc-top    { background: #3A3B36;                                  transform: rotateX(90deg) translateZ(calc(var(--s) / 2)); }
-.fc-bottom { background: var(--yellow-dark);                       transform: rotateX(-90deg) translateZ(calc(var(--s) / 2)); }
-.footer-logo:hover .footer-cube-body { animation: cube-spin .9s cubic-bezier(.3,.7,.2,1); }
-.footer-cube-body.is-idle { animation: cube-idle 8s linear infinite; }
-@keyframes cube-spin { from { transform: rotateX(var(--rx, -18deg)) rotateY(var(--ry, 28deg)); } to { transform: rotateX(var(--rx, -18deg)) rotateY(calc(var(--ry, 28deg) + 360deg)); } }
-@keyframes cube-idle { from { transform: rotateX(-18deg) rotateY(0deg); } to { transform: rotateX(-18deg) rotateY(360deg); } }
 @media (prefers-reduced-motion: reduce) {
-  .pj-stack, .footer-cube-body { transition: none; }
-  .footer-logo:hover .footer-cube-body, .footer-cube-body.is-idle { animation: none; }
-  .footer-cube-body { transform: rotateX(-12deg) rotateY(20deg); }
+  .pj-stack { transition: none; }
 }
 
 /* ─── TIMELINE SCROLL-DRAW (src/hooks/useScrollTimeline.ts) ─── */
@@ -1013,7 +967,7 @@
 @media (max-width: 400px) {
   .navbar-inner { padding: 12px 16px; gap: 8px; }
   .nav-logo { gap: 8px; }
-  .nav-logo-text { font-size: 22px; }
+
   .lang-toggle span { padding: 5px 7px; }
   .nav-menu-btn { width: 40px; height: 40px; padding: 0 10px; }
   .hero-inner, .experience-section, .projects-inner, .skills-inner { padding-left: 16px; padding-right: 16px; }

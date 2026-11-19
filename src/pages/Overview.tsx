@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import LangToggle from '../components/LangToggle'
 import { useT, useLang, translateDeep } from '../i18n/lang'
 import NavMenu from '../components/NavMenu'
+import NavLogoMark, { NAV_LOGO_LABEL } from '../components/NavLogo'
 import { useEffect, useRef, useState } from 'react'
 import '../Overview.css'
 import ReadingProgress from '../components/casestudy/ReadingProgress'
@@ -760,9 +761,8 @@ export default function Overview() {
       {/* ── NAVBAR ── */}
       <nav className="navbar">
         <div className="navbar-inner">
-          <Link to="/" className="nav-logo">
-            <span className="nav-logo-icon">S</span>
-            <span className="nav-logo-text">Sakdidet</span>
+          <Link to="/" className="nav-logo" aria-label={NAV_LOGO_LABEL}>
+            <NavLogoMark />
           </Link>
           <ul className="nav-links">
             <li><Link to="/#experience">{t("About Me")}</Link></li>
@@ -1915,7 +1915,7 @@ export default function Overview() {
         <div className="footer-inner">
           <div>
             <Link to="/" className="footer-logo">
-              <span className="nav-logo-icon">S</span>
+              <NavLogoMark />
               <span className="footer-logo-text">Sakdidet</span>
             </Link>
             <p className="footer-copy">{t("©2026 Sakdidet. All Rights Reserved.")}</p>

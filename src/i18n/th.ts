@@ -45,7 +45,7 @@ export const TH: Record<string, string> = {
   "Design is how I think.": "ดีไซน์คือวิธีคิดของผม",
   "Let's think together.": "มาคิดไปด้วยกันครับ",
   "Currently open to new opportunities — whether it's a product, a system, or an experience worth building.": "ตอนนี้เปิดรับโอกาสใหม่ๆ ไม่ว่าจะเป็นโปรดักต์ ระบบ หรือประสบการณ์ที่คุ้มค่าแก่การสร้าง",
-  "Sakdidet — back to top": "Sakdidet — กลับขึ้นด้านบน",
+  "Sakdidet, back to top": "Sakdidet, กลับขึ้นด้านบน",
   "©2026 Sakdidet. All Rights Reserved.": "©2026 Sakdidet สงวนลิขสิทธิ์",
   "Based on Bangkok Thailand": "อยู่ที่กรุงเทพฯ ประเทศไทย",
   "PORTFOLIO ARCHIVE": "คลังผลงาน",
