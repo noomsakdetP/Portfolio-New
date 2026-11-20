@@ -1,6 +1,6 @@
 /**
- * PageTransitionProvider: the curtain between pages. Reuses the intro curtain's fabric
- * (CurtainLoader.css: .curtain-panel tile + .curtain-valance), without the rope.
+ * PageTransitionProvider: the curtain between pages (Curtain.tsx). This is the only place
+ * the curtain is used; the first load of Home has the Cloud welcome intro instead.
  *
  * go(to), started by a TransitionLink click:
  * 1. Close: both panels slide in from the sides and meet in the centre (0.45s).
@@ -13,13 +13,14 @@
  * prefers-reduced-motion: a 0.2s cross-fade (View Transitions API) instead of the curtain;
  * browsers without it just switch pages.
  * Only one transition runs at a time. Back/forward (POP) and the first load never use it,
- * since it only runs from go().
+ * since it only runs from go(). Starting one also finishes the Cloud welcome intro, so
+ * coming back to Home never replays it.
  */
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useLocation, useNavigate, type To } from 'react-router-dom'
-import { markIntroPlayed } from '../components/introCurtain'
+import { finishIntro } from '../components/firstLoadIntro'
+import Curtain from './Curtain'
 import { PageTransitionContext, pendingChunks, type PageTransitionApi } from './pageTransition'
-import '../components/CurtainLoader.css'
 import './PageTransition.css'
 
 const CLOSE_MS = 450
@@ -80,7 +81,7 @@ export default function PageTransitionProvider({ children }: { children: ReactNo
   const go = useCallback((to: To) => {
     if (busy.current) return
     busy.current = true
-    markIntroPlayed() // the intro curtain is for first loads only
+    finishIntro() // the Cloud welcome is for the first view of Home only
 
     const curtain = async () => {
       setPhase('closing')
@@ -153,13 +154,7 @@ export default function PageTransitionProvider({ children }: { children: ReactNo
   return (
     <PageTransitionContext.Provider value={api}>
       {children}
-      {phase !== 'idle' && (
-        <div className={`page-curtain pt-${phase}`} aria-hidden="true">
-          <div className="curtain-panel curtain-panel--left" />
-          <div className="curtain-panel curtain-panel--right" />
-          <div className="curtain-valance" />
-        </div>
-      )}
+      {phase !== 'idle' && <Curtain className={`page-curtain pt-${phase}`} />}
     </PageTransitionContext.Provider>
   )
 }

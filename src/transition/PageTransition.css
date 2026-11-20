@@ -1,10 +1,9 @@
 /* ═══ PAGE TRANSITION CURTAIN (PageTransitionProvider.tsx) ═══
-   Panels and valance reuse .curtain-panel / .curtain-valance from CurtainLoader.css.
-   The root is not .curtain, so none of the intro's 1.2s phase rules apply here. */
+   Animates the fabric from Curtain.css (.curtain-panel / .curtain-valance). */
 .page-curtain {
   position: fixed;
   inset: 0;
-  z-index: 1001; /* above the navbar (100) and the intro curtain (1000) */
+  z-index: 1001; /* above the navbar (100) and the Cloud welcome (1000) */
   overflow: hidden;
   pointer-events: none; /* clicks pass through once it starts opening */
   container-type: size; /* cqw lines the fabric up across the seam (see .curtain-panel--right) */

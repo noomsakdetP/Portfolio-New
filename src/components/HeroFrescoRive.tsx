@@ -11,13 +11,14 @@
  * - inputs: `swat` (trigger), `reducedMotion` (bool; unused here because the
  *   wrapper never mounts Rive under reduced motion)
  */
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Alignment, Fit, Layout, RuntimeLoader, useRive, useStateMachineInput } from '@rive-app/react-webgl2'
 // Self-hosted runtime: Vite copies these out of node_modules into the build with
 // hashed names, so nothing is fetched from Rive's CDNs (unpkg / jsdelivr).
 // @rive-app/webgl2 is pinned in package.json to the exact version react-webgl2 uses.
 import riveWasmUrl from '@rive-app/webgl2/rive.wasm?url'
 import riveFallbackWasmUrl from '@rive-app/webgl2/rive_fallback.wasm?url'
+import { HERO_RIV } from './heroAssets'
 
 // Must run before the first useRive() call creates an instance.
 RuntimeLoader.setWasmUrl(riveWasmUrl)
@@ -25,28 +26,30 @@ RuntimeLoader.setWasmFallbackUrl(riveFallbackWasmUrl) // default: jsdelivr
 RuntimeLoader.setWasmThreadsUrl(null) // default: unpkg; threads build isn't used by @rive-app/webgl2
 
 const SM = 'Hero'
-const SRC = `${import.meta.env.BASE_URL}hero-fresco.riv`
+const SRC = HERO_RIV
 const LAYOUT = new Layout({ fit: Fit.Cover, alignment: Alignment.Center })
 const AUTO_SWAT_MS = 6000
 const TOUCH_QUERY = '(hover: none)'
 
-export default function HeroFrescoRive({ onReady }: { onReady: () => void }) {
+/** `playing` false: load but stay paused (e.g. under the Cloud welcome intro). */
+export default function HeroFrescoRive({ onReady, playing = true }: { onReady: () => void; playing?: boolean }) {
   const hostRef = useRef<HTMLDivElement>(null)
-  const activeRef = useRef(true) // on screen and tab visible
+  const [autoplay] = useState(playing) // read once, when the Rive instance is created
+  const activeRef = useRef(autoplay) // playing, on screen and tab visible
 
   const { rive, RiveComponent } = useRive(
-    { src: SRC, stateMachines: SM, autoplay: true, layout: LAYOUT, onLoad: onReady },
+    { src: SRC, stateMachines: SM, autoplay, layout: LAYOUT, onLoad: onReady },
     { shouldUseIntersectionObserver: false }, // we pause/resume ourselves below
   )
   const swat = useStateMachineInput(rive, SM, 'swat')
 
-  // Pause when the hero is off screen or the tab is hidden; resume when back.
+  // Pause when the hero is off screen, the tab is hidden or we're told not to play yet.
   useEffect(() => {
     const el = hostRef.current
     if (!rive || !el) return
     let onScreen = true
     const apply = () => {
-      const active = onScreen && !document.hidden
+      const active = playing && onScreen && !document.hidden
       if (active === activeRef.current) return
       activeRef.current = active
       if (active) {
@@ -67,7 +70,7 @@ export default function HeroFrescoRive({ onReady }: { onReady: () => void }) {
       io.disconnect()
       document.removeEventListener('visibilitychange', apply)
     }
-  }, [rive])
+  }, [rive, playing])
 
   // Touch screens have no hover: let the cat swat on its own every ~6 s while visible.
   useEffect(() => {

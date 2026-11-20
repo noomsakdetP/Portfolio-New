@@ -1,0 +1,51 @@
+/* ═══ CURTAIN FABRIC (Curtain.tsx) ═══
+   Static look only: panels (tile), seam alignment, edge shading, valance.
+   Motion and timing live in PageTransition.css. */
+
+/* ── panels: fabric is the tile, #8E3A2E is the fallback while it loads ── */
+.curtain-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5%; /* slight overlap so no gap shows down the middle */
+  background: #8E3A2E url(/curtain-tile.webp) repeat-x;
+  background-size: auto 100%;
+}
+.curtain-panel--left  { left: 0;  transform-origin: left center; }
+.curtain-panel--right {
+  right: 0;
+  transform-origin: right center;
+  /* The right panel starts at 49.5% of the curtain width. Shift its tile back by that
+     much so it continues the left panel's pattern: no visible edge down the middle.
+     (cqw = the curtain's width: its root sets container-type: size.) */
+  background-position: calc(-49.5cqw) 0;
+}
+
+/* shading that builds toward each panel's gathered outer edge as it opens */
+.curtain-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+.curtain-panel--left::after {
+  background: linear-gradient(90deg, rgba(24, 8, 5, 0.62) 0%, rgba(24, 8, 5, 0.28) 45%, rgba(24, 8, 5, 0) 100%);
+}
+.curtain-panel--right::after {
+  background: linear-gradient(270deg, rgba(24, 8, 5, 0.62) 0%, rgba(24, 8, 5, 0.28) 45%, rgba(24, 8, 5, 0) 100%);
+}
+
+/* ── valance (public/curtain-valance.webp): above both panels ── */
+.curtain-valance {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  z-index: 2;
+  background: url(/curtain-valance.webp) repeat-x;
+  background-size: auto 100%;
+  pointer-events: none;
+}

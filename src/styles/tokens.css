@@ -6,6 +6,7 @@
   /* Primitives */
   --p-cream: #FAF9F4;
   --p-ink: #1B1C19;
+  --p-red-700: #B51F18;
   --p-white: #FFFFFF;
   --p-yellow-200: #FFDF9A;
   --p-yellow-500: #EAB308;
@@ -86,6 +87,8 @@
   --color-bg-danger-subtle: var(--p-red-50);
   --color-bg-brand-storybook: var(--p-pink-500);
   --color-text-primary: var(--p-museum-deep-umber);
+  --color-ink: var(--p-ink);           /* Cloud welcome title (Figma) */
+  --color-primary: var(--p-red-700);   /* Cloud welcome "portfolio" (Figma) */
   --color-text-muted: var(--p-museum-burnt-umber);
   --color-text-nav: var(--p-museum-nav);
   --color-text-on-inverse: var(--p-museum-plaster-ivory);

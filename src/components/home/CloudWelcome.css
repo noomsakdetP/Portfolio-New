@@ -1,0 +1,64 @@
+/* ═══ CLOUD WELCOME (CloudWelcome.tsx) ═══
+   Figma "Loader / Cloud welcome: 1 Loading". Motion is set inline (transform/opacity only). */
+.cw {
+  position: fixed;
+  inset: 0;
+  z-index: 1000; /* above the navbar (100) */
+  overflow: hidden;
+}
+.cw:is(.is-opening, .is-fading) { pointer-events: none; } /* page is usable once it opens */
+.cw.is-fading { opacity: 0; transition-property: opacity; transition-timing-function: ease; } /* reduced motion; duration inline */
+
+/* cream veil under the clouds */
+.cw-veil {
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-page);
+}
+
+/* clouds: positioned by their centre (left/top inline), width in vw */
+.cw-cloud {
+  position: absolute;
+  translate: -50% -50%; /* the separate property, so the rAF transform composes on top */
+  will-change: transform;
+}
+.cw-cloud img { display: block; width: 100%; height: auto; max-width: none; }
+.cw-cloud.is-flipped img { transform: scaleX(-1); }
+.cw-cloud--mobile { display: none; }
+@media (max-width: 767.98px) {
+  .cw-cloud--desktop { display: none; }
+  .cw-cloud--mobile { display: block; }
+}
+
+/* centre text: stack centred in the viewport, 4px gap */
+.cw-text {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  will-change: transform, opacity;
+}
+.cw-welcome {
+  margin: 0;
+  font-family: 'Architects Daughter', cursive;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+.cw-title {
+  margin: 0;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: min(80px, 12.5vw); /* 80px as in Figma; shrinks on phones so it stays on one line */
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.cw-title-ink { color: var(--color-ink); }
+.cw-title-accent { color: var(--color-primary); }
