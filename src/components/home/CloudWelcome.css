@@ -2,7 +2,11 @@
    Figma "Loader / Cloud welcome: 1 Loading". Motion is set inline (transform/opacity only). */
 .cw {
   position: fixed;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw; /* per the Figma annotation. Note: with html { scrollbar-gutter: stable }, Chromium
+                  excludes the reserved gutter from 100vw, so this does not reach into the gutter. */
   z-index: 1000; /* above the navbar (100) */
   overflow: hidden;
 }
@@ -13,7 +17,7 @@
 .cw-veil {
   position: absolute;
   inset: 0;
-  background: var(--color-bg-page);
+  background: var(--color-cream, #FAF9F4); /* token arrives with the next Figma export */
 }
 
 /* clouds: positioned by their centre (left/top inline), width in vw */
@@ -22,7 +26,8 @@
   translate: -50% -50%; /* the separate property, so the rAF transform composes on top */
   will-change: transform;
 }
-.cw-cloud img { display: block; width: 100%; height: auto; max-width: none; }
+/* Figma's cloud boxes are 2.49:1 (cloud.webp is 2.507:1), filled with object-fit: cover */
+.cw-cloud img { display: block; width: 100%; height: auto; aspect-ratio: 2.49; object-fit: cover; max-width: none; }
 .cw-cloud.is-flipped img { transform: scaleX(-1); }
 .cw-cloud--mobile { display: none; }
 @media (max-width: 767.98px) {
@@ -48,7 +53,8 @@
   font-family: 'Architects Daughter', cursive;
   font-weight: 400;
   font-size: 28px;
-  line-height: 1.2;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
   color: var(--color-text-primary);
 }
 .cw-title {
@@ -57,7 +63,7 @@
   font-weight: 700;
   font-style: italic;
   font-size: min(80px, 12.5vw); /* 80px as in Figma; shrinks on phones so it stays on one line */
-  line-height: 1.1;
+  line-height: 1;
   white-space: nowrap;
 }
 .cw-title-ink { color: var(--color-ink); }

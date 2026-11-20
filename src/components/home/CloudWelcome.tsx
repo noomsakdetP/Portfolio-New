@@ -5,15 +5,17 @@
  * Plays once per session, only when the page load started on "/" (see firstLoadIntro.ts);
  * otherwise it renders nothing. No scroll interaction.
  *
- * 1. Loading: full-screen clouds (cloud.webp, 18 on desktop / 10 larger ones under 768px,
- *    some flipped) over a cream veil, "Welcome to / my portfolio" in the centre. Scroll is
- *    locked and the navbar hidden. Loading is tracked (fonts, hero poster, cloud image,
- *    the Rive file when the hero will animate) but not shown. Stays at least CW.minShowMs.
- * 2. At 100%: wait CW.holdMs, then open over CW.openMs (ease-in-out), progress p 0 -> 1:
- *    clouds move outward from the centre by p^1.3 x (320px at the edges .. 1000px near the
- *    centre), vertical x0.75, scale 1 -> 1.45; veil fades out by p 0.4; text scales
- *    1 -> 1.6, rises 160px and fades out by p 0.45; hero art scales 1.12 -> 1; navbar fades
- *    in over p 0.6 -> 0.9.
+ * 1. Loading: full-screen clouds (cloud.webp; desktop = the 27 clouds of Figma frame 1,
+ *    12 flipped; under 768px 10 larger ones) over a --color-cream veil, "Welcome to / my
+ *    portfolio" centred. Scroll is locked and the navbar hidden. Loading is tracked (fonts,
+ *    hero poster, cloud image, the Rive file when the hero will animate) but not shown.
+ *    Stays at least CW.minShowMs, at most CW.capMs.
+ * 2. At 100%: wait CW.holdMs, then open over CW.openMs (ease-in-out), progress p 0 -> 1.
+ *    Per cloud (Figma annotation): dx = cx - 50vw, dy = (cy - 50vh) * 1.7, dir = unit(dx, dy),
+ *    near = 1 - min(1, dist / 800px), push = p^1.3 * (320 + 680 * near) px,
+ *    translate = (dir.x * push, dir.y * push * 0.75), scale = 1 + 0.45p.
+ *    Veil fades out by p 0.4; text scales 1 -> 1.6, rises 160px and fades out by p 0.45;
+ *    hero art scales 1.12 -> 1; navbar fades in over p 0.6 -> 0.9.
  * 3. At p = 1: unmount the layer, unlock scroll, start the hero (Rive).
  * prefers-reduced-motion: no cloud travel or hero zoom; the layer fades out in 400ms.
  *
@@ -33,8 +35,10 @@ const CW = {
   capMs: 6000,           // never wait longer than this for loading (slow network / stalled request)
   openMs: 1600,          // opening, eased in-out
   reducedFadeMs: 400,    // prefers-reduced-motion: layer fade-out
-  distCentre: 1000,      // px a cloud at the centre travels by p = 1
-  distEdge: 320,         // px a cloud at the screen edge travels by p = 1
+  distCentre: 1000,      // px a cloud at the centre travels by p = 1 (320 + 680)
+  distEdge: 320,         // px a cloud at or beyond CW.nearRadius travels by p = 1
+  nearRadius: 800,       // px: near = 1 - min(1, dist / nearRadius)
+  dirYScale: 1.7,        // dy is stretched by this before taking the direction
   distExp: 1.3,          // travel = p ^ distExp
   vertical: 0.75,        // vertical travel factor
   cloudScaleTo: 1.45,
@@ -50,13 +54,17 @@ const CW = {
 /** Cloud centre (x, y in % of the viewport), width in vw, mirrored or not. Later = on top. */
 type Cloud = { x: number; y: number; w: number; flip?: boolean }
 
+/** Figma "Loader / Cloud welcome: 1 Loading" (1440 x 810), clouds 458:1266..1292 in layer order. */
 const DESKTOP_CLOUDS: Cloud[] = [
-  { x: 10, y: 6, w: 44 }, { x: 47, y: 4, w: 48, flip: true }, { x: 88, y: 7, w: 46 },
-  { x: -2, y: 27, w: 42, flip: true }, { x: 30, y: 25, w: 46 }, { x: 68, y: 27, w: 50, flip: true }, { x: 102, y: 29, w: 40 },
-  { x: 34, y: 42, w: 38, flip: true },
-  { x: 7, y: 50, w: 46, flip: true }, { x: 52, y: 53, w: 56 }, { x: 93, y: 49, w: 48, flip: true },
-  { x: -4, y: 73, w: 40 }, { x: 28, y: 72, w: 48, flip: true }, { x: 68, y: 74, w: 46 }, { x: 103, y: 71, w: 42, flip: true },
-  { x: 13, y: 95, w: 50, flip: true }, { x: 52, y: 96, w: 46 }, { x: 89, y: 94, w: 50, flip: true },
+  { x: 9.61, y: 10.21, w: 54.66 }, { x: 37.99, y: 9.67, w: 53.68, flip: true }, { x: 68.14, y: 11.78, w: 56.72, flip: true },
+  { x: 96.16, y: 13.34, w: 58.14 }, { x: 125.93, y: 13.75, w: 58.44 }, { x: 19.48, y: 32.92, w: 48.12, flip: true },
+  { x: 50.25, y: 32.59, w: 46.96 }, { x: 83.12, y: 33.41, w: 53.18 }, { x: 112.11, y: 30.45, w: 47.99 },
+  { x: 8.92, y: 52.79, w: 55.84, flip: true }, { x: 36.16, y: 50.97, w: 51.77, flip: true }, { x: 67.12, y: 52.06, w: 49.42 },
+  { x: 97.4, y: 56.2, w: 57.01, flip: true }, { x: 120.72, y: 51.2, w: 47.28 }, { x: 20.15, y: 72.67, w: 45.44, flip: true },
+  { x: 58.28, y: 78.22, w: 64.34 }, { x: 84.92, y: 74.44, w: 53.59 }, { x: 108.93, y: 74.59, w: 49.95 },
+  { x: 8.46, y: 96.19, w: 50.08, flip: true }, { x: 44.99, y: 100.52, w: 63.75, flip: true }, { x: 65.63, y: 95.66, w: 56 },
+  { x: 93.32, y: 94.93, w: 48.93, flip: true }, { x: 126.15, y: 91.96, w: 50 }, { x: 25.91, y: 113.26, w: 56.65, flip: true },
+  { x: 56.13, y: 114.75, w: 53.95 }, { x: 81.4, y: 113.81, w: 47.05 }, { x: 105.97, y: 112.13, w: 44.95, flip: true },
 ]
 
 const MOBILE_CLOUDS: Cloud[] = [
@@ -159,20 +167,20 @@ export default function CloudWelcome({
     const text = textRef.current
     if (nav) nav.style.visibility = 'visible'
 
-    const cx = window.innerWidth / 2
-    const cy = window.innerHeight / 2
-    const halfDiagonal = Math.hypot(cx, cy)
+    // Each cloud's full travel at p = 1 (Figma annotation formula, see the header).
+    const cx = window.innerWidth / 2 // 50vw
+    const cy = window.innerHeight / 2 // 50vh
     const clouds = cloudRefs.current.flatMap((el) => {
       if (!el) return []
       const r = el.getBoundingClientRect()
       if (!r.width) return [] // the other breakpoint's set
-      let dx = r.left + r.width / 2 - cx
-      let dy = r.top + r.height / 2 - cy
+      const dx = r.left + r.width / 2 - cx
+      const dy = (r.top + r.height / 2 - cy) * CW.dirYScale
       const dist = Math.hypot(dx, dy)
-      if (dist < 1) { dx = 0; dy = 1 }
-      const len = Math.hypot(dx, dy)
-      const reach = lerp(CW.distCentre, CW.distEdge, clamp01(dist / halfDiagonal))
-      return [{ el, x: (dx / len) * reach, y: (dy / len) * reach * CW.vertical }]
+      const [ux, uy] = dist < 1 ? [0, 1] : [dx / dist, dy / dist]
+      const near = 1 - Math.min(1, dist / CW.nearRadius)
+      const reach = lerp(CW.distEdge, CW.distCentre, near)
+      return [{ el, x: ux * reach, y: uy * reach * CW.vertical }]
     })
 
     const start = performance.now()
