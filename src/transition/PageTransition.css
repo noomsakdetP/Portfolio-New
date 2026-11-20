@@ -1,0 +1,51 @@
+/* ═══ PAGE TRANSITION CURTAIN (PageTransitionProvider.tsx) ═══
+   Animates the fabric from Curtain.css (.curtain-panel / .curtain-valance). */
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 1001; /* above the navbar (100) and the Cloud welcome (1000) */
+  overflow: hidden;
+  pointer-events: none; /* clicks pass through once it starts opening */
+  container-type: size; /* cqw lines the fabric up across the seam (see .curtain-panel--right) */
+}
+.page-curtain:is(.pt-closing, .pt-closed) { pointer-events: auto; cursor: progress; }
+
+/* 1. close: both panels slide in from the sides and meet in the centre */
+.page-curtain.pt-closing .curtain-panel--left  { animation: pt-in-left 0.45s cubic-bezier(0.7, 0, 0.3, 1) both; }
+.page-curtain.pt-closing .curtain-panel--right { animation: pt-in-right 0.45s cubic-bezier(0.7, 0, 0.3, 1) both; }
+@keyframes pt-in-left  { from { transform: translateX(-100%); } to { transform: none; } }
+@keyframes pt-in-right { from { transform: translateX(100%); }  to { transform: none; } }
+
+/* 2. open: the intro's gather (scaleX 0.14, curved inner corner, edge shading), in 0.6s */
+.page-curtain .curtain-panel {
+  transition:
+    transform 0.6s cubic-bezier(0.65, 0, 0.35, 1),
+    border-radius 0.6s cubic-bezier(0.65, 0, 0.35, 1),
+    box-shadow 0.3s ease;
+}
+.page-curtain .curtain-panel::after { transition: opacity 0.6s ease-in; }
+.page-curtain:is(.pt-opening, .pt-sliding) .curtain-panel { box-shadow: 0 0 24px rgba(20, 6, 4, 0.45); }
+.page-curtain:is(.pt-opening, .pt-sliding) .curtain-panel::after { opacity: 1; }
+.page-curtain:is(.pt-opening, .pt-sliding) .curtain-panel--left {
+  transform: scaleX(0.14);
+  border-bottom-right-radius: 100% 30%;
+}
+.page-curtain:is(.pt-opening, .pt-sliding) .curtain-panel--right {
+  transform: scaleX(0.14);
+  border-bottom-left-radius: 100% 30%;
+}
+
+/* 3. slide off in 0.3s */
+.page-curtain.pt-sliding .curtain-panel { transition: transform 0.3s cubic-bezier(0.55, 0, 1, 0.45); }
+.page-curtain.pt-sliding .curtain-panel--left  { transform: translateX(-100%) scaleX(0.14); }
+.page-curtain.pt-sliding .curtain-panel--right { transform: translateX(100%) scaleX(0.14); }
+
+/* valance: never moves; fades in with the close and out with the slide */
+.page-curtain .curtain-valance { transition: opacity 0.3s ease; }
+.page-curtain.pt-closing .curtain-valance { animation: pt-fade-in 0.45s ease both; }
+.page-curtain.pt-sliding .curtain-valance { opacity: 0; }
+@keyframes pt-fade-in { from { opacity: 0; } }
+
+/* prefers-reduced-motion: 0.2s cross-fade via the View Transitions API */
+:root.pt-fade::view-transition-old(root),
+:root.pt-fade::view-transition-new(root) { animation-duration: 0.2s; }

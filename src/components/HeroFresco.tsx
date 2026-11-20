@@ -11,22 +11,16 @@
  * The Rive runtime + component live in a separate chunk (HeroFrescoRive) that is
  * only imported after the page has loaded and gone idle, and never imported at
  * all when prefers-reduced-motion is on or the browser asks to save data.
+ * While the Cloud welcome intro is up, Rive may load but stays paused and hidden;
+ * it fades in and starts playing when the intro finishes.
  */
 import { lazy, Suspense, useCallback, useEffect, useState, useSyncExternalStore } from 'react'
 import cloudImg from '../assets/hero/cloud.webp'
-
-/**
- * Master switch for the Rive animation. Off for now: our Rive plan watermarks every
- * export with a splash screen that covers the hero for several seconds. Flip to `true`
- * after re-exporting public/hero-fresco.riv from a plan without the watermark
- * (rive/hero-fresco: `rive . --publish=local`). While false, only the static WebP shows
- * and the Rive chunk, wasm and .riv are never downloaded.
- */
-export const HERO_ANIMATED = true
+import { HERO_ANIMATED, HERO_POSTER as POSTER, saveData } from './heroAssets'
+import { isIntroPending, subscribeIntro } from './firstLoadIntro'
 
 const HeroFrescoRive = lazy(() => import('./HeroFrescoRive'))
 
-const POSTER = `${import.meta.env.BASE_URL}creation-of-sakdidet-final.webp`
 const LABEL = 'The Creation of Components: me and my cat'
 const REDUCE_QUERY = '(prefers-reduced-motion: reduce)'
 
@@ -36,9 +30,7 @@ function subscribeReduced(cb: () => void) {
   return () => mql.removeEventListener('change', cb)
 }
 const getReduced = () => window.matchMedia(REDUCE_QUERY).matches
-
-type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } }
-const saveData = () => (navigator as NavigatorWithConnection).connection?.saveData === true
+const getIntroDone = () => !isIntroPending()
 
 /** True once the window has loaded and the main thread has had an idle moment. */
 function useAfterLoadIdle() {
@@ -67,15 +59,17 @@ export default function HeroFresco({ className = '' }: { className?: string }) {
   const afterLoad = useAfterLoadIdle()
   const [riveReady, setRiveReady] = useState(false)
   const onReady = useCallback(() => setRiveReady(true), [])
+  const introDone = useSyncExternalStore(subscribeIntro, getIntroDone, () => true)
 
   const animate = HERO_ANIMATED && !reduced && !lite && afterLoad
+  const live = animate && riveReady && introDone
 
   return (
-    <div className={`hero-fresco ${riveReady && animate ? 'is-live' : ''} ${className}`} role="img" aria-label={LABEL}>
+    <div className={`hero-fresco ${live ? 'is-live' : ''} ${className}`} role="img" aria-label={LABEL}>
       <img className="hero-fresco-poster" src={POSTER} alt="" width={1672} height={941} fetchPriority="high" decoding="async" />
       {animate && (
         <Suspense fallback={null}>
-          <HeroFrescoRive onReady={onReady} />
+          <HeroFrescoRive onReady={onReady} playing={introDone} />
         </Suspense>
       )}
       {/* Clouds sit in fresco coordinates: the stage is cropped exactly like the

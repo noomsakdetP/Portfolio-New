@@ -1,0 +1,66 @@
+/* ═══ CLOUD WELCOME (CloudWelcome.tsx) ═══
+   Figma "Loader / Cloud welcome: 1 Loading". Motion is set inline (transform/opacity only). */
+.cw {
+  position: fixed;
+  inset: 0; /* the reserved scrollbar gutter can't be covered; <html> turns cream instead (CloudWelcome.tsx) */
+  z-index: 1000; /* above the navbar (100); keep in sync with CW_LAYER_Z */
+  overflow: hidden;
+}
+.cw:is(.is-opening, .is-fading) { pointer-events: none; } /* page is usable once it opens */
+.cw.is-fading { opacity: 0; transition-property: opacity; transition-timing-function: ease; } /* reduced motion; duration inline */
+
+/* cream veil under the clouds */
+.cw-veil {
+  position: absolute;
+  inset: 0;
+  background: var(--color-cream, #FAF9F4); /* token arrives with the next Figma export */
+}
+
+/* clouds: positioned by their centre (left/top inline), width in vw */
+.cw-cloud {
+  position: absolute;
+  translate: -50% -50%; /* the separate property, so the rAF transform composes on top */
+  will-change: transform;
+}
+/* Figma's cloud boxes are 2.49:1 (cloud.webp is 2.507:1), filled with object-fit: cover */
+.cw-cloud img { display: block; width: 100%; height: auto; aspect-ratio: 2.49; object-fit: cover; max-width: none; }
+.cw-cloud.is-flipped img { transform: scaleX(-1); }
+.cw-cloud--mobile { display: none; }
+@media (max-width: 767.98px) {
+  .cw-cloud--desktop { display: none; }
+  .cw-cloud--mobile { display: block; }
+}
+
+/* centre text: stack centred in the viewport, 4px gap */
+.cw-text {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  will-change: transform, opacity;
+}
+.cw-welcome {
+  margin: 0;
+  font-family: 'Architects Daughter', cursive;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+  color: var(--color-text-primary);
+}
+.cw-title {
+  margin: 0;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: min(80px, 12.5vw); /* 80px as in Figma; shrinks on phones so it stays on one line */
+  line-height: 1;
+  white-space: nowrap;
+}
+.cw-title-ink { color: var(--color-ink); }
+.cw-title-accent { color: var(--color-primary); }

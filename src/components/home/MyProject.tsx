@@ -3,7 +3,7 @@
  * My Project (single) (364:2680). "View all projects" goes to /projects.
  * The hidden "Hover Label" in Figma (tags + title over the image) appears on hover/focus.
  */
-import { Link } from 'react-router-dom'
+import TransitionLink from '../../transition/TransitionLink'
 import { useT } from '../../i18n/lang'
 import { FEATURED_PROJECT as P } from '../../data/featuredProject'
 import { ArrowRight14, ArrowToImage, UnderlineResults, UnderlineStrategy } from './ProjectArt'
@@ -18,10 +18,10 @@ export default function MyProject() {
       <div className="pj-inner">
         <header className="pj-header">
           <h2 id="pj-title" className="pj-title">{t("My Project")}</h2>
-          <Link to="/projects" className="pj-view-all">
+          <TransitionLink to="/projects" className="pj-view-all">
             <span>{t("VIEW ALL PROJECTS")}</span>
             <span className="pj-view-all-icon"><ArrowRight14 /></span>
-          </Link>
+          </TransitionLink>
         </header>
 
         <div className="pj-grid">
@@ -31,7 +31,7 @@ export default function MyProject() {
             <p className="pj-note" aria-hidden="true">{t("my favourite one")}</p>
             <ArrowToImage />
 
-            <Link to={href} className="pj-image" tabIndex={-1} aria-hidden="true">
+            <TransitionLink to={href} className="pj-image" tabIndex={-1} aria-hidden="true">
               {P.image
                 ? <img src={P.image.src} width={P.image.width} height={P.image.height} alt="" loading="lazy" decoding="async" />
                 : (
@@ -42,7 +42,7 @@ export default function MyProject() {
                 <span className="pj-hover-tag">{P.tags}</span>
                 <span className="pj-hover-title">{t(P.title)}</span>
               </span>
-            </Link>
+            </TransitionLink>
           </div>
 
           <div className="pj-info">
@@ -54,9 +54,9 @@ export default function MyProject() {
               <h3 className="pj-block-title">{t("Results")}<UnderlineResults /></h3>
               <p className="pj-block-body">{t(P.results)}</p>
             </div>
-            <Link to={href} className="btn-view-project" aria-label={`${t("View Project")}: ${t(P.title)}`}>
+            <TransitionLink to={href} className="btn-view-project" aria-label={`${t("View Project")}: ${t(P.title)}`}>
               {t("View Project")}
-            </Link>
+            </TransitionLink>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import './App.css'
 import { useMagnetic } from './hooks/useMagnetic'
 // Light wrapper: static WebP poster first; it lazy-loads the Rive runtime itself.
 import HeroFresco from './components/HeroFresco'
-import CurtainLoader from './components/CurtainLoader'
+import CloudWelcome from './components/home/CloudWelcome'
 import WallLabel from './components/home/WallLabel'
 import WhatIDo from './components/home/WhatIDo'
 import Impact from './components/home/Impact'
@@ -49,14 +49,13 @@ export default function App() {
   const emailRef = useMagnetic<HTMLAnchorElement>(0.3)
   const linkedinRef = useMagnetic<HTMLAnchorElement>(0.45, 60)
   const introRef = useCloudRise<HTMLDivElement>()
+  const navRef = useRef<HTMLElement>(null)
+  const heroArtRef = useRef<HTMLDivElement>(null)
 
   return (
     <>
-      {/* Curtain over the page while the hero loads (once per full page load) */}
-      <CurtainLoader />
-
       {/* ── NAVBAR ── */}
-      <nav className="navbar">
+      <nav className="navbar" ref={navRef}>
         <div className="navbar-inner">
           <a href="#" className="nav-logo" aria-label={NAV_LOGO_LABEL}>
             <NavLogoMark />
@@ -79,7 +78,7 @@ export default function App() {
 
       {/* Figma: playground › Hero (full-bleed), node 364:2555 */}
       <section className="hero-section hero--fresco" id="about">
-        <div className="hero-art">
+        <div className="hero-art" ref={heroArtRef}>
           <HeroFresco />
         </div>
         <FadeUp className="hero-float">
@@ -163,6 +162,10 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Cloud welcome intro: first load of "/" only, once per session. Rendered last so
+          navRef / heroArtRef are attached before its layout effect hides and zooms them. */}
+      <CloudWelcome navRef={navRef} heroRef={heroArtRef} />
     </>
   )
 }
