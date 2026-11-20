@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import TransitionLink from '../transition/TransitionLink'
 import { useT } from '../i18n/lang'
 
 export type NavItem = { label: string; href?: string; to?: string }
@@ -40,7 +41,7 @@ export default function NavMenu({ items }: { items: NavItem[] }) {
           {items.map(it => (
             <li key={it.label}>
               {it.to
-                ? <Link to={it.to} onClick={() => setOpen(false)}>{t(it.label)}</Link>
+                ? <TransitionLink to={it.to} onClick={() => setOpen(false)}>{t(it.label)}</TransitionLink>
                 : <a href={it.href} onClick={() => setOpen(false)}>{t(it.label)}</a>}
             </li>
           ))}

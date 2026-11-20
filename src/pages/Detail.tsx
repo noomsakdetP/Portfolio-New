@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom'
 import LangToggle from '../components/LangToggle'
 import { useT, useLang, translateDeep } from '../i18n/lang'
 import NavMenu from '../components/NavMenu'
+import TransitionLink from '../transition/TransitionLink'
+import { lazyTracked } from '../transition/pageTransition'
 import NavLogoMark, { NAV_LOGO_LABEL } from '../components/NavLogo'
-import { lazy, Suspense, useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import '../Detail.css'
 import imgHrSystem from '../assets/project-banner.png'
 import imgImpactHireHub from '../assets/banner-impact.webp'
@@ -11,8 +13,9 @@ import imgFlexibleBenefits from '../assets/flexible-benefit.webp'
 import imgImpactWedding from '../assets/12.webp'
 import imgCleanNearU from '../assets/banner-casestudy.webp'
 
-// 3D walk-through gallery (code-split: three.js loads after the page renders)
-const ProjectGallery = lazy(() => import('../components/ProjectGallery'))
+// 3D walk-through gallery (code-split: three.js loads after the page renders).
+// lazyTracked: a page transition waits for this chunk (max 0.8s) before opening.
+const ProjectGallery = lazyTracked(() => import('../components/ProjectGallery'))
 
 const IMG_HR_SYSTEM = imgHrSystem
 const IMG_STUDENT_ACTIVITY = ''
@@ -101,14 +104,14 @@ export default function Detail() {
       {/* ── NAVBAR ── */}
       <nav className="navbar">
         <div className="navbar-inner">
-          <Link to="/" className="nav-logo" aria-label={NAV_LOGO_LABEL}>
+          <TransitionLink to="/" className="nav-logo" aria-label={NAV_LOGO_LABEL}>
             <NavLogoMark />
-          </Link>
+          </TransitionLink>
           <ul className="nav-links">
-            <li><Link to="/#experience">{t("About Me")}</Link></li>
-            <li><Link to="/projects">{t("Project")}</Link></li>
-            <li><Link to="/#skills">{t("Skills")}</Link></li>
-            <li><Link to="/#experience">{t("Experience")}</Link></li>
+            <li><TransitionLink to="/#experience">{t("About Me")}</TransitionLink></li>
+            <li><TransitionLink to="/projects">{t("Project")}</TransitionLink></li>
+            <li><TransitionLink to="/#skills">{t("Skills")}</TransitionLink></li>
+            <li><TransitionLink to="/#experience">{t("Experience")}</TransitionLink></li>
           </ul>
           <LangToggle />
           <a href="mailto:sakdidetsuttipol@hotmail.com" className="btn-sayhi">{t("Say hi")}</a>

@@ -1,7 +1,7 @@
 /**
  * CurtainLoader — a theatre curtain over the Home page while the hero's assets load.
  *
- * Sequence (once per browser session; skipped on later loads and client-side navigation):
+ * Sequence (once per browser session; skipped on later loads and after a page transition):
  * 1. Closed curtain under the valance, with a gold rope progress bar a little below the
  *    middle. Progress is real: the rope fills one equal share per finished item (web
  *    fonts, the hero poster, the curtain tile, the valance) and creeps slowly toward the
@@ -19,6 +19,7 @@
  */
 import { useCallback, useEffect, useRef, useState } from 'react'
 import './CurtainLoader.css'
+import { introPlayedThisPageLoad, markIntroPlayed } from './introCurtain'
 
 const BASE = import.meta.env.BASE_URL
 const TRACKED_IMAGES = [
@@ -45,13 +46,11 @@ const CREEP_TAU_S = 1.5    // creep time constant
 
 type Phase = 'loading' | 'rope-out' | 'opening' | 'sliding' | 'lifting' | 'skipping' | 'done'
 
-let playedThisPageLoad = false
-
 function playedThisSession() {
   try { return sessionStorage.getItem(SESSION_KEY) === '1' } catch { return false }
 }
 function markPlayed() {
-  playedThisPageLoad = true
+  markIntroPlayed()
   try { sessionStorage.setItem(SESSION_KEY, '1') } catch { /* storage blocked: page-load flag still applies */ }
 }
 
@@ -66,7 +65,7 @@ function loadImage(src: string): Promise<void> {
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export default function CurtainLoader() {
-  const [show] = useState(() => !playedThisPageLoad && !playedThisSession())
+  const [show] = useState(() => !introPlayedThisPageLoad() && !playedThisSession())
   const [phase, setPhase] = useState<Phase>('loading')
   const [progress, setProgress] = useState(0)
   const [fillMs, setFillMs] = useState(FILL_MS)

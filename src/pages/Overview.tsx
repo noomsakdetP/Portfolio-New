@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import LangToggle from '../components/LangToggle'
 import { useT, useLang, translateDeep } from '../i18n/lang'
 import NavMenu from '../components/NavMenu'
+import TransitionLink from '../transition/TransitionLink'
 import NavLogoMark, { NAV_LOGO_LABEL } from '../components/NavLogo'
 import { useEffect, useRef, useState } from 'react'
 import '../Overview.css'
@@ -761,14 +762,14 @@ export default function Overview() {
       {/* ── NAVBAR ── */}
       <nav className="navbar">
         <div className="navbar-inner">
-          <Link to="/" className="nav-logo" aria-label={NAV_LOGO_LABEL}>
+          <TransitionLink to="/" className="nav-logo" aria-label={NAV_LOGO_LABEL}>
             <NavLogoMark />
-          </Link>
+          </TransitionLink>
           <ul className="nav-links">
-            <li><Link to="/#experience">{t("About Me")}</Link></li>
-            <li><Link to="/projects">{t("Project")}</Link></li>
-            <li><Link to="/#skills">{t("Skills")}</Link></li>
-            <li><Link to="/#experience">{t("Experience")}</Link></li>
+            <li><TransitionLink to="/#experience">{t("About Me")}</TransitionLink></li>
+            <li><TransitionLink to="/projects">{t("Project")}</TransitionLink></li>
+            <li><TransitionLink to="/#skills">{t("Skills")}</TransitionLink></li>
+            <li><TransitionLink to="/#experience">{t("Experience")}</TransitionLink></li>
           </ul>
           <LangToggle />
           <a href="mailto:sakdidetsuttipol@hotmail.com" className="btn-sayhi">{t("Say hi")}</a>
@@ -1876,12 +1877,12 @@ export default function Overview() {
                   <p className="label-tag">{t("NEXT PROJECT")}</p>
                   <h2 className="ov-next-title">{nextProject.title}</h2>
                   <p className="ov-next-sub">{nextProject.subtitle}</p>
-                  <Link to={`/projects/${nextProject.id}`} className="ov-next-btn">
+                  <TransitionLink to={`/projects/${nextProject.id}`} className="ov-next-btn">
                     {t("View Case Study")}
                     <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
                       <path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                  </Link>
+                  </TransitionLink>
                 </div>
                 <div className="ov-next-img-wrap">
                   {nextProject.image
