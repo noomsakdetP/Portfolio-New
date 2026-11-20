@@ -5,6 +5,9 @@
  */
 import type { CSSProperties } from 'react'
 
+/** Dispatched on window when the portrait drop has finished (the first-view yarn waits for it). */
+export const PORTRAIT_DONE_EVENT = 'projects:portrait-done'
+
 export const PROJECTS_MOTION = {
   portrait: {
     fallbackMs: 300,           // start this long after mount when no curtain transition ran
@@ -40,6 +43,7 @@ export const PROJECTS_MOTION = {
     unreachedOpacity: 0.3,     // works fade 30% -> 100% when the yarn reaches them
     revealMs: 600,             // work fade-up / knot pop / wires
     tailMs: 700,               // tail + heart after the oldest work
+    firstViewDrawMs: 600,      // after the portrait drop: draw to the last knot in view (cubic ease-out)
   },
   restorationSign: {
     swayMs: 1200,              // rotate -3deg -> 3deg -> 0, once when reached

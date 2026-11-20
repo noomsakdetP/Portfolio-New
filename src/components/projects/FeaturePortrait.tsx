@@ -16,7 +16,7 @@ import { useCurtainSettled } from '../../transition/pageTransition'
 import { FEATURE_PORTRAIT } from '../../data/projects'
 import portraitGlow from '../../assets/gallery/portrait-glow.svg'
 import { ArrowToPortrait } from './GalleryArt'
-import { PROJECTS_MOTION } from './motion'
+import { PORTRAIT_DONE_EVENT, PROJECTS_MOTION } from './motion'
 
 const M = PROJECTS_MOTION.portrait
 // deterministic dust: horizontal spread (px) and rise (px) per dot
@@ -84,6 +84,7 @@ export default function FeaturePortrait() {
     Promise.all(anims.map((a) => a.finished)).then(() => {
       if (cancelled) return
       setState('idle')
+      window.dispatchEvent(new Event(PORTRAIT_DONE_EVENT)) // the gallery draws the first view's yarn
       requestAnimationFrame(() => anims.forEach((a) => a.cancel()))
     }, () => undefined)
     return () => { cancelled = true }

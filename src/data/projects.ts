@@ -7,6 +7,7 @@ import imgImpactWedding from '../assets/12.webp'
 import imgFlexibleBenefits from '../assets/flexible-benefit.webp'
 import imgImpactHireHub from '../assets/banner-impact.webp'
 import imgCleanNearU from '../assets/banner-casestudy.webp'
+import imgMonaSakdidet from '../assets/gallery/mona-sakdidet.webp'
 
 export type Work = {
   no: string             // wall label number, "01"
@@ -30,11 +31,8 @@ export const WORKS: Work[] = [
   { no: '07', title: 'Clean near U', year: '2023', role: 'UX/UI Designer', tools: 'Figma, Prototyping', caseStudyId: 'clean-near-u', image: imgCleanNearU },
 ]
 
-/**
- * The feature portrait in the header. Set to the imported mona-sakdidet.webp once the file
- * exists (src/assets/gallery/mona-sakdidet.webp); null shows a neutral placeholder.
- */
+/** The feature portrait in the header (null would show a neutral placeholder). */
 export const FEATURE_PORTRAIT: { src: string | null; alt: string } = {
-  src: null,
+  src: imgMonaSakdidet,
   alt: "Mona Lisa parody with Sakdidet's face",
 }

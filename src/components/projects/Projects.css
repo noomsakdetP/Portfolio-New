@@ -62,7 +62,7 @@
   font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
   font-size: 18px;
   line-height: 1.6;
-  color: var(--color-text-muted);
+  color: var(--color-text-on-inverse-muted); /* on the dark band; Figma: text/on-inverse-muted */
 }
 @media (min-width: 900px) { .coll-intro { max-width: min(620px, 100% - 360px); } }
 

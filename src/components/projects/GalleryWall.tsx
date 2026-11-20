@@ -7,6 +7,9 @@
  *   knot pops it in, shows its hanging wires and fades the work from 30% to 100%. Covered works
  *   get a knot too; their sign sways once when reached. Ends in a heart after the oldest work.
  *   Phones: one column, the line runs down the left edge. Reduced motion: fully drawn.
+ * - First view: works already in view on load don't wait for scroll. Once the portrait drop
+ *   has finished, the yarn draws to the last knot in view (600ms ease-out) and reveals them;
+ *   works further down keep the scroll behaviour.
  * - Spotlight (Work 03): hover / keyboard focus fades in the lamp cone, lifts the frame 6px and
  *   dims every other work to 70%. Click runs the page curtain into the case study. Touch: off.
  * - Under restoration (Work 02): not a link, no spotlight, drape in curtain-tile.webp, the sign
@@ -26,7 +29,7 @@ import {
   PostBase, PostFinial, SconceShade, SignFoot, SignString, TieBackRope, VelvetRope, YearUnderline,
 } from './GalleryArt'
 import { HEART_D, KNOTS, YARN_D, YARN_TAIL_D, flattenCubicPath } from './threadGeometry'
-import { PROJECTS_MOTION } from './motion'
+import { PORTRAIT_DONE_EVENT, PROJECTS_MOTION } from './motion'
 
 const DESKTOP_QUERY = '(min-width: 1180px)'
 const REDUCE_QUERY = '(prefers-reduced-motion: reduce)'
@@ -75,6 +78,7 @@ export default function GalleryWall() {
   const workEls = useRef<(HTMLDivElement | null)[]>([])
   const floorRef = useRef<HTMLDivElement>(null)
   const [mobile, setMobile] = useState<Geo | null>(null)
+  const firstViewKnot = useRef(-1) // last knot drawn by the first-view draw (survives geometry changes)
   const geo = desktop ? DESKTOP_GEO : mobile
 
   // Phones: measure the column and lay the thread along the frames.
@@ -131,22 +135,52 @@ export default function GalleryWall() {
     })
 
     let raf = 0
+    // first-view draw: the yarn never shows less than this (restored if the geometry is rebuilt)
+    let floor = firstViewKnot.current >= 0 ? knotFrac[Math.min(firstViewKnot.current, knotFrac.length - 1)] : 0
+    const scrollFraction = () => fractionAt(window.innerHeight * PROJECTS_MOTION.thread.tipViewport - svg.getBoundingClientRect().top)
     const update = () => {
       raf = 0
-      const tip = window.innerHeight * PROJECTS_MOTION.thread.tipViewport - svg.getBoundingClientRect().top
-      const drawn = fractionAt(tip)
+      const drawn = Math.max(scrollFraction(), floor)
       path.style.strokeDashoffset = String(1 - drawn)
       geo.knots.forEach((_, i) => reach(i, drawn >= knotFrac[i] - 0.002))
       tailRef.current?.classList.toggle('is-reached', drawn >= knotFrac[knotFrac.length - 1] - 0.002)
     }
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
+
+    // After the portrait drop: draw to the last knot whose frame is in view, revealing those works.
+    let firstViewRaf = 0
+    const onPortraitDone = () => {
+      let last = -1
+      workEls.current.forEach((w, i) => {
+        const f = w?.querySelector('.gw-frame')?.getBoundingClientRect()
+        if (f && f.top < window.innerHeight && f.bottom > 0) last = Math.max(last, i)
+      })
+      if (last < 0) return
+      firstViewKnot.current = last
+      const from = Math.max(scrollFraction(), floor)
+      const target = knotFrac[last]
+      if (target <= from) return
+      const start = performance.now()
+      const duration = PROJECTS_MOTION.thread.firstViewDrawMs
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / duration)
+        floor = from + (target - from) * (1 - (1 - t) ** 3)
+        update()
+        if (t < 1) firstViewRaf = requestAnimationFrame(step)
+      }
+      firstViewRaf = requestAnimationFrame(step)
+    }
+
     update()
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
+    window.addEventListener(PORTRAIT_DONE_EVENT, onPortraitDone, { once: true })
     return () => {
       cancelAnimationFrame(raf)
+      cancelAnimationFrame(firstViewRaf)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
+      window.removeEventListener(PORTRAIT_DONE_EVENT, onPortraitDone)
     }
   }, [geo])
 
