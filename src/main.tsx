@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import LangProvider from './i18n/LangProvider.tsx'
 import App from './App.tsx'
-import Detail from './pages/Detail.tsx'
+import Projects from './pages/Projects.tsx'
 import Overview from './pages/Overview.tsx'
 import PageTransitionProvider from './transition/PageTransitionProvider.tsx'
 
@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')!).render(
       <PageTransitionProvider>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/projects" element={<Detail />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:projectId" element={<Overview />} />
       </Routes>
       </PageTransitionProvider>

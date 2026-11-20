@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="676" height="502" viewBox="0 0 676 502" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Spotlight cone (hover state)" opacity="0.55" filter="url(#filter0_f_0_99)" style="mix-blend-mode:screen">
+<path d="M290 18H386L658 484H18L290 18Z" fill="url(#paint0_linear_0_99)"/>
+</g>
+<defs>
+<filter id="filter0_f_0_99" x="0" y="0" width="676" height="502" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="9" result="effect1_foregroundBlur_0_99"/>
+</filter>
+<linearGradient id="paint0_linear_0_99" x1="338" y1="18" x2="338" y2="484" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFF2CC" stop-opacity="0.85"/>
+<stop offset="0.7" stop-color="#FFF2CC" stop-opacity="0.25"/>
+<stop offset="1" stop-color="#FFF2CC" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

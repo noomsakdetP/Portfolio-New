@@ -1,0 +1,403 @@
+/* ═══ /projects: "The Collection" (Figma: Projects v2 / Desktop, 441:2696) ═══
+   Coordinates are Figma's. Timings come from motion.ts via custom properties on .coll
+   (--coll-*). Colours are tokens only; shadows mix token colours. */
+
+.coll { padding-top: 72px; } /* fixed navbar */
+@media (max-width: 860px) { .coll { padding-top: 64px; } }
+
+/* token colours for the inline SVG art (GalleryArt.tsx) */
+.ga-stroke-accent { stroke: var(--color-text-accent); }
+.ga-fill-accent { fill: var(--color-text-accent); }
+.ga-stroke-ochre { stroke: var(--color-bg-accent); }
+.ga-fill-ochre { fill: var(--color-bg-accent); }
+.ga-stroke-ink { stroke: var(--color-text-primary); }
+.ga-fill-ink { fill: var(--color-text-primary); }
+.ga-stroke-on-inverse { stroke: var(--color-text-on-inverse); }
+.ga-stroke-crack { stroke: var(--color-border-inverse); }
+.ga-fill-card { fill: var(--color-bg-card); }
+.ga-fill-raised { fill: var(--color-bg-inverse-raised); }
+
+/* ═══ HEADER (441:2721) ═══ */
+.coll-header {
+  position: relative;
+  z-index: 3; /* the portrait and its label hang over the top of the wall */
+  background: var(--color-bg-inverse);
+  padding: 96px 0 150px;
+  overflow-x: clip; /* the 520px portrait glow must not widen the page (phones); y stays visible for the overhang */
+}
+.coll-header-inner {
+  position: relative;
+  width: min(1120px, 100% - 48px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.coll-kicker {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 1.2px;
+  color: var(--color-text-accent);
+}
+.coll-title {
+  position: relative;
+  font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 11vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-on-inverse);
+  white-space: nowrap;
+}
+.coll-title-collection { font-style: italic; color: var(--color-text-accent); }
+/* underlines in em, so they follow the title when it shrinks */
+.coll-underline { position: absolute; display: block; pointer-events: none; }
+.coll-underline--1 { left: 1.943em; top: 1.092em; width: 4.424em; height: 0.131em; }
+.coll-underline--2 { left: 2.138em; top: 1.264em; width: 3.940em; height: 0.1em; }
+.coll-intro {
+  max-width: 620px;
+  font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+@media (min-width: 900px) { .coll-intro { max-width: min(620px, 100% - 360px); } }
+
+/* header doodles (content coordinates) */
+.coll-header-doodles { position: absolute; inset: 0; pointer-events: none; }
+.coll-note {
+  position: absolute;
+  margin: 0;
+  font-family: 'Architects Daughter', cursive;
+  font-size: 24px;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  color: var(--color-text-highlight);
+}
+.coll-note--drying { left: 651.2px; top: 74.7px; transform: translate(-50%, -50%) rotate(6deg); }
+.coll-arrow-title { position: absolute; left: 428.8px; top: 83.7px; width: 128.4px; height: 17.53px; }
+.coll-arrow-title-head { position: absolute; left: 428.8px; top: 90.97px; width: 13.9px; height: 13.65px; }
+.coll-sparkle { position: absolute; }
+.coll-sparkle--20 { left: 756px; top: 30px; width: 20px; height: 20px; }
+.coll-sparkle--12 { left: 784px; top: 60px; width: 12px; height: 12px; }
+@media (max-width: 1179.98px) { .coll-header-doodles { display: none; } }
+
+/* ── feature portrait (452:2816), group box 306 x 420 ── */
+.fp {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  width: 306.19px;
+  height: 420.19px;
+}
+.fp-glow { position: absolute; left: -106.9px; top: -120px; width: 520px; height: 520px; max-width: none; pointer-events: none; transition: filter 0.3s ease; }
+.fp-note { position: absolute; left: -105.6px; top: 271.8px; margin: 0; transform: translate(-50%, -50%) rotate(6deg);
+  font-family: 'Architects Daughter', cursive; font-size: 24px; line-height: 1.3; letter-spacing: 0.5px; white-space: nowrap; color: var(--color-text-highlight); }
+.fp-arrow { position: absolute; left: -84px; top: 222.8px; width: 72.9px; height: 30.4px; }
+.fp-arrow path { stroke-dasharray: 1; }
+.fp-pivot { position: absolute; inset: 0; transform-origin: top center; } /* the nail */
+.fp-shadow { position: absolute; inset: 12px 14px 8px; box-shadow: 0 18px 36px color-mix(in srgb, var(--color-overlay-black) 80%, transparent); }
+.fp-squash { position: absolute; inset: 0; transform-origin: top center; }
+.fp-frame { position: absolute; inset: 0; }
+.fp-frame::after { /* gold-frame.webp as border-image (slice 135, width 67px) */
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 67px solid transparent;
+  border-image: url('../../assets/gallery/gold-frame.webp') 135 stretch;
+  pointer-events: none;
+}
+.fp-art { position: absolute; left: 43.1px; top: 46.09px; width: 220px; height: 328px; object-fit: cover; display: block; }
+.fp-art--placeholder { background: var(--color-bg-inverse-raised); }
+.fp-dust { position: absolute; left: 0; right: 0; top: 404px; height: 12px; pointer-events: none; }
+.fp-dust i { position: absolute; top: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--color-bg-card); opacity: 0; }
+.fp-dust i:nth-child(1) { left: 30%; } .fp-dust i:nth-child(2) { left: 40%; } .fp-dust i:nth-child(3) { left: 50%; }
+.fp-dust i:nth-child(4) { left: 60%; } .fp-dust i:nth-child(5) { left: 70%; } .fp-dust i:nth-child(6) { left: 45%; }
+.fp-label {
+  position: absolute;
+  left: 61.6px;
+  top: 438.19px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: 3px;
+  background: var(--color-bg-card);
+  white-space: nowrap;
+}
+.fp-label-kicker { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: 11px; line-height: 1.3; letter-spacing: 1.2px; color: var(--color-text-accent); }
+.fp-label-title { font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-style: italic; font-size: 22px; line-height: 1.25; color: var(--color-text-primary); }
+.fp-label-meta { font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif; font-size: 12px; line-height: 1.6; color: var(--color-text-muted); }
+
+/* before the drop starts (the animations take over from here) */
+.fp[data-state='waiting'] .fp-pivot { transform: translateY(-120vh) rotate(-8deg); }
+.fp[data-state='waiting'] :is(.fp-shadow, .fp-glow, .fp-label, .fp-note) { opacity: 0; }
+.fp[data-state='waiting'] .fp-arrow path { stroke-dashoffset: 1; }
+@media (max-width: 767.98px) { .fp[data-state='waiting'] .fp-pivot { transform: translateY(-60vh) rotate(-8deg); } }
+@media (prefers-reduced-motion: reduce) { .fp[data-state='waiting'] .fp-pivot { transform: none; opacity: 0; } }
+
+/* after the intro: a gentle swing on hover, the glow brightens */
+@keyframes fp-hover-swing {
+  0%, 100% { transform: rotate(0deg); }
+  33% { transform: rotate(var(--coll-hover-swing-a)); }
+  66% { transform: rotate(var(--coll-hover-swing-b)); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .fp[data-state='idle'] .fp-pivot:hover { animation: fp-hover-swing var(--coll-hover-swing-ms) ease-in-out; }
+}
+.fp[data-state='idle']:has(.fp-pivot:hover) .fp-glow { filter: brightness(1.3); }
+
+/* below 900px the portrait moves under the title */
+@media (max-width: 899.98px) {
+  .coll-header { padding: 64px 0 140px; }
+  .fp { position: relative; top: auto; right: auto; align-self: center; margin-top: 64px; }
+}
+@media (max-width: 639.98px) { :is(.fp-note, .fp-arrow) { display: none; } }
+
+/* ═══ GALLERY WALL (441:2725) ═══ */
+.gw {
+  --fw: 530px; /* frame width; every frame measurement scales from it */
+  position: relative;
+  z-index: 1;
+  overflow-x: clip;
+  background: var(--color-bg-surface) url('../../assets/gallery/plaster-wall.webp') repeat 0 0 / 640px 640px;
+}
+.gw-rail { position: absolute; z-index: 1; top: 28px; left: 0; right: 0; height: 6px; background: var(--color-bg-accent); border: 1px solid var(--color-border-inverse); }
+
+/* desktop: Figma's 1440 x 3084 stage, centred */
+.gw-stage { position: relative; width: 1440px; height: 3084px; left: 50%; margin-left: -720px; }
+.gw-thread, .gw-knots { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.gw-thread { z-index: 1; }
+.gw-knots { z-index: 1; }
+.gw-works { position: absolute; z-index: 2; left: 160px; top: 96px; width: 1120px; display: flex; flex-direction: column; gap: 96px; }
+.gw-row { display: flex; align-items: flex-start; justify-content: space-between; }
+.gw-row:last-child { justify-content: center; }
+
+/* ── a work: frame + wall label ── */
+.gw-work {
+  position: relative;
+  width: var(--fw);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  opacity: var(--coll-unreached);
+  transition: opacity var(--coll-reveal-ms) ease;
+}
+.gw-work.is-reached { opacity: 1; }
+.gw-work--low { padding-top: 72px; }
+.gw-work--covered { cursor: default; }
+.gw-work-link { display: flex; flex-direction: column; gap: 28px; color: inherit; text-decoration: none; border-radius: 4px; }
+.gw-work-link:focus-visible { outline: 3px solid var(--color-border-accent); outline-offset: 8px; }
+
+.gw-frame {
+  position: relative;
+  width: var(--fw);
+  padding: calc(var(--fw) * 54 / 530) calc(var(--fw) * 59 / 530) calc(var(--fw) * 53 / 530) calc(var(--fw) * 57 / 530);
+  transition: transform 0.3s ease;
+}
+.gw-frame::after { /* gold-frame.webp as border-image (slice 135, width 67px at 530px) */
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: calc(var(--fw) * 67 / 530) solid transparent;
+  border-image: url('../../assets/gallery/gold-frame.webp') 135 stretch;
+  pointer-events: none;
+}
+.gw-mat {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-default);
+  padding: calc(var(--fw) * 16 / 530);
+  filter: drop-shadow(0 14px 12px color-mix(in srgb, var(--color-bg-inverse) 18%, transparent));
+  transition: filter 0.3s ease;
+}
+.gw-art { display: block; width: 100%; height: auto; aspect-ratio: 380 / 238; object-fit: cover; }
+.gw-art--placeholder { background: var(--color-bg-surface-strong); }
+
+/* wall label */
+.gw-label { width: var(--fw); display: flex; gap: 16px; padding: 16px 22px; background: var(--color-bg-card); border: 1px solid var(--color-border-default); border-radius: 4px; }
+.gw-label-rule { flex: none; width: 3px; align-self: stretch; background: var(--color-text-accent); }
+.gw-label-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.gw-label-no { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: 11px; line-height: 1.3; letter-spacing: 1.2px; color: var(--color-text-muted); }
+.gw-work--covered .gw-label-no { color: var(--color-text-accent); }
+.gw-label-title { margin: 0; font-family: 'Hanken Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-style: italic; font-size: 22px; line-height: 1.25; color: var(--color-text-primary); }
+.gw-label-meta, .gw-label-tools { font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif; font-size: 14px; line-height: 1.65; }
+.gw-label-meta { color: var(--color-text-muted); }
+.gw-label-tools { color: var(--color-text-nav); }
+
+/* ── under restoration: the drape (curtain fabric) with a hanging sign; sizes in drape cqw (380px wide in Figma) ── */
+.gw-drape {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 380 / 238;
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--color-bg-accent-strong) url('/curtain-tile.webp') repeat-x 0 0 / auto 100%;
+}
+.gw-drape-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    color-mix(in srgb, var(--color-overlay-black) 35%, transparent),
+    transparent 35%,
+    color-mix(in srgb, var(--color-overlay-black) 25%, transparent));
+}
+.gw-sign-group { position: absolute; inset: 0; transform-origin: 50cqw 2.1cqw; } /* the nail */
+.gw-sign-string { position: absolute; left: 31.32cqw; top: 1.79cqw; width: 37.37cqw; height: 13.21cqw; }
+.gw-nail { position: absolute; left: 48.68cqw; top: 0.79cqw; width: 2.63cqw; height: 2.63cqw; }
+.gw-sign {
+  position: absolute;
+  left: 5cqw;
+  top: 13.68cqw;
+  width: 90cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.58cqw;
+  padding: 4.21cqw 7.37cqw 4.74cqw;
+  background: var(--color-bg-page);
+  border: 3px solid var(--color-bg-accent);
+  border-radius: 4px;
+  filter: drop-shadow(0 8px 7px color-mix(in srgb, var(--color-overlay-black) 35%, transparent));
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.gw-sign-kicker { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: max(9px, 3.16cqw); letter-spacing: 0.1em; color: var(--color-text-accent); }
+.gw-sign-note { font-family: 'Architects Daughter', cursive; font-size: max(15px, 6.32cqw); letter-spacing: 0.5px; color: var(--color-text-primary); }
+.gw-tieback { position: absolute; left: -0.22cqw; top: 48.84cqw; width: 100.44cqw; height: 9.17cqw; }
+@keyframes gw-sway {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(calc(-1 * var(--coll-sway-deg))); }
+  65% { transform: rotate(var(--coll-sway-deg)); }
+}
+.gw-work--covered.has-been-reached .gw-sign-group { animation: gw-sway var(--coll-sway-ms) ease-in-out 1; }
+
+/* ── spotlight (Work 03 annotation): lamp + cone placed on the work box, as in Figma ── */
+.gw-lamp { position: absolute; z-index: 3; left: 217px; top: -86px; width: 96px; height: 14px; border-radius: 7px; background: var(--color-bg-inverse); opacity: 0; transition: opacity var(--coll-cone-ms) ease; pointer-events: none; }
+.gw-cone { position: absolute; z-index: 3; left: -73px; top: -98px; width: 676px; height: 502px; max-width: none; opacity: 0; mix-blend-mode: screen; transition: opacity var(--coll-cone-ms) ease; pointer-events: none; }
+
+@media (min-width: 1180px) and (hover: hover) {
+  .gw-work--live:hover :is(.gw-lamp, .gw-cone) { opacity: 1; }
+  .gw-work--live:hover .gw-frame { transform: translateY(calc(-1 * var(--coll-lift))); }
+  .gw-work--live:hover .gw-mat { filter: drop-shadow(0 22px 20px color-mix(in srgb, var(--color-bg-inverse) 35%, transparent)); }
+  .gw-stage:has(.gw-work--live:hover) .gw-work.is-reached:not(:hover) { opacity: var(--coll-dim); }
+}
+@media (min-width: 1180px) { /* keyboard focus shows the same state */
+  .gw-work--live:has(.gw-work-link:focus-visible) :is(.gw-lamp, .gw-cone) { opacity: 1; }
+  .gw-work--live:has(.gw-work-link:focus-visible) .gw-frame { transform: translateY(calc(-1 * var(--coll-lift))); }
+  .gw-work--live:has(.gw-work-link:focus-visible) .gw-mat { filter: drop-shadow(0 22px 20px color-mix(in srgb, var(--color-bg-inverse) 35%, transparent)); }
+  .gw-stage:has(.gw-work-link:focus-visible) .gw-work.is-reached:not(:has(.gw-work-link:focus-visible)) { opacity: var(--coll-dim); }
+}
+
+/* ── the thread (451:2817) ── */
+.gw-yarn { stroke-dasharray: 1; stroke-dashoffset: 1; } /* drawn on scroll (GalleryWall.tsx) */
+.gw-knot { opacity: 0; transform: scale(0.3); transition: opacity var(--coll-reveal-ms) ease, transform var(--coll-reveal-ms) cubic-bezier(0.34, 1.56, 0.64, 1); }
+.gw-knot.is-reached { opacity: 1; transform: scale(1); }
+.gw-tail path:first-child { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset var(--coll-tail-ms) ease-out; }
+.gw-tail.is-reached path:first-child { stroke-dashoffset: 0; }
+.gw-heart { opacity: 0; transform: scale(0.4); transform-origin: 895px 2122px; transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transition-delay: var(--coll-tail-ms); }
+.gw-tail.is-reached .gw-heart { opacity: 1; transform: scale(1); }
+
+/* ── wall dressing (stage coordinates) ── */
+.gw-dressing, .gw-doodles { position: absolute; inset: 0; pointer-events: none; }
+.gw-doodles { z-index: 3; }
+.gw-crack { position: absolute; }
+.gw-crack--1 { left: 39.4px; top: 419.4px; width: 46.2px; height: 151.2px; }
+.gw-crack--2 { left: 1334.4px; top: 1099.4px; width: 46.2px; height: 141.2px; }
+.gw-crack--3 { left: 59.4px; top: 1899.4px; width: 71.2px; height: 121.2px; }
+.gw-crack--4 { left: 1294.4px; top: 2299.4px; width: 36.2px; height: 141.2px; }
+.gw-sconce { position: absolute; width: 140px; height: 160px; }
+.gw-sconce--1 { left: 0; top: 629px; } .gw-sconce--2 { left: 1300px; top: 1338px; } .gw-sconce--3 { left: 0; top: 2047px; }
+.gw-sconce-glow { position: absolute; inset: 0; width: 100%; height: 100%; }
+.gw-sconce-plate { position: absolute; left: 63px; top: 110px; width: 14px; height: 30px; border-radius: 4px; background: var(--color-bg-accent); }
+.gw-sconce-shade { position: absolute; left: 54px; top: 100px; width: 32px; height: 18px; }
+
+/* ── wall doodles (stage coordinates; text placed by its centre) ── */
+.gw-year { display: contents; }
+.gw-hand { position: absolute; margin: 0; font-family: 'Architects Daughter', cursive; font-size: 26px; line-height: 1.3; letter-spacing: 0.5px; white-space: nowrap; color: var(--color-text-primary); }
+.gw-year--2026 .gw-hand { left: 79.3px; top: 157.3px; transform: translate(-50%, -50%) rotate(8deg); }
+.gw-year--2025 .gw-hand { left: 80.8px; top: 938.5px; transform: translate(-50%, -50%) rotate(8deg); }
+.gw-year--2024 .gw-hand { left: 1335px; top: 857.2px; transform: translate(-50%, -50%) rotate(-8deg); }
+.gw-year--2023 .gw-hand { left: 372.8px; top: 2284.1px; transform: translate(-50%, -50%) rotate(8deg); }
+.gw-year-underline { position: absolute; width: 72.5px; height: 5.5px; }
+.gw-year--2026 .gw-year-underline { left: 44.75px; top: 177.25px; }
+.gw-year--2025 .gw-year-underline { left: 44.75px; top: 958.25px; }
+.gw-year--2024 .gw-year-underline { left: 1294.75px; top: 886.25px; }
+.gw-year--2023 .gw-year-underline { left: 339.75px; top: 2304.25px; }
+.gw-note { font-size: 24px; color: var(--color-text-accent); }
+.gw-note--easel { left: 686.7px; top: 51.8px; transform: translate(-50%, -50%) rotate(5deg); }
+.gw-note--hover { left: 653.2px; top: 696.2px; transform: translate(-50%, -50%) rotate(4deg); }
+.gw-note--started { left: 1128.3px; top: 2290.6px; transform: translate(-50%, -50%) rotate(-4deg); }
+.gw-washi { position: absolute; left: 223.8px; top: 929.5px; width: 96px; height: 26px; background: var(--color-bg-highlight); transform: translate(-50%, -50%) rotate(32deg); }
+.gw-arrow-lamp { position: absolute; left: 481.8px; top: 701.8px; width: 72.4px; height: 26.4px; }
+.gw-arrow-lamp-head { position: absolute; left: 481.8px; top: 713.92px; width: 13.32px; height: 14.28px; }
+.gw-arrow-first { position: absolute; left: 963.8px; top: 2321.8px; width: 66.4px; height: 52.4px; }
+.gw-arrow-first-head { position: absolute; left: 963.8px; top: 2361.46px; width: 14.39px; height: 12.74px; }
+
+/* ── floor, rope and posts (451:2818); decorative. Desktop: the bottom 234px of the stage (y 2850-3084) ── */
+.gw-floor { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 234px; pointer-events: none; }
+.gw-floor-band { position: absolute; left: 0; right: 0; bottom: 0; height: 171px; background: var(--color-bg-surface-strong); }
+.gw-baseboard-trim { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--color-bg-accent); }
+.gw-baseboard { position: absolute; left: 0; right: 0; top: 3px; height: 18px; background: var(--color-bg-inverse-raised); }
+.gw-floorboards { position: absolute; left: 0; top: 25px; }
+.gw-floor-stage { position: absolute; top: 0; left: 50%; width: 1440px; height: 234px; margin-left: -720px; }
+.gw-rope { position: absolute; top: 16.5px; height: 57.5px; transform-origin: top center; transition: transform var(--coll-sag-ms) cubic-bezier(0.34, 1.56, 0.64, 1); }
+.gw-rope--1 { left: 194.5px; width: 371px; } .gw-rope--2 { left: 554.5px; width: 331px; } .gw-rope--3 { left: 874.5px; width: 371px; }
+.gw-floor.is-inview .gw-rope { transform: scaleY(var(--coll-sag)); }
+.gw-post { position: absolute; top: 0; width: 54px; height: 132px; }
+.gw-post--1 { left: 173px; } .gw-post--2 { left: 533px; } .gw-post--3 { left: 853px; } .gw-post--4 { left: 1213px; }
+.gw-post-finial { position: absolute; z-index: 1; left: 17px; top: 0; width: 20px; height: 20px; }
+.gw-post-pole { position: absolute; left: 22px; top: 14px; width: 10px; height: 110px; background: var(--color-bg-accent); border: 1px solid var(--color-text-primary); }
+.gw-post-base { position: absolute; left: 0; top: 118px; width: 54px; height: 14px; }
+.gw-touch { position: absolute; left: 1251px; top: -66px; width: 158px; }
+.gw-touch-pole { position: absolute; left: 76px; top: 60px; width: 6px; height: 150px; background: var(--color-text-primary); }
+.gw-touch-foot { position: absolute; left: 55px; top: 204px; width: 48px; height: 12px; }
+.gw-touch-sign {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  background: var(--color-bg-card);
+  border: 3px solid var(--color-bg-accent);
+  border-radius: 4px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.gw-touch-kicker { font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 1.2px; color: var(--color-text-accent); }
+.gw-touch-note { font-family: 'Architects Daughter', cursive; font-size: 18px; letter-spacing: 0.5px; color: var(--color-text-primary); }
+
+/* ═══ one column below 1180px (no mobile frame in Figma): frames full width minus 24px,
+   labels under each frame, the thread down the left edge, no spotlight ═══ */
+@media (max-width: 1179.98px) {
+  .gw { --fw: min(530px, 100vw - 24px); }
+  .gw-stage { left: auto; width: auto; height: auto; margin: 0; padding: 72px 0 24px; }
+  .gw-works { position: relative; left: auto; top: auto; width: 100%; align-items: center; gap: 56px; }
+  .gw-row { display: contents; }
+  .gw-work--low { padding-top: 0; }
+  .gw-thread { z-index: 0; }
+  .gw-knots { z-index: 3; }
+  .gw-work { z-index: 1; }
+  :is(.gw-dressing, .gw-doodles, .gw-lamp, .gw-cone, .gw-touch) { display: none; }
+  .gw-floor { position: relative; }
+  .gw-floor-stage { left: 0; width: 100%; margin-left: 0; }
+  /* two posts, one rope, centred */
+  :is(.gw-rope--1, .gw-rope--3, .gw-post--3, .gw-post--4) { display: none; }
+  .gw-post--1 { left: calc(50% - 187px); }
+  .gw-post--2 { left: calc(50% + 133px); }
+  .gw-rope--2 { left: calc(50% - 165.5px); }
+}
+
+/* reduced motion: thread fully drawn (JS), no lift, no sway, no pops */
+@media (prefers-reduced-motion: reduce) {
+  .gw-work, .gw-knot, .gw-rope, .gw-frame, .gw-heart, .gw-tail path { transition: none; }
+  .gw-frame { transform: none !important; }
+  .gw-work--covered.has-been-reached .gw-sign-group { animation: none; }
+}
+
+/* footer: Figma 441:2842 uses the highlight band */
+.coll-footer { background: var(--color-bg-highlight); }
