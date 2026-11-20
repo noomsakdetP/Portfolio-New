@@ -31,6 +31,18 @@ export const WORKS: Work[] = [
   { no: '07', title: 'Clean near U', year: '2023', role: 'UX/UI Designer', tools: 'Figma, Prototyping', caseStudyId: 'clean-near-u', image: imgCleanNearU },
 ]
 
+/**
+ * The case study that follows `id` in the "Next project" card: the next open work in wall
+ * order (newest first), skipping "Under restoration" works, wrapping around after the last.
+ * Uncovering a work (giving it a caseStudyId) adds it to the chain automatically.
+ * Returns null when `id` isn't an open work.
+ */
+export function nextCaseStudyId(id: string): string | null {
+  const open = WORKS.flatMap((w) => (w.caseStudyId ? [w.caseStudyId] : []))
+  const i = open.indexOf(id)
+  return i < 0 ? null : open[(i + 1) % open.length]
+}
+
 /** The feature portrait in the header (null would show a neutral placeholder). */
 export const FEATURE_PORTRAIT: { src: string | null; alt: string } = {
   src: imgMonaSakdidet,

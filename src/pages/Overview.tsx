@@ -3,6 +3,7 @@ import LangToggle from '../components/LangToggle'
 import { useT, useLang, translateDeep } from '../i18n/lang'
 import NavMenu from '../components/NavMenu'
 import TransitionLink from '../transition/TransitionLink'
+import { nextCaseStudyId } from '../data/projects'
 import NavLogoMark, { NAV_LOGO_LABEL } from '../components/NavLogo'
 import { useEffect, useRef, useState } from 'react'
 import '../Overview.css'
@@ -121,7 +122,6 @@ interface Project {
   problem: string
   process: { phase: string; title: string; desc: string }[]
   outcomes: { metric: string; label: string }[]
-  nextId: string
   storybookUrl?: string
   howWeSolvedIt?: { title: string; problem: string; fix: string }[]
   requirementsSection?: { title: string; desc: string }
@@ -202,7 +202,6 @@ const projects: Record<string, Project> = {
       { metric: 'Storybook', label: 'Component documentation' },
       { metric: '✦', label: 'Icons & assets library organized' },
     ],
-    nextId: 'student-activity',
     storybookUrl: 'https://hr-design-system.vercel.app/',
   },
   'student-activity': {
@@ -280,7 +279,6 @@ const projects: Record<string, Project> = {
         },
       ],
     },
-    nextId: 'impact-hire-hub',
   },
   'impact-hire-hub': {
     id: 'impact-hire-hub',
@@ -346,7 +344,6 @@ const projects: Record<string, Project> = {
       { metric: '3', label: 'Platforms Supported' },
       { metric: 'Progressive', label: 'Data Collection Applied' },
     ],
-    nextId: 'flexible-benefits',
   },
   'flexible-benefits': {
     id: 'flexible-benefits',
@@ -472,7 +469,6 @@ const projects: Record<string, Project> = {
         objective: 'Score 65 or higher, which indicates "Good Usability".',
       },
     ],
-    nextId: 'impact-wedding',
   },
   'impact-wedding': {
     id: 'impact-wedding',
@@ -562,7 +558,6 @@ const projects: Record<string, Project> = {
       { metric: '6', label: 'Key User Flows' },
       { metric: '3', label: 'Color Palettes Explored' },
     ],
-    nextId: 'clean-near-u',
   },
   'clean-near-u': {
     id: 'clean-near-u',
@@ -711,7 +706,6 @@ const projects: Record<string, Project> = {
       { metric: '5', label: 'UI Screens Designed' },
       { metric: '3', label: 'HMW Questions' },
     ],
-    nextId: 'hr-system',
   },
 }
 
@@ -746,7 +740,9 @@ export default function Overview() {
   const { lang } = useLang()
   const baseProject = projects[projectId ?? ''] ?? projects['hr-system']
   const project = translateDeep(lang, baseProject)
-  const nextProject = translateDeep(lang, projects[baseProject.nextId])
+  // next open work in the order of the /projects wall (src/data/projects.ts)
+  const nextId = nextCaseStudyId(baseProject.id)
+  const nextProject = nextId && projects[nextId] ? translateDeep(lang, projects[nextId]) : null
   const [lightboxImg, setLightboxImg] = useState<string | null>(null)
   const [personaSlide, setPersonaSlide] = useState(0)
   const [uiSlide, setUiSlide] = useState(0)
