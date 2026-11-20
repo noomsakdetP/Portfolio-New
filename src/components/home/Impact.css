@@ -135,11 +135,6 @@
 .impact-avatar--ochre   { background: var(--color-bg-accent); color: var(--color-text-on-accent); }
 .impact-avatar--stone   { background: var(--color-bg-surface-strong); color: var(--color-text-on-accent); }
 
-.visually-hidden {
-  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-}
-
 /* ── narrower: 2 × 2 grid; the horizontal yarn only works on one row ── */
 @media (max-width: 900px) {
   .impact-stats { grid-template-columns: repeat(2, 1fr); column-gap: 32px; row-gap: 48px; }

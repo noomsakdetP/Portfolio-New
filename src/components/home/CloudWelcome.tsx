@@ -65,8 +65,6 @@ const MOBILE_CLOUDS: Cloud[] = [
   { x: 52, y: 51, w: 130 }, { x: 90, y: 73, w: 118 }, { x: 24, y: 85, w: 124, flip: true }, { x: 76, y: 97, w: 120 },
 ]
 
-const SCROLL_KEYS = new Set([' ', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'])
-
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v))
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2)
@@ -96,33 +94,33 @@ export default function CloudWelcome({
 
   const active = show && phase !== 'done'
 
-  // Before first paint and until the end: navbar hidden, hero art pre-zoomed, scroll locked.
-  // The lock blocks scroll input instead of setting overflow: hidden, so the scrollbar never
-  // disappears: no strip down the right edge, no layout shift when the intro ends.
-  // The cleanup (at p = 1) puts everything back.
+  // Before first paint and until the end: navbar hidden, hero art pre-zoomed, scroll locked
+  // (overflow: hidden on <html>; html has scrollbar-gutter: stable in index.css, so the
+  // layout doesn't shift when it unlocks). The cleanup (at p = 1) puts everything back.
   useLayoutEffect(() => {
     if (!active) return
     const nav = navRef.current
     const hero = heroRef.current
+    const html = document.documentElement
     if (nav) { nav.style.opacity = '0'; nav.style.visibility = 'hidden' }
     if (hero && !reduced) hero.style.transform = `scale(${CW.heroScaleFrom})`
-    const lockedY = window.scrollY
-    const block = (e: Event) => e.preventDefault()
-    const blockKeys = (e: KeyboardEvent) => { if (SCROLL_KEYS.has(e.key)) e.preventDefault() }
-    const holdScroll = () => { if (window.scrollY !== lockedY) window.scrollTo({ top: lockedY, behavior: 'instant' }) }
-    window.addEventListener('wheel', block, { passive: false })
-    window.addEventListener('touchmove', block, { passive: false })
-    window.addEventListener('keydown', blockKeys)
-    window.addEventListener('scroll', holdScroll) // scrollbar drag, find-in-page, etc.
+    const prevOverflow = html.style.overflow
+    html.style.overflow = 'hidden'
     return () => {
       if (nav) { nav.style.opacity = ''; nav.style.visibility = '' }
       if (hero) hero.style.transform = ''
-      window.removeEventListener('wheel', block)
-      window.removeEventListener('touchmove', block)
-      window.removeEventListener('keydown', blockKeys)
-      window.removeEventListener('scroll', holdScroll)
+      html.style.overflow = prevOverflow
     }
   }, [active, reduced, navRef, heroRef])
+
+  // Screen readers: announce the welcome once. The live region starts empty and is filled
+  // after mount (a region rendered with its text already in it isn't reliably announced).
+  const [announce, setAnnounce] = useState(false)
+  useEffect(() => {
+    if (!show) return
+    const id = window.setTimeout(() => setAnnounce(true), 100)
+    return () => window.clearTimeout(id)
+  }, [show])
 
   // Track loading; at 100% (and after the minimum time) hold, then open.
   useEffect(() => {
@@ -229,13 +227,18 @@ export default function CloudWelcome({
   )
 
   return (
-    <div
-      className={`cw is-${phase}`}
-      style={phase === 'fading' ? { transitionDuration: `${CW.reducedFadeMs}ms` } : undefined}
-      role="status"
-    >
-      <div ref={veilRef} className="cw-veil" aria-hidden="true" />
-      <div className="cw-clouds" aria-hidden="true">
+    <>
+      {/* announced once (polite); the visual layer below is hidden from assistive tech */}
+      <p className="visually-hidden" role="status" aria-live="polite">
+        {announce ? 'Welcome to my portfolio' : ''}
+      </p>
+      <div
+        className={`cw is-${phase}`}
+        style={phase === 'fading' ? { transitionDuration: `${CW.reducedFadeMs}ms` } : undefined}
+        aria-hidden="true"
+      >
+      <div ref={veilRef} className="cw-veil" />
+      <div className="cw-clouds">
         {DESKTOP_CLOUDS.map((c, i) => cloud(c, i, 'desktop', 0))}
         {MOBILE_CLOUDS.map((c, i) => cloud(c, i, 'mobile', DESKTOP_CLOUDS.length))}
       </div>
@@ -246,6 +249,7 @@ export default function CloudWelcome({
           <span className="cw-title-accent">portfolio</span>
         </p>
       </div>
-    </div>
+      </div>
+    </>
   )
 }
