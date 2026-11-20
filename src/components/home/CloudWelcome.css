@@ -2,12 +2,8 @@
    Figma "Loader / Cloud welcome: 1 Loading". Motion is set inline (transform/opacity only). */
 .cw {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 100vw; /* per the Figma annotation. Note: with html { scrollbar-gutter: stable }, Chromium
-                  excludes the reserved gutter from 100vw, so this does not reach into the gutter. */
-  z-index: 1000; /* above the navbar (100) */
+  inset: 0; /* the reserved scrollbar gutter can't be covered; <html> turns cream instead (CloudWelcome.tsx) */
+  z-index: 1000; /* above the navbar (100); keep in sync with CW_LAYER_Z */
   overflow: hidden;
 }
 .cw:is(.is-opening, .is-fading) { pointer-events: none; } /* page is usable once it opens */

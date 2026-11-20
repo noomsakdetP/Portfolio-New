@@ -51,6 +51,9 @@ const CW = {
   navFadeTo: 0.9,
 } as const
 
+/** z-index of .cw in CloudWelcome.css; the navbar goes one above it during the opening. */
+const CW_LAYER_Z = 1000
+
 /** Cloud centre (x, y in % of the viewport), width in vw, mirrored or not. Later = on top. */
 type Cloud = { x: number; y: number; w: number; flip?: boolean }
 
@@ -104,7 +107,9 @@ export default function CloudWelcome({
 
   // Before first paint and until the end: navbar hidden, hero art pre-zoomed, scroll locked
   // (overflow: hidden on <html>; html has scrollbar-gutter: stable in index.css, so the
-  // layout doesn't shift when it unlocks). The cleanup (at p = 1) puts everything back.
+  // layout doesn't shift when it unlocks). The reserved gutter shows the root background,
+  // which the fixed layer can't cover, so <html> gets the veil's cream meanwhile.
+  // The cleanup (at p = 1) puts everything back.
   useLayoutEffect(() => {
     if (!active) return
     const nav = navRef.current
@@ -112,12 +117,14 @@ export default function CloudWelcome({
     const html = document.documentElement
     if (nav) { nav.style.opacity = '0'; nav.style.visibility = 'hidden' }
     if (hero && !reduced) hero.style.transform = `scale(${CW.heroScaleFrom})`
-    const prevOverflow = html.style.overflow
+    const prev = { overflow: html.style.overflow, background: html.style.backgroundColor }
     html.style.overflow = 'hidden'
+    html.style.backgroundColor = 'var(--color-cream, #FAF9F4)'
     return () => {
-      if (nav) { nav.style.opacity = ''; nav.style.visibility = '' }
+      if (nav) { nav.style.opacity = ''; nav.style.visibility = ''; nav.style.zIndex = '' }
       if (hero) hero.style.transform = ''
-      html.style.overflow = prevOverflow
+      html.style.overflow = prev.overflow
+      html.style.backgroundColor = prev.background
     }
   }, [active, reduced, navRef, heroRef])
 
@@ -165,7 +172,9 @@ export default function CloudWelcome({
     const hero = heroRef.current
     const veil = veilRef.current
     const text = textRef.current
-    if (nav) nav.style.visibility = 'visible'
+    // Navbar above the cloud layer (Figma frame 3); it stays hidden until its fade starts.
+    if (nav) nav.style.zIndex = String(CW_LAYER_Z + 1)
+    let navShown = false
 
     // Each cloud's full travel at p = 1 (Figma annotation formula, see the header).
     const cx = window.innerWidth / 2 // 50vw
@@ -199,7 +208,10 @@ export default function CloudWelcome({
         text.style.opacity = String(1 - q)
       }
       if (hero) hero.style.transform = `scale(${lerp(CW.heroScaleFrom, 1, p)})`
-      if (nav) nav.style.opacity = String(clamp01((p - CW.navFadeFrom) / (CW.navFadeTo - CW.navFadeFrom)))
+      if (nav) {
+        if (!navShown && p >= CW.navFadeFrom) { nav.style.visibility = 'visible'; navShown = true }
+        nav.style.opacity = String(clamp01((p - CW.navFadeFrom) / (CW.navFadeTo - CW.navFadeFrom)))
+      }
       if (p < 1) raf = requestAnimationFrame(frame)
       else setPhase('done')
     }
