@@ -1,0 +1,28 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1440" height="3084" viewBox="0 0 1440 3084" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Thread">
+<path id="Yarn" d="M60 31C169.5 132 315.5 132 425 62C602 204 838 204 1015 134C975 224 640 428.5 720 488.5C680 518.5 728 550.5 752 524.5C768 506.5 545 713 425 843C602 913 838 913 1015 771C975 861 640 1065.5 720 1125.5C680 1155.5 728 1187.5 752 1161.5C768 1143.5 545 1350 425 1480C602 1622 838 1622 1015 1552C975 1642 787.5 1810.5 867.5 1870.5C827.5 1900.5 875.5 1932.5 899.5 1906.5C915.5 1888.5 840 2059 720 2189" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke="#A64B3C"/>
+<path id="Hanging wire 1" d="M250 114L425 62L600 114" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#D9A066"/>
+<circle id="Knot 1" cx="425" cy="62" r="9.5" fill="#FAF6EF" stroke-width="5" stroke="#A64B3C"/>
+<circle id="Knot centre" cx="425" cy="62" r="4" fill="#A64B3C"/>
+<path id="Hanging wire 2" d="M840 186L1015 134L1190 186" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#D9A066"/>
+<circle id="Knot 2" cx="1015" cy="134" r="9.5" fill="#FAF6EF" stroke-width="5" stroke="#A64B3C"/>
+<circle id="Knot centre_2" cx="1015" cy="134" r="4" fill="#A64B3C"/>
+<path id="Hanging wire 3" d="M250 895L425 843L600 895" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#D9A066"/>
+<circle id="Knot 3" cx="425" cy="843" r="9.5" fill="#FAF6EF" stroke-width="5" stroke="#A64B3C"/>
+<circle id="Knot centre_3" cx="425" cy="843" r="4" fill="#A64B3C"/>
+<path id="Hanging wire 4" d="M840 823L1015 771L1190 823" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#D9A066"/>
+<circle id="Knot 4" cx="1015" cy="771" r="9.5" fill="#FAF6EF" stroke-width="5" stroke="#A64B3C"/>
+<circle id="Knot centre_4" cx="1015" cy="771" r="4" fill="#A64B3C"/>
+<path id="Hanging wire 5" d="M250 1532L425 1480L600 1532" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#D9A066"/>
+<circle id="Knot 5" cx="425" cy="1480" r="9.5" fill="#FAF6EF" stroke-width="5" stroke="#A64B3C"/>
+<circle id="Knot centre_5" cx="425" cy="1480" r="4" fill="#A64B3C"/>
+<path id="Hanging wire 6" d="M840 1604L1015 1552L1190 1604" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#D9A066"/>
+<circle id="Knot 6" cx="1015" cy="1552" r="9.5" fill="#FAF6EF" stroke-width="5" stroke="#A64B3C"/>
+<circle id="Knot centre_6" cx="1015" cy="1552" r="4" fill="#A64B3C"/>
+<path id="Hanging wire 7" d="M545 2241L720 2189L895 2241" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#D9A066"/>
+<circle id="Knot 7" cx="720" cy="2189" r="9.5" fill="#FAF6EF" stroke-width="5" stroke="#A64B3C"/>
+<circle id="Knot centre_7" cx="720" cy="2189" r="4" fill="#A64B3C"/>
+<path id="Yarn tail" d="M720 2189C770 2129 830 2209 890 2139" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke="#A64B3C"/>
+<path id="Heart" d="M894.881 2133.89C873.281 2119.49 876.881 2101.49 894.881 2112.29C912.881 2101.49 916.481 2119.49 894.881 2133.89Z" fill="#A64B3C"/>
+</g>
+</svg>

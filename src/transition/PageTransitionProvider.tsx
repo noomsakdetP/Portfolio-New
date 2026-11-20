@@ -20,7 +20,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, typ
 import { useLocation, useNavigate, type To } from 'react-router-dom'
 import { finishIntro } from '../components/firstLoadIntro'
 import Curtain from './Curtain'
-import { PageTransitionContext, pendingChunks, type PageTransitionApi } from './pageTransition'
+import { PageTransitionContext, TRANSITION_OPENED_EVENT, pendingChunks, type PageTransitionApi } from './pageTransition'
 import './PageTransition.css'
 
 const CLOSE_MS = 450
@@ -122,6 +122,7 @@ export default function PageTransitionProvider({ children }: { children: ReactNo
       .finally(() => {
         setPhase('idle')
         busy.current = false
+        window.dispatchEvent(new Event(TRANSITION_OPENED_EVENT)) // e.g. the Projects portrait drop
       })
   }, [swapRoute])
 

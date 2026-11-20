@@ -1,6 +1,6 @@
 /**
  * The one featured project on Home. Figma: Home v2 / Desktop › My Project (single).
- * The full list lives on /projects (src/pages/Detail.tsx).
+ * The full list lives on /projects (src/data/projects.ts, src/pages/Projects.tsx).
  */
 import projectBanner from '../assets/project-banner.webp'
 
